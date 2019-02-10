@@ -26,7 +26,6 @@ public class UserServiceTest {
         em = JPAUtil.getCurrentEntityManager();
         Initializer dataHelper = new Initializer();
         dataHelper.prepareData();
-
     }
 
     @Test
@@ -34,17 +33,24 @@ public class UserServiceTest {
 
         UserService service = new UserService();
         User newUser = service.createUser("Django", "Tarantino");
+        User newUser2 = service.createUser("Teo", "Aggelis", "0900900900", "test@gmail.com", "5887527591");
         // EntityManager.persist() updates the ID of the persisted object
-        Assert.assertNotEquals(0, newUser.getId());
+        Assert.assertNotNull(newUser.getId());
+        Assert.assertNotNull(newUser2.getId());
         em.close(); // close session
 
         // new session, data will be retrieved from database
         em = JPAUtil.getCurrentEntityManager();
 
         User savedUser = em.find(User.class, newUser.getId());
+        User savedUser2 = em.find(User.class, newUser2.getId());
         Assert.assertNotNull(savedUser);
-        System.out.println("User: " + savedUser.getFistName() + " " + savedUser.getLastName());
+        Assert.assertNotNull(savedUser2);
+        System.out.println(savedUser);
+        System.out.println(savedUser2);
         Assert.assertEquals("Django", savedUser.getFistName());
+        Assert.assertEquals("Tarantino", savedUser.getLastName());
+        Assert.assertEquals("Teo", savedUser2.getFistName());
 
     }
 }

@@ -33,4 +33,15 @@ public class UserService {
         return newUser;
 
     }
+
+    public User createUser(String firstName, String lastName, String phoneNumber, String email, String vatNumber) {
+
+        User newUser = new User(firstName, lastName, phoneNumber, email, vatNumber);
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+        em.persist(newUser);
+        tx.commit();
+
+        return newUser;
+    }
 }
