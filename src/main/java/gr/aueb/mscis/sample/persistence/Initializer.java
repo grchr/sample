@@ -1,6 +1,7 @@
 package gr.aueb.mscis.sample.persistence;
 
 import gr.aueb.mscis.sample.model.MunicipalityWorker;
+import gr.aueb.mscis.sample.model.Parent;
 import gr.aueb.mscis.sample.model.User;
 
 import javax.persistence.EntityManager;
@@ -18,18 +19,19 @@ public class Initializer  {
      * Remove all data from database.
      * The functionality must be executed within the bounds of a transaction
      */
-    public void  eraseData(Class c) {
+    private void eraseData(Class clazz) {
+
         EntityManager em = JPAUtil.getCurrentEntityManager();
-        System.err.println("----------->" + c.getSimpleName());
         EntityTransaction tx = em.getTransaction();
         tx.begin();
+
         Query query = null;
 
         //TODO: try to create query with prepared statement for delete
         //query = em.createNativeQuery("delete from :table").setParameter("table", "User");
-        if (c.getSimpleName().equals("User")) {
+        if (clazz.getSimpleName().equals("User")) {
             query = em.createNativeQuery("delete from User");
-        } else if (c.getSimpleName().equals("MunicipalityWorker")) {
+        } else if (clazz.getSimpleName().equals("MunicipalityWorker")) {
             query = em.createNativeQuery("delete from User where type like :type").setParameter("type", "MUN_W");
         }
         query.executeUpdate();
@@ -43,7 +45,6 @@ public class Initializer  {
      */
     public void prepareUserData() {
         eraseData(User.class);
-
 
         User user1 = new User("GR", "CHR");
         User user2 = new User("T","Mac");
@@ -67,6 +68,35 @@ public class Initializer  {
         tx.begin();
 
         em.persist(munW1);
+        tx.commit();
+    }
+
+    public void prepareParentData() {
+        eraseParentData(Parent.class);
+
+        Parent parent1 = new Parent("Test", "Parent", "sfs", "v", "@", "242");
+        EntityManager em = JPAUtil.getCurrentEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+
+        em.persist(parent1);
+        tx.commit();
+    }
+
+    public void eraseParentData(Class clazz) {
+
+        EntityManager em = JPAUtil.getCurrentEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+
+        Query deleteChildrenQuery = null;
+        Query deleteParentsQuery = null;
+        deleteChildrenQuery = em.createNativeQuery("delete from Child where parent_id in (select id from Parent) ");
+        deleteParentsQuery = em.createNativeQuery("delete from Parent");
+
+        deleteChildrenQuery.executeUpdate();
+        deleteParentsQuery.executeUpdate();
+
         tx.commit();
     }
 }

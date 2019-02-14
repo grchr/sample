@@ -1,13 +1,11 @@
 package gr.aueb.mscis.sample.dao;
 
 import gr.aueb.mscis.sample.model.MunicipalityWorker;
-import gr.aueb.mscis.sample.model.User;
 import gr.aueb.mscis.sample.persistence.JPAUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
