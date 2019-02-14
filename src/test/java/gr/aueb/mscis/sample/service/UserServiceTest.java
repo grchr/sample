@@ -24,7 +24,7 @@ public class UserServiceTest {
         // prepare database for each test
         em = JPAUtil.getCurrentEntityManager();
         Initializer dataHelper = new Initializer();
-        dataHelper.prepareData();
+        dataHelper.prepareUserData();
     }
 
     @Test

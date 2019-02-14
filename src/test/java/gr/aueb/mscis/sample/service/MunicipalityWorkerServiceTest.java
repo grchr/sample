@@ -25,7 +25,7 @@ public class MunicipalityWorkerServiceTest {
         // prepare database for each test
         em = JPAUtil.getCurrentEntityManager();
         Initializer dataHelper = new Initializer();
-        dataHelper.prepareData();
+        dataHelper.prepareMunicipalityWorkerData();
     }
 
     @Test
@@ -34,7 +34,7 @@ public class MunicipalityWorkerServiceTest {
         MunicipalityWorkerService municipalityWorkerService = new MunicipalityWorkerService();
         MunicipalityWorker newMunWorker = municipalityWorkerService.createMunicipalityWorker("Michael", "Stefanoudakis", "Athens Registry Office");
         // EntityManager.persist() updates the ID of the persisted object
-        Assert.assertNotEquals(0, newMunWorker.getId());
+        Assert.assertNotNull(newMunWorker.getId());
         em.close(); // close session
 
         // new session, data will be retrieved from database
@@ -42,7 +42,7 @@ public class MunicipalityWorkerServiceTest {
 
         MunicipalityWorker savedMunWorker = em.find(MunicipalityWorker.class, newMunWorker.getId());
         Assert.assertNotNull(savedMunWorker);
-        System.out.println("User: " + savedMunWorker.getFistName() + " " + savedMunWorker.getLastName());
+        System.out.println("id: " + savedMunWorker.getId() + " User: " + savedMunWorker.getFistName() + " " + savedMunWorker.getLastName());
         Assert.assertEquals("Michael", savedMunWorker.getFistName());
     }
 }
