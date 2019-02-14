@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@DiscriminatorValue("Parent")
+@DiscriminatorValue("PARENT")
 public class Parent extends User{
 
     @Column(name = "insurance_number")
     private String insuranceNumber;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Child> children;
 
     public Parent(){

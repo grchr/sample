@@ -33,6 +33,7 @@ public class MunicipalityWorkerDao {
                 results.add(worker);
             }
         }
+        tx.commit();
         return results;
     }
 

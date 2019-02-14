@@ -35,6 +35,7 @@ public class ParentServiceTest {
         Parent parent = parentService.createParent("Dimitris", "Diamantidis", "69", "123", "pao@bc.com", "1234", null);
         Child child1 = new Child("Vasilis", "Spanoulis");
         parent.getChildren().add(child1);
+        System.out.println(child1.getParent());
         System.out.println(parent.getId());
 
         em = JPAUtil.getCurrentEntityManager();
