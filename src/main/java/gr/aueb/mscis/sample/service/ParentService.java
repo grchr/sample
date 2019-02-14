@@ -19,8 +19,11 @@ public class ParentService{
     public Parent createParent(final String name, final String lastName, final String phoneNumber , final String email
             , final String vatNumber, final String insuranceNumber, List<Child> children) {
         Parent newParent = new Parent(name,lastName, phoneNumber, email, vatNumber, insuranceNumber);
-        if (children!=null) {
+        if (children != null) {
             newParent.setChildren(children);
+        }
+        for (Child child : children) {
+            child.setParent(newParent);
         }
         EntityTransaction tx = em.getTransaction();
         tx.begin();

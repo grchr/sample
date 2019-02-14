@@ -20,11 +20,10 @@ public class Child implements Serializable {
     private String surname;
 
     @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="parent_id")
+    @JoinColumn(name="parent_id", referencedColumnName = "id")
     private Parent parent;
 
     public Child(){
-
     }
 
     public Child(String name, String surname) {
