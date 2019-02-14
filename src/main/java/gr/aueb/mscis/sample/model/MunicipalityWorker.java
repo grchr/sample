@@ -50,4 +50,9 @@ public class MunicipalityWorker extends User {
     public void setRegistryOffice(final String registryOffice) {
         this.registryOffice = registryOffice;
     }
+
+    @Override
+    public String toString() {
+        return "id: " + this.getId() + " name: " + this.getFistName() + " " + this.getLastName() + " office: " + this.getRegistryOffice();
+    }
 }

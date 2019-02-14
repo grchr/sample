@@ -13,6 +13,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import java.io.Serializable;
 
+//TODO: turn user into abstract and remove usertest and userservicetest
+
 /**
  * The type User.
  */
