@@ -23,7 +23,8 @@ public class MunicipalityWorkerDaoTest {
     public void testMunicipalityWorkerDao() {
         em = JPAUtil.getCurrentEntityManager();
         MunicipalityWorkerService municipalityWorkerService = new MunicipalityWorkerService();
-        MunicipalityWorker newMunWorker = municipalityWorkerService.createMunicipalityWorker("V", "Span", "Athens Registry Office");
+        MunicipalityWorker newMunWorker = municipalityWorkerService.createMunicipalityWorker("Tim", "Duncan", "timD", "12345", "5334",
+                "spurs@texas.com", "12134", "Dallas Office");
         Assert.assertNotNull(newMunWorker.getId());
         em.close(); // close session
 

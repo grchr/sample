@@ -25,7 +25,7 @@ public class ParentServiceTest {
         // prepare database for each test
         em = JPAUtil.getCurrentEntityManager();
         Initializer dataHelper = new Initializer();
-        dataHelper.prepareUserData();
+        //dataHelper.prepareUserData();
     }
 
     @Test

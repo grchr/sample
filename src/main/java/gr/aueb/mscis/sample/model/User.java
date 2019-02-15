@@ -25,26 +25,32 @@ import java.io.Serializable;
         name = "type",
         discriminatorType = DiscriminatorType.STRING
 )
-public class User implements Serializable {
+public abstract class User implements Serializable {
 
     @Id
     @Column(name= "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name= "first_name")
+    @Column(name = "first_name")
     private String fistName;
 
-    @Column(name= "last_name")
+    @Column(name = "last_name")
     private String lastName;
+
+    @Column(name = "user_name")
+    private String userName;
+
+    @Column(name = "password")
+    private String password;
 
     @Column(name= "phone_number")
     private String phoneNumber;
 
-    @Column(name= "email")
+    @Column(name = "email")
     private String email;
 
-    @Column(name= "VAT_number")
+    @Column(name = "VAT_number")
     private String vatNumber;
 
     /**
@@ -60,7 +66,7 @@ public class User implements Serializable {
      * @param fistName the fist name
      * @param lastName the last name
      */
-    public User(final String fistName, final String lastName) {
+    protected User(final String fistName, final String lastName) {
         this.fistName = fistName;
         this.lastName = lastName;
     }
@@ -74,9 +80,19 @@ public class User implements Serializable {
      * @param email       the email
      * @param vatNumber   the vat number
      */
-    public User(final String fistName, final String lastName, final String phoneNumber, final String email, final String vatNumber) {
+    protected User( String fistName, String lastName, String phoneNumber, String email, String vatNumber) {
         this.fistName = fistName;
         this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.vatNumber = vatNumber;
+    }
+
+    protected User(String fistName, String lastName, String userName, String password, String phoneNumber, String email, String vatNumber) {
+        this.fistName = fistName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.password = password;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.vatNumber = vatNumber;
@@ -134,6 +150,22 @@ public class User implements Serializable {
      */
     public void setLastName(final String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     /**

@@ -21,9 +21,9 @@ public class ParentService{
         Parent newParent = new Parent(name,lastName, phoneNumber, email, vatNumber, insuranceNumber);
         if (children != null) {
             newParent.setChildren(children);
-        }
-        for (Child child : children) {
-            child.setParent(newParent);
+            for (Child child : children) {
+                child.setParent(newParent);
+            }
         }
         EntityTransaction tx = em.getTransaction();
         tx.begin();

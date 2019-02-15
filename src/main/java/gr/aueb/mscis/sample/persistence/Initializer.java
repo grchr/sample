@@ -40,24 +40,6 @@ public class Initializer  {
     }
 
 
-    /**
-     * Prepare data.
-     */
-    public void prepareUserData() {
-        eraseData(User.class);
-
-        User user1 = new User("GR", "CHR");
-        User user2 = new User("T","Mac");
-
-        EntityManager em = JPAUtil.getCurrentEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        tx.begin();
-
-        em.persist(user1);
-        em.persist(user2);
-        tx.commit();
-    }
-
     public void prepareMunicipalityWorkerData() {
         eraseData(MunicipalityWorker.class);
 
