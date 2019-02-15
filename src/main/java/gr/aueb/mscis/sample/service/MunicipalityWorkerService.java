@@ -1,5 +1,6 @@
 package gr.aueb.mscis.sample.service;
 
+import gr.aueb.mscis.sample.helper.UserDataValidator;
 import gr.aueb.mscis.sample.model.MunicipalityWorker;
 import gr.aueb.mscis.sample.persistence.JPAUtil;
 
@@ -41,7 +42,12 @@ public class MunicipalityWorkerService {
 //        if (lastName == null) {
 //
 //        }
-
+        em = JPAUtil.getCurrentEntityManager();
+        if(UserDataValidator.isValidEmailFormat(email)){
+            System.out.println("VALID EMAIL FORMAT");
+        } else {
+            System.out.println("INVALID EMAIL FORMAT");
+        }
         MunicipalityWorker newMunWorker = new MunicipalityWorker(firstName, lastName, userName, password, phoneNumber, email, vatNumber, registryOffice);
 
         EntityTransaction tx = em.getTransaction();
