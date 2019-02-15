@@ -11,11 +11,16 @@ public class UserDataValidator {
 
     public static boolean isValidEmailFormat(String email) {
 
-        pattern = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
-        Matcher matcher;
-        matcher = pattern.matcher(email);
-        return matcher.matches();
+        return email.matches(EMAIL_REGEX);
 
+    }
+
+    public static boolean isValidPhoneNumber(String phoneNumber) {
+
+        if (phoneNumber.length() != 10 || !phoneNumber.matches("[0-9]+")) {
+            return false;
+        }
+        return true;
     }
 
 }

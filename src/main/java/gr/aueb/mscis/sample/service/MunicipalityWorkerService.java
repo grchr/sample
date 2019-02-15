@@ -48,6 +48,11 @@ public class MunicipalityWorkerService {
         } else {
             System.out.println("INVALID EMAIL FORMAT");
         }
+        if(UserDataValidator.isValidPhoneNumber(phoneNumber)) {
+            System.out.println("VALID PHONE NUMBER");
+        } else {
+            System.out.println("INVALID PHONE NUMBER");
+        }
         MunicipalityWorker newMunWorker = new MunicipalityWorker(firstName, lastName, userName, password, phoneNumber, email, vatNumber, registryOffice);
 
         EntityTransaction tx = em.getTransaction();
