@@ -44,6 +44,6 @@ public class MunicipalityWorkerServiceTest {
         MunicipalityWorker savedMunWorker = em.find(MunicipalityWorker.class, newMunWorker.getId());
         Assert.assertNotNull(savedMunWorker);
         System.out.println("id: " + savedMunWorker.getId() + " User: " + savedMunWorker.getFistName() + " " + savedMunWorker.getLastName());
-        Assert.assertEquals("Michael", savedMunWorker.getFistName());
+        Assert.assertEquals("Tim", savedMunWorker.getFistName());
     }
 }
