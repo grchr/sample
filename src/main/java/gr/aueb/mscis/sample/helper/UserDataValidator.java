@@ -17,7 +17,7 @@ public class UserDataValidator {
 
     public static boolean isValidPhoneNumber(String phoneNumber) {
 
-        if (phoneNumber.length() != 10 || !phoneNumber.matches("[0-9]+")) {
+        if (!phoneNumber.matches("[0-9]{10}")) {
             return false;
         }
         return true;

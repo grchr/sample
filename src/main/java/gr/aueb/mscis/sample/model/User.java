@@ -13,8 +13,6 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import java.io.Serializable;
 
-//TODO: turn user into abstract and remove usertest and userservicetest
-
 /**
  * The type User.
  */
@@ -88,6 +86,17 @@ public abstract class User implements Serializable {
         this.vatNumber = vatNumber;
     }
 
+    /**
+     * Instantiates a new User.
+     *
+     * @param fistName    the fist name
+     * @param lastName    the last name
+     * @param userName    the user name
+     * @param password    the password
+     * @param phoneNumber the phone number
+     * @param email       the email
+     * @param vatNumber   the vat number
+     */
     protected User(String fistName, String lastName, String userName, String password, String phoneNumber, String email, String vatNumber) {
         this.fistName = fistName;
         this.lastName = lastName;
@@ -121,7 +130,7 @@ public abstract class User implements Serializable {
      *
      * @return the fist name
      */
-   public String getFistName() {
+    public String getFistName() {
         return fistName;
     }
 
@@ -152,18 +161,38 @@ public abstract class User implements Serializable {
         this.lastName = lastName;
     }
 
+    /**
+     * Gets user name.
+     *
+     * @return the user name
+     */
     public String getUserName() {
         return userName;
     }
 
+    /**
+     * Sets user name.
+     *
+     * @param userName the user name
+     */
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
+    /**
+     * Gets password.
+     *
+     * @return the password
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Sets password.
+     *
+     * @param password the password
+     */
     public void setPassword(String password) {
         this.password = password;
     }

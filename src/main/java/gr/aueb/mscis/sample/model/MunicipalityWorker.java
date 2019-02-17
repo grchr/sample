@@ -33,6 +33,18 @@ public class MunicipalityWorker extends User {
         this.registryOffice = registryOffice;
     }
 
+    /**
+     * Instantiates a new Municipality worker.
+     *
+     * @param firstName      the first name
+     * @param lastName       the last name
+     * @param userName       the user name
+     * @param password       the password
+     * @param phoneNumber    the phone number
+     * @param email          the email
+     * @param vatNumber      the vat number
+     * @param registryOffice the registry office
+     */
     public MunicipalityWorker(String firstName, String lastName, String userName, String password, String phoneNumber, String email, String vatNumber, String registryOffice) {
         super(firstName, lastName, userName, password, phoneNumber, email, vatNumber);
         this.registryOffice = registryOffice;
