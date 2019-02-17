@@ -32,7 +32,7 @@ public class MunicipalityWorkerDaoTest {
         em = JPAUtil.getCurrentEntityManager();
 
         MunicipalityWorkerDao munDao = new MunicipalityWorkerDao();
-        List<MunicipalityWorker> workers = munDao.getMunWorkerByLastName("Duncan");
+        List<MunicipalityWorker> workers = munDao.findByLastName("Duncan");
         //System.out.println("====> " + workers.size());
         for (MunicipalityWorker m : workers) {
             System.out.println(m);

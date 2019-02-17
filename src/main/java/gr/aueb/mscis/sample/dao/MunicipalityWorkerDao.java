@@ -1,6 +1,8 @@
 package gr.aueb.mscis.sample.dao;
 
+import com.sun.org.apache.regexp.internal.RE;
 import gr.aueb.mscis.sample.model.MunicipalityWorker;
+import gr.aueb.mscis.sample.model.User;
 import gr.aueb.mscis.sample.persistence.JPAUtil;
 
 import javax.persistence.EntityManager;
@@ -9,31 +11,28 @@ import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MunicipalityWorkerDao {
+public class MunicipalityWorkerDao extends UserDao{
 
     EntityManager em;
 
-    public List<MunicipalityWorker> getMunWorkerByLastName(String name) {
+    public List<MunicipalityWorker> findByLastName(String lastName) {
         List<MunicipalityWorker> results = new ArrayList<>();
-        // The getResultList() method return a List<Object[]>. We need to convert the returned objects to objects of our type and return them TODO: try to find other workaround
-        List<Object[]> rawResults = new ArrayList<>();
 
         em = JPAUtil.getCurrentEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
-        Query query = null;
-        query = em.createNativeQuery("select id,first_name,last_name,reg_office from User as u where u.last_name =:name and u.type like :type").setParameter("name", name)
-                .setParameter("type", "MUN_W");
-
-        //results = query.getResultList();
-        rawResults = query.getResultList();
-        if (rawResults != null) {
-            for (Object[] o : rawResults) {
-                MunicipalityWorker worker = converObjectToMunicipalityWorker(o);
-                results.add(worker);
-            }
-        }
+        String queryString = "from " + User.class.getName() + " where last_name = :name and type like :type";
+        Query query = em.createQuery(queryString);
+        query.setParameter("name", lastName);
+        query.setParameter("type", "MUN_W");
+        results = (List<MunicipalityWorker>) query.getResultList();
         tx.commit();
+        return results;
+    }
+
+    public List<MunicipalityWorker> findByUserName(String userName) {
+        List<MunicipalityWorker> results = new ArrayList<>();
+
         return results;
     }
 

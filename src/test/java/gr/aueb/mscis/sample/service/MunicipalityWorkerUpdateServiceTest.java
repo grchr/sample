@@ -48,11 +48,11 @@ public class MunicipalityWorkerUpdateServiceTest {
                 null, null, null, savedMunWorker);
         //System.out.println(updatedWorker);
         MunicipalityWorkerDao municipalityWorkerDao = new MunicipalityWorkerDao();
-        List<MunicipalityWorker> workers = municipalityWorkerDao.getMunWorkerByLastName("Obadaya");
+        List<MunicipalityWorker> workers = municipalityWorkerDao.findByLastName("Obadaya");
         for (MunicipalityWorker worker : workers) {
             System.out.println(worker);
         }
-        List<MunicipalityWorker> workers2 = municipalityWorkerDao.getMunWorkerByLastName("Duncan");
+        List<MunicipalityWorker> workers2 = municipalityWorkerDao.findByLastName("Duncan");
         System.out.println(workers2.size());
 
     }

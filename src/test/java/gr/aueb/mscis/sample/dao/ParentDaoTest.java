@@ -24,7 +24,7 @@ public class ParentDaoTest {
         ParentService parentService = new ParentService();
         Parent newparent = parentService.createParent("Djibril", "Cisse", "6990", "adf@b", "4212", "523523", null);
         ParentDao pdao = new ParentDao();
-        List<Parent> parents = pdao.findParentsByLastName("Cisse");
+        List<Parent> parents = pdao.findByLastName("Cisse");
         System.out.println(parents.get(0).getFistName());
     }
 }

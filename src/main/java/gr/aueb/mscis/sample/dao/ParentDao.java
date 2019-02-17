@@ -10,12 +10,16 @@ import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParentDao {
+/**
+ * The type Parent dao.
+ */
+public class ParentDao extends UserDao{
 
     private EntityManager em;
 
-    public List<Parent> findParentsByLastName(String lastName) {
-        List<Parent> parents = new ArrayList<>();
+
+    public List<Parent> findByLastName(String lastName) {
+        List<Parent> results = new ArrayList<>();
 
         em = JPAUtil.getCurrentEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -26,8 +30,26 @@ public class ParentDao {
         Query query = em.createQuery(queryString);
         query.setParameter("name", lastName);
         query.setParameter("type", "PARENT");
-        parents = (List<Parent>) query.getResultList();
+        results = (List<Parent>) query.getResultList();
         tx.commit();
-        return parents;
+        return results;
+    }
+
+    public List<Parent> findByUserName(String userName) {
+        List<Parent> results = new ArrayList<>();
+
+        em = JPAUtil.getCurrentEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+
+        //TODO: Use this approach to correct the other DAOs
+        String queryString = "from " + User.class.getName() + " where user_name = :name and type like :type";
+        Query query = em.createQuery(queryString);
+        query.setParameter("user_name", userName);
+        query.setParameter("type", "PARENT");
+        results = (List<Parent>) query.getResultList();
+        tx.commit();
+
+        return results;
     }
 }

@@ -1,5 +1,7 @@
 package gr.aueb.mscis.sample.persistence;
 
+import gr.aueb.mscis.sample.enums.PrivilegeLevel;
+import gr.aueb.mscis.sample.model.Administrator;
 import gr.aueb.mscis.sample.model.MunicipalityWorker;
 import gr.aueb.mscis.sample.model.Parent;
 import gr.aueb.mscis.sample.model.User;
@@ -27,8 +29,6 @@ public class Initializer  {
 
         Query query = null;
 
-        //TODO: try to create query with prepared statement for delete
-        //query = em.createNativeQuery("delete from :table").setParameter("table", "User");
         if (clazz.getSimpleName().equals("User")) {
             query = em.createNativeQuery("delete from User");
         } else if (clazz.getSimpleName().equals("MunicipalityWorker")) {
@@ -62,6 +62,31 @@ public class Initializer  {
         tx.begin();
 
         em.persist(parent1);
+        tx.commit();
+    }
+
+    public void prepareAdministratorData() {
+        eraseAdminData(Administrator.class);
+
+        Administrator admin1 = new Administrator("Bruce", "Wayne", PrivilegeLevel.FULL);
+        EntityManager em = JPAUtil.getCurrentEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+
+        em.persist(admin1);
+        tx.commit();
+
+    }
+
+    public void eraseAdminData(Class clazz) {
+        EntityManager em = JPAUtil.getCurrentEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+
+        Query deleteAdminQuery = null;
+        deleteAdminQuery = em.createNativeQuery("delete from User where type like :type").setParameter("type", "ADMIN");
+        deleteAdminQuery.executeUpdate();
+
         tx.commit();
     }
 
