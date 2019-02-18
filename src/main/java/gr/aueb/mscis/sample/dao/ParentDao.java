@@ -25,7 +25,6 @@ public class ParentDao extends UserDao{
         EntityTransaction tx = em.getTransaction();
         tx.begin();
 
-        //TODO: Use this approach to correct the other DAOs
         String queryString = "from " + User.class.getName() + " where last_name = :name and type like :type";
         Query query = em.createQuery(queryString);
         query.setParameter("name", lastName);
@@ -42,7 +41,6 @@ public class ParentDao extends UserDao{
         EntityTransaction tx = em.getTransaction();
         tx.begin();
 
-        //TODO: Use this approach to correct the other DAOs
         String queryString = "from " + User.class.getName() + " where user_name = :name and type like :type";
         Query query = em.createQuery(queryString);
         query.setParameter("user_name", userName);

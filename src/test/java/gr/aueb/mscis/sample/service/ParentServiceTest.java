@@ -34,6 +34,7 @@ public class ParentServiceTest {
         ParentService parentService = new ParentService();
         Parent parent = parentService.createParent("Dimitris", "Diamantidis", "69", "123", "pao@bc.com", "1234", null);
         Child child1 = new Child("Vasilis", "Spanoulis");
+        child1.setParent(parent);
         parent.getChildren().add(child1);
         System.out.println(child1.getParent());
         System.out.println(parent.getId());
