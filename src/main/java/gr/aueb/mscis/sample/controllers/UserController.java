@@ -2,6 +2,7 @@ package gr.aueb.mscis.sample.controllers;
 
 import gr.aueb.mscis.sample.enums.PrivilegeLevel;
 import gr.aueb.mscis.sample.model.Administrator;
+import gr.aueb.mscis.sample.service.AdministratorService;
 
 import javax.persistence.EntityManager;
 
@@ -36,6 +37,7 @@ public class UserController {
         int munWorker = isMunWorker ? 1 : 0;
         if ((admin+parent+munWorker) > 1 || (admin+parent+munWorker) == 0) {
             System.err.println("A user can be only of one type: parent, administrator or municipality worker");
+            return;
         } else {
             if (isAdmin) {
                 signUpAdmin();
@@ -51,7 +53,14 @@ public class UserController {
     }
 
     public void signUpAdmin(){
-        Administrator admin = new Administrator(firstName, lastName, userName, password, )
+
+        AdministratorService administratorService = new AdministratorService();
+        boolean adminExistsWithUsername = administratorService.findAdminByUsername(userName) == null ? false : true;
+        if (!adminExistsWithUsername) {
+            Administrator newAdmin = administratorService.createAdministrator(firstName, lastName, userName, password, email, vatNumber, insuraneNumber, privilegeLevel);
+            System.out.println("Created admin with id: " + newAdmin.getId() + " and username: " + newAdmin.getUserName());
+        }
+
     }
 
     public void signUpParent(){

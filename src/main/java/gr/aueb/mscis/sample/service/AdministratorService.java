@@ -1,5 +1,6 @@
 package gr.aueb.mscis.sample.service;
 
+import gr.aueb.mscis.sample.dao.AdministratorDao;
 import gr.aueb.mscis.sample.enums.PrivilegeLevel;
 import gr.aueb.mscis.sample.helper.UserDataValidator;
 import gr.aueb.mscis.sample.model.Administrator;
@@ -7,6 +8,7 @@ import gr.aueb.mscis.sample.persistence.JPAUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import java.util.List;
 
 public class AdministratorService {
 
@@ -39,5 +41,15 @@ public class AdministratorService {
         tx.commit();
 
         return newAdmin;
+    }
+
+    public Administrator findAdminByUsername(String username) {
+        AdministratorDao administratorDao = new AdministratorDao();
+        List<Administrator> foundAdmins = administratorDao.findByUserName(username);
+        Administrator foundAdmin = null;
+        if (foundAdmins != null) {
+            foundAdmin = foundAdmins.get(0);
+        }
+        return foundAdmin;
     }
 }

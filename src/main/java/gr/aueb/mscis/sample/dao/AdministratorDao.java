@@ -44,7 +44,7 @@ public class AdministratorDao extends UserDao {
         Query query = em.createQuery(queryString);
         query.setParameter("user_name", userName);
         query.setParameter("type", "ADMIN");
-        results = (List<Administrator>) query.getResultList();
+        results = (List<Administrator>) query.getSingleResult();
         tx.commit();
 
         return  results;
