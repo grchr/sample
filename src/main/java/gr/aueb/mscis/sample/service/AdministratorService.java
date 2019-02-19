@@ -47,7 +47,7 @@ public class AdministratorService {
         AdministratorDao administratorDao = new AdministratorDao();
         List<Administrator> foundAdmins = administratorDao.findByUserName(username);
         Administrator foundAdmin = null;
-        if (foundAdmins != null) {
+        if (foundAdmins.size() != 0) {
             foundAdmin = foundAdmins.get(0);
         }
         return foundAdmin;

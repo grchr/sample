@@ -41,6 +41,7 @@ public class UserController {
         } else {
             if (isAdmin) {
                 signUpAdmin();
+                return;
             }
             if (isMunWorker){
                 signUpMunWorker();
@@ -52,7 +53,7 @@ public class UserController {
 
     }
 
-    public void signUpAdmin(){
+    private void signUpAdmin(){
 
         AdministratorService administratorService = new AdministratorService();
         boolean adminExistsWithUsername = administratorService.findAdminByUsername(userName) == null ? false : true;
@@ -63,11 +64,11 @@ public class UserController {
 
     }
 
-    public void signUpParent(){
+    private void signUpParent(){
 
     }
 
-    public void signUpMunWorker(){
+    private void signUpMunWorker(){
 
     }
 }
