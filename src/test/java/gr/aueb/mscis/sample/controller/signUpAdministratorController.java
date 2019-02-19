@@ -1,4 +1,4 @@
-package gr.aueb.mscis.controller;
+package gr.aueb.mscis.sample.controller;
 
 import gr.aueb.mscis.sample.controllers.UserController;
 import gr.aueb.mscis.sample.enums.PrivilegeLevel;
