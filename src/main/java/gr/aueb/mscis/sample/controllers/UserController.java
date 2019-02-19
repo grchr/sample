@@ -58,7 +58,7 @@ public class UserController {
         AdministratorService administratorService = new AdministratorService();
         boolean adminExistsWithUsername = administratorService.findAdminByUsername(userName) == null ? false : true;
         if (!adminExistsWithUsername) {
-            Administrator newAdmin = administratorService.createAdministrator(firstName, lastName, userName, password, email, vatNumber, insuraneNumber, privilegeLevel);
+            Administrator newAdmin = administratorService.createAdministrator(firstName, lastName, userName, password, phoneNumber, email, vatNumber, privilegeLevel);
             System.out.println("Created admin with id: " + newAdmin.getId() + " and username: " + newAdmin.getUserName());
         }
 

@@ -33,7 +33,7 @@ public class signUpAdministratorController {
     @Test
     public void testControllerAdministrator(){
         UserController userController = new UserController();
-        userController.signUpUser("Admin", "Adminopoulos", "megaAdmin", "1234", "341414","email@svfs.vd", "123456",
+        userController.signUpUser("Admin", "Adminopoulos", "megaAdmin", "1234", "341414","ABGKABDD@sszb.vc", "123456",
                 "62626", null, PrivilegeLevel.FULL, true, false,false);
         AdministratorService administratorService = new AdministratorService();
         Administrator createdAdmin = administratorService.findAdminByUsername("megaAdmin");
