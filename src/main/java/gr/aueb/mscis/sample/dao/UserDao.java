@@ -14,7 +14,7 @@ public abstract class UserDao {
 	 * @param lastName the last name
 	 * @return the list
 	 */
-	public abstract <Y> List<Y> findByLastName(String lastName);
+	public abstract <Y> List<Y> findByLastName(final String lastName);
 
 	/**
 	 * Find by user name list.
@@ -23,5 +23,5 @@ public abstract class UserDao {
 	 * @param userName the user name
 	 * @return the list
 	 */
-	public abstract <Y> List<Y> findByUserName(String userName);
+	public abstract <Y> List<Y> findByUserName(final String userName);
 }

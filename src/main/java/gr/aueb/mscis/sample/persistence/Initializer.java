@@ -4,6 +4,7 @@ import gr.aueb.mscis.sample.enums.PrivilegeLevel;
 import gr.aueb.mscis.sample.model.Administrator;
 import gr.aueb.mscis.sample.model.MunicipalityWorker;
 import gr.aueb.mscis.sample.model.Parent;
+import gr.aueb.mscis.sample.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -15,32 +16,8 @@ import javax.persistence.Query;
  */
 public class Initializer {
 
-
-	/**
-	 * Remove all data from database.
-	 * The functionality must be executed within the bounds of a transaction
-	 */
-	private void eraseData(Class clazz) {
-
-		EntityManager em = JPAUtil.getCurrentEntityManager();
-		EntityTransaction tx = em.getTransaction();
-		tx.begin();
-
-		Query query = null;
-
-		if (clazz.getSimpleName().equals("User")) {
-			query = em.createNativeQuery("delete from User");
-		} else if (clazz.getSimpleName().equals("MunicipalityWorker")) {
-			query = em.createNativeQuery("delete from User where type like :type").setParameter("type", "MUN_W");
-		}
-		query.executeUpdate();
-
-		tx.commit();
-	}
-
-
 	public void prepareMunicipalityWorkerData() {
-		eraseData(MunicipalityWorker.class);
+		eraseUserData(MunicipalityWorker.class);
 
 		MunicipalityWorker munW1 = new MunicipalityWorker("T", "Dot", "Athens");
 
@@ -105,4 +82,30 @@ public class Initializer {
 
 		tx.commit();
 	}
+
+
+	/**
+	 * Remove all data from database.
+	 * The functionality must be executed within the bounds of a transaction
+	 */
+	private void eraseUserData(Class clazz) {
+
+		EntityManager em = JPAUtil.getCurrentEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+
+		Query query = null;
+
+		if (clazz.isInstance(User.class)) {
+			query = em.createNativeQuery("delete from User");
+		} else if (clazz.isInstance(MunicipalityWorker.class)) {
+			query = em.createNativeQuery("delete from User where type like :type").setParameter("type", "MUN_W");
+		}
+		if (query != null) {
+			query.executeUpdate();
+		}
+
+		tx.commit();
+	}
+
 }

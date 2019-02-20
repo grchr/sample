@@ -4,6 +4,7 @@ package gr.aueb.mscis.sample.model;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -48,6 +49,9 @@ public abstract class User implements Serializable {
 	@Column(name = "email")
 	private String email;
 
+	@Embedded
+	private Address address;
+
 	@Column(name = "VAT_number")
 	private String vatNumber;
 
@@ -61,49 +65,24 @@ public abstract class User implements Serializable {
 	/**
 	 * Instantiates a new User.
 	 *
-	 * @param fistName the fist name
-	 * @param lastName the last name
-	 */
-	protected User(final String fistName, final String lastName) {
-		this.fistName = fistName;
-		this.lastName = lastName;
-	}
-
-	/**
-	 * Instantiates a new User.
-	 *
-	 * @param fistName    the fist name
-	 * @param lastName    the last name
-	 * @param phoneNumber the phone number
-	 * @param email       the email
-	 * @param vatNumber   the vat number
-	 */
-	protected User(String fistName, String lastName, String phoneNumber, String email, String vatNumber) {
-		this.fistName = fistName;
-		this.lastName = lastName;
-		this.phoneNumber = phoneNumber;
-		this.email = email;
-		this.vatNumber = vatNumber;
-	}
-
-	/**
-	 * Instantiates a new User.
-	 *
 	 * @param fistName    the fist name
 	 * @param lastName    the last name
 	 * @param userName    the user name
 	 * @param password    the password
 	 * @param phoneNumber the phone number
 	 * @param email       the email
+	 * @param address     the address
 	 * @param vatNumber   the vat number
 	 */
-	protected User(String fistName, String lastName, String userName, String password, String phoneNumber, String email, String vatNumber) {
+	public User(final String fistName, final String lastName, final String userName, final String password, final String phoneNumber,
+				final String email, final Address address, final String vatNumber) {
 		this.fistName = fistName;
 		this.lastName = lastName;
 		this.userName = userName;
 		this.password = password;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
+		this.address = address;
 		this.vatNumber = vatNumber;
 	}
 
@@ -249,5 +228,39 @@ public abstract class User implements Serializable {
 	 */
 	public void setVatNumber(final String vatNumber) {
 		this.vatNumber = vatNumber;
+	}
+
+	/**
+	 * Gets address.
+	 *
+	 * @return the address
+	 */
+	public Address getAddress() {
+		return address;
+	}
+
+	/**
+	 * Sets address.
+	 *
+	 * @param address the address
+	 */
+	public void setAddress(final Address address) {
+		this.address = address;
+	}
+
+
+	@Override
+	public String toString() {
+		return "{\"User\":{"
+				+ "\"id\":\"" + id + "\""
+				+ ",\"fistName\":" + fistName + "\""
+				+ ",\"lastName\":" + lastName + "\""
+				+ ",\"userName\":" + userName + "\""
+				+ ",\"password\":" + password + "\""
+				+ ",\"phoneNumber\":" + phoneNumber + "\""
+				+ ",\"email\":" + email + "\""
+				+ ",\"address\":" + address
+				+ ",\"vatNumber\":" + vatNumber + "\""
+				+ "}}";
 	}
 }

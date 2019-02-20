@@ -43,12 +43,5 @@ public final class JPAUtil {
 		return em;
 	}
 
-	/**
-	 * Create entity manager entity manager.
-	 *
-	 * @return the entity manager
-	 */
-	public static EntityManager createEntityManager() {
-		return getEntityManagerFactory().createEntityManager();
-	}
+
 }
