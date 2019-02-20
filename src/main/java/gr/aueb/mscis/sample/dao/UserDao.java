@@ -1,7 +1,5 @@
 package gr.aueb.mscis.sample.dao;
 
-import gr.aueb.mscis.sample.model.User;
-
 import java.util.List;
 
 /**
@@ -9,21 +7,21 @@ import java.util.List;
  */
 public abstract class UserDao {
 
-    /**
-     * Find by last name list.
-     *
-     * @param <Y>      the type parameter
-     * @param lastName the last name
-     * @return the list
-     */
-    public abstract <Y> List<Y> findByLastName(String lastName);
+	/**
+	 * Find by last name list.
+	 *
+	 * @param <Y>      the type parameter
+	 * @param lastName the last name
+	 * @return the list
+	 */
+	public abstract <Y> List<Y> findByLastName(String lastName);
 
-    /**
-     * Find by user name list.
-     *
-     * @param <Y>      the type parameter
-     * @param userName the user name
-     * @return the list
-     */
-    public abstract <Y> List<Y> findByUserName(String userName);
+	/**
+	 * Find by user name list.
+	 *
+	 * @param <Y>      the type parameter
+	 * @param userName the user name
+	 * @return the list
+	 */
+	public abstract <Y> List<Y> findByUserName(String userName);
 }

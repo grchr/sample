@@ -11,21 +11,21 @@ import java.util.List;
 
 public class ChildDao {
 
-    private EntityManager em;
+	private EntityManager em;
 
-    public List<Child> findChildreByParentId(int parentId) {
-        List<Child> results = new ArrayList<>();
-        em = JPAUtil.getCurrentEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        tx.begin();
+	public List<Child> findChildreByParentId(int parentId) {
+		List<Child> results = new ArrayList<>();
+		em = JPAUtil.getCurrentEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
 
-        String queryString = "from " + Child.class.getName() + " where parent_id = :id";
-        Query query = em.createQuery(queryString);
-        query.setParameter("id", parentId);
-        results = (List<Child>) query.getResultList();
+		String queryString = "from " + Child.class.getName() + " where parent_id = :id";
+		Query query = em.createQuery(queryString);
+		query.setParameter("id", parentId);
+		results = (List<Child>) query.getResultList();
 
 
-        tx.commit();
-        return results;
-    }
+		tx.commit();
+		return results;
+	}
 }

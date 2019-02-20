@@ -11,65 +11,65 @@ import javax.persistence.Entity;
 @DiscriminatorValue("MUN_W")
 public class MunicipalityWorker extends User {
 
-    @Column(name="reg_office")
-    private String registryOffice;
+	@Column(name = "reg_office")
+	private String registryOffice;
 
-    /**
-     * Instantiates a new Municipality worker.
-     */
-    public MunicipalityWorker(){
-        super();
-    }
+	/**
+	 * Instantiates a new Municipality worker.
+	 */
+	public MunicipalityWorker() {
+		super();
+	}
 
-    /**
-     * Instantiates a new Municipality worker.
-     *
-     * @param firstNamne     the first namne
-     * @param lastName       the last name
-     * @param registryOffice the registry office
-     */
-    public MunicipalityWorker( String firstNamne, String lastName, String registryOffice) {
-        super(firstNamne, lastName);
-        this.registryOffice = registryOffice;
-    }
+	/**
+	 * Instantiates a new Municipality worker.
+	 *
+	 * @param firstNamne     the first namne
+	 * @param lastName       the last name
+	 * @param registryOffice the registry office
+	 */
+	public MunicipalityWorker(String firstNamne, String lastName, String registryOffice) {
+		super(firstNamne, lastName);
+		this.registryOffice = registryOffice;
+	}
 
-    /**
-     * Instantiates a new Municipality worker.
-     *
-     * @param firstName      the first name
-     * @param lastName       the last name
-     * @param userName       the user name
-     * @param password       the password
-     * @param phoneNumber    the phone number
-     * @param email          the email
-     * @param vatNumber      the vat number
-     * @param registryOffice the registry office
-     */
-    public MunicipalityWorker(String firstName, String lastName, String userName, String password, String phoneNumber, String email, String vatNumber, String registryOffice) {
-        super(firstName, lastName, userName, password, phoneNumber, email, vatNumber);
-        this.registryOffice = registryOffice;
-    }
+	/**
+	 * Instantiates a new Municipality worker.
+	 *
+	 * @param firstName      the first name
+	 * @param lastName       the last name
+	 * @param userName       the user name
+	 * @param password       the password
+	 * @param phoneNumber    the phone number
+	 * @param email          the email
+	 * @param vatNumber      the vat number
+	 * @param registryOffice the registry office
+	 */
+	public MunicipalityWorker(String firstName, String lastName, String userName, String password, String phoneNumber, String email, String vatNumber, String registryOffice) {
+		super(firstName, lastName, userName, password, phoneNumber, email, vatNumber);
+		this.registryOffice = registryOffice;
+	}
 
-    /**
-     * Gets registry office.
-     *
-     * @return the registry office
-     */
-    public String getRegistryOffice() {
-        return registryOffice;
-    }
+	/**
+	 * Gets registry office.
+	 *
+	 * @return the registry office
+	 */
+	public String getRegistryOffice() {
+		return registryOffice;
+	}
 
-    /**
-     * Sets registry office.
-     *
-     * @param registryOffice the registry office
-     */
-    public void setRegistryOffice(final String registryOffice) {
-        this.registryOffice = registryOffice;
-    }
+	/**
+	 * Sets registry office.
+	 *
+	 * @param registryOffice the registry office
+	 */
+	public void setRegistryOffice(final String registryOffice) {
+		this.registryOffice = registryOffice;
+	}
 
-    @Override
-    public String toString() {
-        return "id: " + this.getId() + " name: " + this.getFistName() + " " + this.getLastName() + " office: " + this.getRegistryOffice();
-    }
+	@Override
+	public String toString() {
+		return "id: " + this.getId() + " name: " + this.getFistName() + " " + this.getLastName() + " office: " + this.getRegistryOffice();
+	}
 }

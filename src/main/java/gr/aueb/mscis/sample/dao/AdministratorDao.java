@@ -12,41 +12,41 @@ import java.util.List;
 
 public class AdministratorDao extends UserDao {
 
-    private EntityManager em;
+	private EntityManager em;
 
-    public List<Administrator> findByLastName(String lastName) {
-        List<Administrator> results = new ArrayList<>();
+	public List<Administrator> findByLastName(String lastName) {
+		List<Administrator> results = new ArrayList<>();
 
-        em = JPAUtil.getCurrentEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        tx.begin();
+		em = JPAUtil.getCurrentEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
 
-        //TODO: Use this approach to correct the other DAOs
-        String queryString = "from " + User.class.getName() + " where last_name = :name and type like :type";
-        Query query = em.createQuery(queryString);
-        query.setParameter("name", lastName);
-        query.setParameter("type", "ADMIN");
-        results = (List<Administrator>) query.getResultList();
-        tx.commit();
+		//TODO: Use this approach to correct the other DAOs
+		String queryString = "from " + User.class.getName() + " where last_name = :name and type like :type";
+		Query query = em.createQuery(queryString);
+		query.setParameter("name", lastName);
+		query.setParameter("type", "ADMIN");
+		results = (List<Administrator>) query.getResultList();
+		tx.commit();
 
-        return  results;
+		return results;
 
-    }
+	}
 
-    public List<Administrator> findByUserName(String userName) {
-        List<Administrator> results = new ArrayList<>();
+	public List<Administrator> findByUserName(String userName) {
+		List<Administrator> results = new ArrayList<>();
 
-        em = JPAUtil.getCurrentEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        tx.begin();
+		em = JPAUtil.getCurrentEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
 
-        String queryString = "from " + User.class.getName() + " where user_name = :user_name and type like :type";
-        Query query = em.createQuery(queryString);
-        query.setParameter("user_name", userName);
-        query.setParameter("type", "ADMIN");
-        results = (List<Administrator>) query.getResultList();
-        tx.commit();
+		String queryString = "from " + User.class.getName() + " where user_name = :user_name and type like :type";
+		Query query = em.createQuery(queryString);
+		query.setParameter("user_name", userName);
+		query.setParameter("type", "ADMIN");
+		results = (List<Administrator>) query.getResultList();
+		tx.commit();
 
-        return  results;
-    }
+		return results;
+	}
 }
