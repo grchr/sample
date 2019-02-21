@@ -13,7 +13,7 @@ public class ChildDao {
 
     private EntityManager em;
 
-    public List<Child> findChildreByParentId(int parentId) {
+    public List<Child> findChildrenByParentId(int parentId) {
         List<Child> results = new ArrayList<>();
         em = JPAUtil.getCurrentEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -34,7 +34,7 @@ public class ChildDao {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
 
-        String queryString = "from " + Child.class.getName() + " where suraname = :surname";
+        String queryString = "from " + Child.class.getName() + " where surname = :surname";
         Query query = em.createQuery(queryString);
         query.setParameter("surname", surname);
         results = (List<Child>) query.getResultList();

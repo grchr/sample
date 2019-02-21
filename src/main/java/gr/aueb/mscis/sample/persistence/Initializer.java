@@ -98,8 +98,8 @@ public class Initializer  {
 
         Query deleteChildrenQuery = null;
         Query deleteParentsQuery = null;
-        deleteChildrenQuery = em.createNativeQuery("delete from Child where parent_id in (select id from Parent) ");
-        deleteParentsQuery = em.createNativeQuery("delete from Parent");
+        deleteChildrenQuery = em.createNativeQuery("delete from Child where parent_id in (select id from User where type like :type)").setParameter("type", "PARENT");
+        deleteParentsQuery = em.createNativeQuery("delete from User where type like :type").setParameter("type", "PARENT");
 
         deleteChildrenQuery.executeUpdate();
         deleteParentsQuery.executeUpdate();

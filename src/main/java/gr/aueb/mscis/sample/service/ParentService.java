@@ -76,6 +76,9 @@ public class ParentService{
         if (vatNumber != null) {
             parent.setVatNumber(vatNumber);
         }
+        if (insuranceNumber != null) {
+            parent.setInsuranceNumber(insuranceNumber);
+        }
         if (children != null) {
             parent.setChildren(children);
         }
