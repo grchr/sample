@@ -34,9 +34,9 @@ public class ParentService{
      * @param children        the children
      * @return the parent
      */
-    public Parent createParent(final String name, final String lastName, final String phoneNumber , final String email
+    public Parent createParent(final String name, final String lastName, final String userName, final String password, final String phoneNumber , final String email
             , final String vatNumber, final String insuranceNumber, List<Child> children) {
-        Parent newParent = new Parent(name,lastName, phoneNumber, email, vatNumber, insuranceNumber);
+        Parent newParent = new Parent(name, lastName, userName, password, phoneNumber, email, vatNumber, insuranceNumber);
         if (children != null) {
             newParent.setChildren(children);
             for (Child child : children) {
@@ -49,6 +49,43 @@ public class ParentService{
         tx.commit();
 
         return newParent;
+    }
+
+    public Parent updateParent(final String firstName, final String lastName, final String userName, final String password, final String phoneNumber , final String email
+            , final String vatNumber, final String insuranceNumber, List<Child> children, Parent parent) {
+
+        if (firstName != null) {
+            parent.setFistName(firstName);
+        }
+        if (lastName != null) {
+            parent.setLastName(lastName);
+        }
+        if (userName != null) {
+            parent.setUserName(userName);
+        }
+        if (password != null) {
+            parent.setPassword(password);
+        }
+        if (phoneNumber != null) {
+            parent.setPhoneNumber(phoneNumber);
+        }
+        if (email != null) {
+            parent.setEmail(email);
+        }
+        if (vatNumber != null) {
+            parent.setVatNumber(vatNumber);
+        }
+        if (children != null) {
+            parent.setChildren(children);
+        }
+
+        em = JPAUtil.getCurrentEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+        em.merge(parent);
+        tx.commit();
+
+        return parent;
     }
 
 }

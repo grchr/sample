@@ -26,7 +26,8 @@ public class ChildDaoTest {
         ParentService parentService = new ParentService();
         List<Child> children = new ArrayList<>();
         children.add(new Child("Mario", "Galinovic"));
-        Parent newparent = parentService.createParent("Djibril", "Cisse", "6990", "adf@b", "4212", "523523", children);
+        Parent newparent = parentService.createParent("Djibril", "Cisse", "DC", "password",
+                "6990", "adf@b", "4212", "523523", children);
         ChildDao childDao = new ChildDao();
         List<Child> foundChildren = childDao.findChildreByParentId(newparent.getId());
         System.out.println(foundChildren.get(0).getName());

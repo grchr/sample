@@ -41,6 +41,12 @@ public class Parent extends User{
         this.insuranceNumber = insuranceNumber;
     }
 
+    public Parent(String name, String lastName, String userName, String password, String phoneNumber, String insuranceNumber, String email
+            , String vatNumber) {
+        super(name, lastName, userName, password, phoneNumber, email, vatNumber);
+        this.insuranceNumber = insuranceNumber;
+    }
+
     /**
      * Gets insurance number.
      *

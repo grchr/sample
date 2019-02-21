@@ -43,6 +43,42 @@ public class AdministratorService {
         return newAdmin;
     }
 
+    public Administrator updateAdministrator(String firstName, String lastName, String userName, String password, String phoneNumber,
+                                             String email, String vatNumber, PrivilegeLevel privilegeLevel, Administrator administrator) {
+        if (firstName != null) {
+            administrator.setFistName(firstName);
+        }
+        if (lastName != null) {
+            administrator.setLastName(lastName);
+        }
+        if (userName != null) {
+            administrator.setUserName(userName);
+        }
+        if (password != null) {
+            administrator.setPassword(password);
+        }
+        if (phoneNumber != null) {
+            administrator.setPhoneNumber(phoneNumber);
+        }
+        if (email != null) {
+            administrator.setEmail(email);
+        }
+        if (vatNumber != null) {
+            administrator.setVatNumber(vatNumber);
+        }
+        if (privilegeLevel != null) {
+            administrator.setPrivilege(privilegeLevel);
+        }
+
+        em = JPAUtil.getCurrentEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+        em.merge(administrator);
+        tx.commit();
+
+        return administrator;
+    }
+
     public Administrator findAdminByUsername(String username) {
         AdministratorDao administratorDao = new AdministratorDao();
         List<Administrator> foundAdmins = administratorDao.findByUserName(username);
