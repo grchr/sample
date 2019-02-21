@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 public class AdminCreateServiceTest {
 
@@ -47,6 +48,9 @@ public class AdminCreateServiceTest {
         Administrator mpalourdos = administratorService.findAdminByUsername("mpalourdos");
         System.out.println(mpalourdos);
         Assert.assertEquals(mpalourdos.getUserName(), "mpalourdos");
+        List<Administrator> allAdmins = administratorService.findAll();
+        System.out.println(allAdmins.size());
+        Assert.assertEquals(2, allAdmins.size());
     }
 
 }

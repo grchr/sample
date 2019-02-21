@@ -26,4 +26,6 @@ public abstract class UserDao {
      * @return the list
      */
     public abstract <Y> List<Y> findByUserName(String userName);
+
+    public abstract <Y> List<Y> findAll();
 }

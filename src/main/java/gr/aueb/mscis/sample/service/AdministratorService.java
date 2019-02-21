@@ -32,6 +32,11 @@ public class AdministratorService {
         } else {
             System.out.println("INVALID PHONE NUMBER");
         }
+        if(UserDataValidator.isValidVATNumber(vatNumber)) {
+            System.out.println("VALID VAT NUMBER");
+        } else {
+            System.out.println("INVALID VAT NUMBER");
+        }
         Administrator newAdmin = new Administrator(firstName, lastName, userName, password, phoneNumber,
                 email, vatNumber, privilegeLevel);
 
@@ -87,5 +92,11 @@ public class AdministratorService {
             foundAdmin = foundAdmins.get(0);
         }
         return foundAdmin;
+    }
+
+    public List<Administrator> findAll() {
+        AdministratorDao administratorDao = new AdministratorDao();
+        List<Administrator> foundAdmins = administratorDao.findAll();
+        return foundAdmins;
     }
 }

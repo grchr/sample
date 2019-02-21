@@ -1,14 +1,13 @@
 package gr.aueb.mscis.sample.persistence;
 
 import gr.aueb.mscis.sample.enums.PrivilegeLevel;
-import gr.aueb.mscis.sample.model.Administrator;
-import gr.aueb.mscis.sample.model.MunicipalityWorker;
-import gr.aueb.mscis.sample.model.Parent;
-import gr.aueb.mscis.sample.model.User;
+import gr.aueb.mscis.sample.model.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -57,6 +56,23 @@ public class Initializer  {
         eraseParentData(Parent.class);
 
         Parent parent1 = new Parent("Test", "Parent", "sfs", "v", "@", "242");
+        EntityManager em = JPAUtil.getCurrentEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+
+        em.persist(parent1);
+        tx.commit();
+    }
+
+    public void prepareChildData() {
+        eraseParentData(Parent.class);
+
+        Parent parent1 = new Parent("Test", "Parent", "sfs", "v", "@", "242");
+        List<Child> children = new ArrayList<>();
+        Child child1 = new Child("Test", "Child");
+        child1.setParent(parent1);
+        children.add(child1);
+        parent1.setChildren(children);
         EntityManager em = JPAUtil.getCurrentEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();

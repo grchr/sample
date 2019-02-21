@@ -82,4 +82,19 @@ public class ParentServiceTest {
         List<Child> updatedChildren = childDao.findChildrenBySurname("Fotsis");
         Assert.assertEquals(0, updatedChildren.size());
     }
+
+    @Test
+    public void testFindAllParents() {
+        ParentService parentService = new ParentService();
+        Parent parent1 = parentService.createParent("Phillip", "von Hapsburg", "PvH", "espana","321311","escorial@madrid.com",
+                "31313","42424", null);
+        Parent parent2 = parentService.createParent("Karl", "von Hapsburg", "KvH", "austria","321311","escorial@madrid.com",
+                "31313","42424", null);
+        System.out.println(parent1.getId());
+        System.out.println(parent2.getId());
+
+        List<Parent> foundParents = parentService.findAll();
+        Assert.assertEquals(3, foundParents.size());
+
+    }
 }

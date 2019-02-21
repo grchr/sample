@@ -42,4 +42,19 @@ public class ChildDao {
         tx.commit();
         return results;
     }
+
+    public List<Child> finadAll() {
+        List<Child> results = new ArrayList<>();
+        em = JPAUtil.getCurrentEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+
+        String queryString = "from " + Child.class.getName();
+        Query query = em.createQuery(queryString);
+        results = (List<Child>) query.getResultList();
+
+        tx.commit();
+        return results;
+    }
+
 }

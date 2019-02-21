@@ -49,4 +49,20 @@ public class AdministratorDao extends UserDao {
 
         return  results;
     }
+
+    public List<Administrator> findAll(){
+        List<Administrator> results = new ArrayList<>();
+
+        em = JPAUtil.getCurrentEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+
+        String queryString = "from " + User.class.getName() + " where type like :type";
+        Query query = em.createQuery(queryString);
+        query.setParameter("type", "ADMIN");
+        results = (List<Administrator>) query.getResultList();
+        tx.commit();
+
+        return  results;
+    }
 }

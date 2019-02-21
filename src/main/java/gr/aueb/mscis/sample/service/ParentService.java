@@ -1,6 +1,7 @@
 package gr.aueb.mscis.sample.service;
 
 import gr.aueb.mscis.sample.dao.ParentDao;
+import gr.aueb.mscis.sample.helper.UserDataValidator;
 import gr.aueb.mscis.sample.model.Child;
 import gr.aueb.mscis.sample.model.Parent;
 import gr.aueb.mscis.sample.persistence.JPAUtil;
@@ -44,6 +45,28 @@ public class ParentService{
                 child.setParent(newParent);
             }
         }
+
+        if(UserDataValidator.isValidEmailFormat(email)){
+            System.out.println("VALID EMAIL FORMAT");
+        } else {
+            System.out.println("INVALID EMAIL FORMAT");
+        }
+        if(UserDataValidator.isValidPhoneNumber(phoneNumber)) {
+            System.out.println("VALID PHONE NUMBER");
+        } else {
+            System.out.println("INVALID PHONE NUMBER");
+        }
+        if(UserDataValidator.isValidVATNumber(vatNumber)) {
+            System.out.println("VALID VAT NUMBER");
+        } else {
+            System.out.println("INVALID VAT NUMBER");
+        }
+        if (UserDataValidator.isValidInsuranceNumber(insuranceNumber)) {
+            System.out.println("VALID INSURANCE NUMBER");
+        } else {
+            System.out.println("INVALID INSURANCE NUMBER");
+        }
+
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         em.persist(newParent);
@@ -93,14 +116,20 @@ public class ParentService{
     }
 
     public Parent findParentByUsername(String userName) {
-        ParentDao administratorDao = new ParentDao();
-        List<Parent> foundAdmins = administratorDao.findByUserName(userName);
+        ParentDao parentDao = new ParentDao();
+        List<Parent> foundParents = parentDao.findByUserName(userName);
         Parent foundAdmin = null;
         // We assume that the username will be unique for each of the 3 types of users
-        if (foundAdmins.size() != 0) {
-            foundAdmin = foundAdmins.get(0);
+        if (foundParents.size() != 0) {
+            foundAdmin = foundParents.get(0);
         }
         return foundAdmin;
+    }
+
+    public List<Parent> findAll() {
+        ParentDao parentDao = new ParentDao();
+        List<Parent> foundParents = parentDao.findAll();
+        return  foundParents;
     }
 
 }

@@ -53,6 +53,11 @@ public class MunicipalityWorkerService {
         } else {
             System.out.println("INVALID PHONE NUMBER");
         }
+        if(UserDataValidator.isValidVATNumber(vatNumber)) {
+            System.out.println("VALID VAT NUMBER");
+        } else {
+            System.out.println("INVALID VAT NUMBER");
+        }
         MunicipalityWorker newMunWorker = new MunicipalityWorker(firstName, lastName, userName, password, phoneNumber, email, vatNumber, registryOffice);
 
         EntityTransaction tx = em.getTransaction();
