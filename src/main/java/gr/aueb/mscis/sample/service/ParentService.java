@@ -1,5 +1,6 @@
 package gr.aueb.mscis.sample.service;
 
+import gr.aueb.mscis.sample.dao.ParentDao;
 import gr.aueb.mscis.sample.model.Child;
 import gr.aueb.mscis.sample.model.Parent;
 import gr.aueb.mscis.sample.persistence.JPAUtil;
@@ -86,6 +87,17 @@ public class ParentService{
         tx.commit();
 
         return parent;
+    }
+
+    public Parent findParentByUsername(String userName) {
+        ParentDao administratorDao = new ParentDao();
+        List<Parent> foundAdmins = administratorDao.findByUserName(userName);
+        Parent foundAdmin = null;
+        // We assume that the username will be unique for each of the 3 types of users
+        if (foundAdmins.size() != 0) {
+            foundAdmin = foundAdmins.get(0);
+        }
+        return foundAdmin;
     }
 
 }

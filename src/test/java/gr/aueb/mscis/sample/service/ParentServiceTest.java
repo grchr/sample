@@ -1,5 +1,6 @@
 package gr.aueb.mscis.sample.service;
 
+import gr.aueb.mscis.sample.model.Administrator;
 import gr.aueb.mscis.sample.model.Child;
 import gr.aueb.mscis.sample.model.Parent;
 import gr.aueb.mscis.sample.persistence.Initializer;
@@ -44,7 +45,16 @@ public class ParentServiceTest {
 
         Parent foundParent = em.find(Parent.class, parent.getId());
         System.out.println("Number of children: " + foundParent.getChildren().size() + " children's name: " +
-                foundParent.getChildren().get(0).getId() + " name: " + foundParent.getFistName() + " " + foundParent.getLastName());
+                foundParent.getChildren().get(0).getName() + " " + foundParent.getChildren().get(0).getSurname() + " name: " + foundParent.getFistName() + " " + foundParent.getLastName());
+
+        Parent updatedParent = parentService.updateParent("Mike", "Batiste", "MB", null, "6262", null, null,
+                "421315", null, foundParent);
+        Parent tryToFindPreviousParent = parentService.findParentByUsername("3D");
+        Assert.assertNull(tryToFindPreviousParent);
+        Parent actualNewParent = parentService.findParentByUsername("MB");
+        System.out.println(actualNewParent);
+        System.out.println(actualNewParent.getChildren().size());
+
 
     }
 }
