@@ -3,6 +3,7 @@ package gr.aueb.mscis.sample.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * The type Child.
@@ -126,5 +127,22 @@ public class Child implements Serializable {
      */
     public void setParent(Parent parent) {
         this.parent = parent;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Child child = (Child) o;
+        return getId() == child.getId() &&
+                Objects.equals(getName(), child.getName()) &&
+                Objects.equals(getSurname(), child.getSurname()) &&
+                Objects.equals(getParent(), child.getParent());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getId(), getName(), getSurname(), getParent());
     }
 }

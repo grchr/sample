@@ -12,6 +12,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * The type User.
@@ -249,5 +250,22 @@ public abstract class User implements Serializable {
      */
     public void setVatNumber(final String vatNumber) {
         this.vatNumber = vatNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return getId() == user.getId() &&
+                Objects.equals(getFistName(), user.getFistName()) &&
+                Objects.equals(getLastName(), user.getLastName()) &&
+                Objects.equals(getUserName(), user.getUserName());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getId(), getFistName(), getLastName(), getUserName());
     }
 }
