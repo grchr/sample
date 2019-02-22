@@ -16,29 +16,18 @@ public class UserDataValidator {
 
 	public static boolean isValidPhoneNumber(String phoneNumber) {
 
-		if (!phoneNumber.matches("[0-9]{10}")) {
-			return false;
-		}
-		return true;
+		return phoneNumber.matches("[0-9]{10}");
 	}
 
-    public static boolean isValidInsuranceNumber(String insuranceNumber) {
+	public static boolean isValidInsuranceNumber(String insuranceNumber) {
 
-        if (!insuranceNumber.matches("[0-9]{9}")) {
-            return false;
-        }
+		return insuranceNumber.matches("[0-9]{9}");
+	}
 
-        return true;
-    }
+	public static boolean isValidVATNumber(String vatNumber) {
 
-    public static boolean isValidVATNumber(String vatNumber) {
-
-        if (!vatNumber.matches("[0-9]{9}")) {
-            return false;
-        }
-
-        return true;
-    }
+		return vatNumber.matches("[0-9]{9}");
+	}
 
 
 }

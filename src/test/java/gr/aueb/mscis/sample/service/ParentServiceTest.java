@@ -1,100 +1,138 @@
 package gr.aueb.mscis.sample.service;
 
-import gr.aueb.mscis.sample.dao.ChildDao;
-import gr.aueb.mscis.sample.model.Administrator;
-import gr.aueb.mscis.sample.model.Child;
 import gr.aueb.mscis.sample.model.Parent;
+import gr.aueb.mscis.sample.model.User;
 import gr.aueb.mscis.sample.persistence.Initializer;
 import gr.aueb.mscis.sample.persistence.JPAUtil;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import javax.persistence.EntityManager;
-import java.util.ArrayList;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+
+/**
+ * The type Parent service test.
+ */
 public class ParentServiceTest {
 
-    private EntityManager em;
+	private EntityManager em;
 
-    @After
-    public void tearDown(){
-        em.close();
-    }
+	/**
+	 * Tear down.
+	 */
+	@After
+	public void tearDown() {
+		em.close();
+	}
 
-    @Before
-    public void setup(){
-        // prepare database for each test
-        em = JPAUtil.getCurrentEntityManager();
-        Initializer dataHelper = new Initializer();
-        dataHelper.prepareParentData();
-    }
+	/**
+	 * Set up tests.
+	 */
+	@Before
+	public void setup() {
+		// prepare database for each test
+		em = JPAUtil.getCurrentEntityManager();
+		Initializer dataHelper = new Initializer();
+		dataHelper.prepareParentData();
+	}
 
-    @Test
-    public void testPersistAValidParentService() {
+	/**
+	 * Create parent test.
+	 */
+	@Test
+	public void createParentTest() {
+		ParentService parentService = new ParentService();
+		Parent parent1 = new Parent("Kostas", "Fortounis", "6999", "v", "@", "2421");
+		parent1.setUserName("theUsername");
+		Parent createdParent = parentService.createParent(parent1);
 
-        ParentService parentService = new ParentService();
-        Parent parent = parentService.createParent("Dimitris", "Diamantidis", "3D", "password",
-                "69", "123", "pao@bc.com", "1234", null);
-        Child child1 = new Child("Vasilis", "Spanoulis");
-        child1.setParent(parent);
-        parent.getChildren().add(child1);
-        System.out.println(child1.getParent());
-        System.out.println(parent.getId());
+		assertEquals("Kostas", createdParent.getFistName());
+		assertEquals("Fortounis", createdParent.getLastName());
+		assertEquals("6999", createdParent.getPhoneNumber());
+		assertEquals("v", createdParent.getInsuranceNumber());
+		assertEquals("@", createdParent.getEmail());
+		assertEquals("2421", createdParent.getVatNumber());
+		assertEquals(2, getParents().size());
 
-        em = JPAUtil.getCurrentEntityManager();
+	}
 
-        Parent foundParent = em.find(Parent.class, parent.getId());
-        System.out.println("Number of children: " + foundParent.getChildren().size() + " children's name: " +
-                foundParent.getChildren().get(0).getName() + " " + foundParent.getChildren().get(0).getSurname() + " name: " + foundParent.getFistName() + " " + foundParent.getLastName());
+	/**
+	 * Update parent username test.
+	 */
+	@Test
+	public void updateParentUsernameTest() {
+		ParentService parentService = new ParentService();
+		List<User> parent = em.createQuery("Select a From User a where  a.class like :userType", User.class)
+				.setParameter("userType", "PARENT").getResultList();
 
-        Parent updatedParent = parentService.updateParent("Mike", "Batiste", "MB", null, "6262", null, null,
-                "421315", null, foundParent);
-        Parent tryToFindPreviousParent = parentService.findParentByUsername("3D");
-        Assert.assertNull(tryToFindPreviousParent);
-        Parent actualNewParent = parentService.findParentByUsername("MB");
-        System.out.println(actualNewParent);
-        System.out.println(actualNewParent.getChildren().size());
+		Parent createdParent = parentService.updateParentUsername("newusername", (Parent) parent.get(0));
+
+		assertEquals("newusername", createdParent.getUserName());
+		assertEquals("Parent", createdParent.getLastName());
+		assertEquals("sfs", createdParent.getPhoneNumber());
+		assertEquals("v", createdParent.getInsuranceNumber());
+		assertEquals("@", createdParent.getEmail());
+		assertEquals("242", createdParent.getVatNumber());
+		assertEquals(1, getParents().size());
+	}
+
+	/**
+	 * Find parent by last name test.
+	 */
+	@Test
+	public void findParentByLastNameTest() {
+		ParentService parentService = new ParentService();
+		Parent parent = em.find(Parent.class, 1);
+
+		List<Parent> parents = parentService.findParentByLastName("Parent");
+
+		assertEquals(1, parents.size());
+		assertEquals("Parent", parents.get(0).getLastName());
+
+	}
+
+	/**
+	 * Find parent by vat number test.
+	 */
+	@Test
+	public void findParentByVatNumberTest() {
+		ParentService parentService = new ParentService();
+		Parent parent = em.find(Parent.class, 1);
+
+		List<Parent> parents = parentService.findParentByVatNumber("242");
+
+		assertEquals(1, parents.size());
+		assertEquals("242", parents.get(0).getVatNumber());
+
+	}
+
+	/**
+	 * Test find all parents.
+	 */
+	@Test
+	public void testFindAllParents() {
+		ParentService parentService = new ParentService();
+		List<Parent> admin = parentService.findAll();
+
+		assertEquals(1, admin.size());
+		assertEquals("Test", admin.get(0).getFistName());
+		assertEquals("Parent", admin.get(0).getLastName());
+	}
 
 
-    }
+	private List<Parent> getParents() {
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
 
-    @Test
-    public void testUpdateChildThroughParent() {
-        List<Child> children = new ArrayList<>();
-        Child child1 = new Child("Antonis", "Fotsis");
-        Child child2 = new Child("Kostas", "Tsartsaris");
-        children.add(child1);
-        children.add(child2);
-        ParentService parentService = new ParentService();
-        Parent parent = parentService.createParent("Dimitris", "Diamantidis", "3D", "password",
-                "69", "123", "pao@bc.com", "1234", children);
-        System.out.println("parent id: " + parent.getId() + " parent children: " + parent.getChildren().size());
-        ChildDao childDao = new ChildDao();
-        List<Child> createdChildren = childDao.findChildrenBySurname("Fotsis");
-        System.out.println(createdChildren.get(0));
-
-        Parent parent1 = parentService.findParentByUsername("3D");
-        parent1.getChildren().get(0).setSurname("Matsapliokos");
-        parentService.updateParent(null,null,null,null,null,null,null,null,null, parent1);
-        List<Child> updatedChildren = childDao.findChildrenBySurname("Fotsis");
-        Assert.assertEquals(0, updatedChildren.size());
-    }
-
-    @Test
-    public void testFindAllParents() {
-        ParentService parentService = new ParentService();
-        Parent parent1 = parentService.createParent("Phillip", "von Hapsburg", "PvH", "espana","321311","escorial@madrid.com",
-                "31313","42424", null);
-        Parent parent2 = parentService.createParent("Karl", "von Hapsburg", "KvH", "austria","321311","escorial@madrid.com",
-                "31313","42424", null);
-        System.out.println(parent1.getId());
-        System.out.println(parent2.getId());
-
-        List<Parent> foundParents = parentService.findAll();
-        Assert.assertEquals(3, foundParents.size());
-
-    }
+		String queryString = "from User user where user.class like :usertype";
+		Query query = em.createQuery(queryString);
+		query.setParameter("usertype", "PARENT");
+		tx.commit();
+		return (List<Parent>) query.getResultList();
+	}
 }

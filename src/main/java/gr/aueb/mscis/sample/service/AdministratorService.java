@@ -1,13 +1,14 @@
 package gr.aueb.mscis.sample.service;
 
-import gr.aueb.mscis.sample.dao.AdministratorDao;
 import gr.aueb.mscis.sample.enums.PrivilegeLevel;
-import gr.aueb.mscis.sample.helper.UserDataValidator;
+import gr.aueb.mscis.sample.model.Address;
 import gr.aueb.mscis.sample.model.Administrator;
 import gr.aueb.mscis.sample.persistence.JPAUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdministratorService {
@@ -18,28 +19,12 @@ public class AdministratorService {
 		em = JPAUtil.getCurrentEntityManager();
 	}
 
-	public Administrator createAdministrator(String firstName, String lastName, String userName, String password, String phoneNumber,
-											 String email, String vatNumber, PrivilegeLevel privilegeLevel) {
+	public Administrator createAdministrator(final String firstName,final String lastName,final String userName,final String password,final String phoneNumber,
+											 final String email,final String vatNumber, final Address address,final PrivilegeLevel privilegeLevel) {
 
-        em = JPAUtil.getCurrentEntityManager();
-        if(UserDataValidator.isValidEmailFormat(email)){
-            System.out.println("VALID EMAIL FORMAT");
-        } else {
-            System.out.println("INVALID EMAIL FORMAT");
-        }
-        if(UserDataValidator.isValidPhoneNumber(phoneNumber)) {
-            System.out.println("VALID PHONE NUMBER");
-        } else {
-            System.out.println("INVALID PHONE NUMBER");
-        }
-        if(UserDataValidator.isValidVATNumber(vatNumber)) {
-            System.out.println("VALID VAT NUMBER");
-        } else {
-            System.out.println("INVALID VAT NUMBER");
-        }
-        Administrator newAdmin = new Administrator(firstName, lastName, userName, password, phoneNumber,
-                email, vatNumber, privilegeLevel);
-
+		em = JPAUtil.getCurrentEntityManager();
+		Administrator newAdmin = new Administrator(firstName, lastName, userName, password, phoneNumber,
+				email, vatNumber, address, privilegeLevel);
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		em.persist(newAdmin);
@@ -48,55 +33,59 @@ public class AdministratorService {
 		return newAdmin;
 	}
 
-    public Administrator updateAdministrator(String firstName, String lastName, String userName, String password, String phoneNumber,
-                                             String email, String vatNumber, PrivilegeLevel privilegeLevel, Administrator administrator) {
-        if (firstName != null) {
-            administrator.setFistName(firstName);
-        }
-        if (lastName != null) {
-            administrator.setLastName(lastName);
-        }
-        if (userName != null) {
-            administrator.setUserName(userName);
-        }
-        if (password != null) {
-            administrator.setPassword(password);
-        }
-        if (phoneNumber != null) {
-            administrator.setPhoneNumber(phoneNumber);
-        }
-        if (email != null) {
-            administrator.setEmail(email);
-        }
-        if (vatNumber != null) {
-            administrator.setVatNumber(vatNumber);
-        }
-        if (privilegeLevel != null) {
-            administrator.setPrivilege(privilegeLevel);
-        }
+	public Administrator updateAdministratorPassword(final String password,final Administrator administrator) {
 
-        em = JPAUtil.getCurrentEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        tx.begin();
-        em.merge(administrator);
-        tx.commit();
+		administrator.setPassword(password);
+		em = JPAUtil.getCurrentEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		em.merge(administrator);
+		tx.commit();
 
-        return administrator;
-    }
+		return administrator;
+	}
 
-    public Administrator findAdminByUsername(String username) {
-        AdministratorDao administratorDao = new AdministratorDao();
-        List<Administrator> foundAdmins = administratorDao.findByUserName(username);
-        Administrator foundAdmin = null;
-        if (foundAdmins.size() != 0) {
-            foundAdmin = foundAdmins.get(0);
-        }
-        return foundAdmin;
-    }
+	public Administrator updateAdministratorPrivilege(final PrivilegeLevel level,final Administrator administrator) {
 
-    public List<Administrator> findAll() {
-        AdministratorDao administratorDao = new AdministratorDao();
-        List<Administrator> foundAdmins = administratorDao.findAll();
-        return foundAdmins;
-    }
+		administrator.setPrivilege(level);
+		em = JPAUtil.getCurrentEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		em.merge(administrator);
+		tx.commit();
+
+		return administrator;
+	}
+
+	public Administrator findAdminByUsername(String username) {
+		List<Administrator> results = new ArrayList<>();
+
+		em = JPAUtil.getCurrentEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+
+		String queryString = "from User user where user.userName= :user_name and user.class like :usertype";
+		Query query = em.createQuery(queryString);
+		query.setParameter("user_name", username);
+		query.setParameter("usertype", "ADMIN");
+		results = (List<Administrator>) query.getResultList();
+		tx.commit();
+		return results.get(0);
+	}
+
+	public List<Administrator> findAll(){
+		List<Administrator> results = new ArrayList<>();
+
+		em = JPAUtil.getCurrentEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+
+		String queryString = "from User user  where user.class like :type";
+		Query query = em.createQuery(queryString);
+		query.setParameter("type", "ADMIN");
+		results = (List<Administrator>) query.getResultList();
+		tx.commit();
+
+		return  results;
+	}
 }

@@ -43,8 +43,9 @@ public class Administrator extends User {
 	 * @param vatNumber   the vat number
 	 * @param privilege   the privilege
 	 */
-	public Administrator(String fistName, String lastName, String userName, String password, String phoneNumber, String email, String vatNumber, PrivilegeLevel privilege) {
-		super(fistName, lastName, userName, password, phoneNumber, email, vatNumber);
+	public Administrator(String fistName, String lastName, String userName, String password, String phoneNumber, String email,
+						 String vatNumber, Address address, PrivilegeLevel privilege) {
+		super(fistName, lastName, userName, password, phoneNumber, email, address, vatNumber);
 		this.privilege = privilege;
 	}
 

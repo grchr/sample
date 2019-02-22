@@ -2,6 +2,7 @@ package gr.aueb.mscis.sample.model;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 /**
  * The type Address.
@@ -9,7 +10,7 @@ import javax.persistence.Embeddable;
  * @author taggelis
  */
 @Embeddable
-public class Address {
+public class Address implements Serializable {
 
 	@Column(name = "street")
 	private String street;

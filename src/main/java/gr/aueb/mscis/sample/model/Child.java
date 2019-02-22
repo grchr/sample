@@ -25,7 +25,7 @@ public class Child implements Serializable {
 	private String surname;
 
 	@Column(name = "age")
-	private Date age;
+	private Date birthday;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "parent_id", referencedColumnName = "id", nullable = false)
@@ -42,13 +42,26 @@ public class Child implements Serializable {
 	 *
 	 * @param name    the name
 	 * @param surname the surname
-	 * @param age     the age
-	 * @param parent  the parent
+	 * @param birthday     the age
 	 */
-	public Child(final String name, final String surname, final Date age, final Parent parent) {
+	public Child(final String name, final String surname, final Date birthday) {
 		this.name = name;
 		this.surname = surname;
-		this.age = age;
+		this.birthday = birthday;
+	}
+
+	/**
+	 * Instantiates a new Child.
+	 *
+	 * @param name    the name
+	 * @param surname the surname
+	 * @param birthday     the age
+	 * @param parent  the parent
+	 */
+	public Child(final String name, final String surname, final Date birthday, final Parent parent) {
+		this.name = name;
+		this.surname = surname;
+		this.birthday = birthday;
 		this.parent = parent;
 	}
 
@@ -111,8 +124,8 @@ public class Child implements Serializable {
 	 *
 	 * @return the age
 	 */
-	public Date getAge() {
-		return age;
+	public Date getBirthday() {
+		return birthday;
 	}
 
 	/**
@@ -120,8 +133,8 @@ public class Child implements Serializable {
 	 *
 	 * @param age the age
 	 */
-	public void setAge(final Date age) {
-		this.age = age;
+	public void setBirthday(final Date birthday) {
+		this.birthday = birthday;
 	}
 
 	/**
@@ -165,7 +178,7 @@ public class Child implements Serializable {
 				+ "\"id\":\"" + id + "\""
 				+ ",\"name\":" + name + "\""
 				+ ",\"surname\":" + surname + "\""
-				+ ",\"age\":" + age
+				+ ",\"birthday\":" + birthday
 				+ ",\"parent\":" + parent
 				+ "}}";
 	}

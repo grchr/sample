@@ -24,6 +24,18 @@ public class MunicipalityWorker extends User {
 	/**
 	 * Instantiates a new Municipality worker.
 	 *
+	 * @param firstNamne     the first namne
+	 * @param lastName       the last name
+	 * @param registryOffice the registry office
+	 */
+	public MunicipalityWorker(final String firstNamne, final String lastName, final String registryOffice) {
+		super(firstNamne, lastName);
+		this.registryOffice = registryOffice;
+	}
+
+	/**
+	 * Instantiates a new Municipality worker.
+	 *
 	 * @param fistName       the fist name
 	 * @param lastName       the last name
 	 * @param userName       the user name

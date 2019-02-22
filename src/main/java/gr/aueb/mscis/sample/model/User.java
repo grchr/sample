@@ -38,7 +38,7 @@ public abstract class User implements Serializable {
 	@Column(name = "last_name")
 	private String lastName;
 
-	@Column(name = "user_name")
+	@Column(name = "user_name",unique=true)
 	private String userName;
 
 	@Column(name = "password")
@@ -53,7 +53,7 @@ public abstract class User implements Serializable {
 	@Embedded
 	private Address address;
 
-	@Column(name = "VAT_number")
+	@Column(name = "VAT_number",unique=true)
 	private String vatNumber;
 
 	/**
@@ -62,6 +62,35 @@ public abstract class User implements Serializable {
 	public User() {
 
 	}
+
+	/**
+	 * Instantiates a new User.
+	 *
+	 * @param fistName the fist name
+	 * @param lastName the last name
+	 */
+	protected User(final String fistName, final String lastName) {
+		this.fistName = fistName;
+		this.lastName = lastName;
+	}
+
+	/**
+	 * Instantiates a new User.
+	 *
+	 * @param fistName    the fist name
+	 * @param lastName    the last name
+	 * @param phoneNumber the phone number
+	 * @param email       the email
+	 * @param vatNumber   the vat number
+	 */
+	protected User( String fistName, String lastName, String phoneNumber, String email, String vatNumber) {
+		this.fistName = fistName;
+		this.lastName = lastName;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.vatNumber = vatNumber;
+	}
+
 
 	/**
 	 * Instantiates a new User.
@@ -86,6 +115,7 @@ public abstract class User implements Serializable {
 		this.address = address;
 		this.vatNumber = vatNumber;
 	}
+
 
 	/**
 	 * Gets id.

@@ -5,38 +5,104 @@ import gr.aueb.mscis.sample.model.Parent;
 import gr.aueb.mscis.sample.persistence.Initializer;
 import gr.aueb.mscis.sample.persistence.JPAUtil;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
+import java.sql.Date;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+/**
+ * The type Child service test.
+ */
 public class ChildServiceTest {
 
-    private EntityManager em;
+	private EntityManager em;
 
-    @After
-    public void tearDown(){
-        em.close();
-    }
+	/**
+	 * Tear down.
+	 */
+	@After
+	public void tearDown() {
+		em.close();
+	}
 
-    @Before
-    public void setup(){
-        // prepare database for each test
-        em = JPAUtil.getCurrentEntityManager();
-        Initializer dataHelper = new Initializer();
-        dataHelper.prepareChildData();
-    }
+	/**
+	 * Sets .
+	 */
+	@Before
+	public void setup() {
+		// prepare database for each test
+		em = JPAUtil.getCurrentEntityManager();
+		Initializer dataHelper = new Initializer();
+		dataHelper.prepareChildData();
+	}
 
-    @Test
-    public void testChildService(){
-        em = JPAUtil.getCurrentEntityManager();
-        ParentService parentService = new ParentService();
-        ChildService childService = new ChildService();
-        List<Parent> parents = parentService.findAll();
-        List<Child> children = childService.findAll();
-        Assert.assertEquals(1, children.size());
-    }
+	/**
+	 * Find childs by parent test.
+	 */
+	@Test
+	public void findChildsByParentTest() {
+		ChildService childService = new ChildService();
+		Parent parent = em.find(Parent.class, 1);
 
+		List<Child> childrens = childService.findChildsByParent(parent);
+
+		assertEquals(2, childrens.size());
+		assertNotNull(childrens.get(0));
+		assertNotNull(childrens.get(1));
+	}
+
+	/**
+	 * Find children by surname test.
+	 */
+	@Test
+	public void findChildrenBySurnameTest() {
+		ChildService childService = new ChildService();
+		List<Child> childrens = childService.findChildrenBySurname("Child");
+
+		assertEquals(2, childrens.size());
+	}
+
+	/**
+	 * Create child test.
+	 */
+	@Test
+	public void createChildTest() {
+		ChildService childService = new ChildService();
+		Parent parent = em.find(Parent.class, 1);
+		Child child = new Child("Test", "Child", new Date(1992, 12, 5));
+		child.setParent(parent);
+		Child child1 = childService.createChild(child);
+
+		assertEquals("Test",child1.getName());
+		assertEquals("Child",child1.getSurname());
+		assertEquals(new Date(1992, 12, 5),child1.getBirthday());
+		assertEquals(3,getChilds().size());
+	}
+
+	/**
+	 * Finad all test.
+	 */
+	@Test
+	public void finadAllTest() {
+		ChildService childService = new ChildService();
+		List<Child> childrens = childService.finadAll();
+
+		assertEquals(2, childrens.size());
+	}
+
+	private List<Child> getChilds() {
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		String queryString = "from Child";
+		Query query = em.createQuery(queryString);
+		tx.commit();
+		return (List<Child>) query.getResultList();
+	}
 }

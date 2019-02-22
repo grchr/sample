@@ -6,6 +6,7 @@ import gr.aueb.mscis.sample.model.*;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,9 @@ import java.util.List;
  */
 public class Initializer {
 
+	/**
+	 * Prepare municipality worker data.
+	 */
 	public void prepareMunicipalityWorkerData() {
 		eraseUserData(MunicipalityWorker.class);
 
@@ -28,39 +32,54 @@ public class Initializer {
 		tx.commit();
 	}
 
+	/**
+	 * Prepare parent data.
+	 */
 	public void prepareParentData() {
-		eraseParentData(Parent.class);
+		eraseParentData();
 
 		Parent parent1 = new Parent("Test", "Parent", "sfs", "v", "@", "242");
+		parent1.setUserName("username");
 		EntityManager em = JPAUtil.getCurrentEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-
 		em.persist(parent1);
 		tx.commit();
 	}
 
+	/**
+	 * Prepare child data.
+	 */
 	public void prepareChildData() {
-		eraseParentData(Parent.class);
-
+		eraseParentData();
 		Parent parent1 = new Parent("Test", "Parent", "sfs", "v", "@", "242");
+
 		List<Child> children = new ArrayList<>();
-		Child child1 = new Child("Test", "Child");
+		Child child1 = new Child("Test", "Child", new Date(1992, 12, 5));
 		child1.setParent(parent1);
 		children.add(child1);
+		Child child2 = new Child("Test2", "Child", new Date(1992, 12, 5));
+		child2.setParent(parent1);
+		children.add(child2);
+
 		parent1.setChildren(children);
+
 		EntityManager em = JPAUtil.getCurrentEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-
 		em.persist(parent1);
 		tx.commit();
 	}
 
+	/**
+	 * Prepare administrator data.
+	 */
 	public void prepareAdministratorData() {
-		eraseAdminData(Administrator.class);
+		eraseAdminData();
 
 		Administrator admin1 = new Administrator("Bruce", "Wayne", PrivilegeLevel.FULL);
+		admin1.setUserName("username");
+		admin1.setPassword("pass");
 		EntityManager em = JPAUtil.getCurrentEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
@@ -70,32 +89,30 @@ public class Initializer {
 
 	}
 
-	public void eraseAdminData(Class clazz) {
+	/**
+	 * Erase admin data.
+	 */
+	public void eraseAdminData() {
 		EntityManager em = JPAUtil.getCurrentEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 
-		Query deleteAdminQuery = null;
-		deleteAdminQuery = em.createNativeQuery("delete from User where type like :type").setParameter("type", "ADMIN");
+		Query deleteAdminQuery;
+		deleteAdminQuery = em.createQuery("delete from User user where user.class like :type").setParameter("type", "ADMIN");
 		deleteAdminQuery.executeUpdate();
 
 		tx.commit();
 	}
 
-	public void eraseParentData(Class clazz) {
+	/**
+	 * Erase parent data.
+	 */
+	public void eraseParentData() {
 
 		EntityManager em = JPAUtil.getCurrentEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-
-        Query deleteChildrenQuery = null;
-        Query deleteParentsQuery = null;
-        deleteChildrenQuery = em.createNativeQuery("delete from Child where parent_id in (select id from User where type like :type)").setParameter("type", "PARENT");
-        deleteParentsQuery = em.createNativeQuery("delete from User where type like :type").setParameter("type", "PARENT");
-
-		deleteChildrenQuery.executeUpdate();
-		deleteParentsQuery.executeUpdate();
-
+		em.createQuery("delete from User user where user.class like :type").setParameter("type", "PARENT").executeUpdate();
 		tx.commit();
 	}
 

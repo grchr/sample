@@ -1,6 +1,7 @@
 package gr.aueb.mscis.sample.service;
 
 import gr.aueb.mscis.sample.helper.UserDataValidator;
+import gr.aueb.mscis.sample.model.Address;
 import gr.aueb.mscis.sample.model.MunicipalityWorker;
 import gr.aueb.mscis.sample.persistence.JPAUtil;
 
@@ -34,7 +35,7 @@ public class MunicipalityWorkerService {
 	 * @return the municipality worker
 	 */
 	public MunicipalityWorker createMunicipalityWorker(String firstName, String lastName, String userName, String password, String phoneNumber,
-													   String email, String vatNumber, String registryOffice) {
+													   String email, String vatNumber, String registryOffice, final Address address) {
 
 //        if (firstName == null) {
 //
@@ -58,7 +59,7 @@ public class MunicipalityWorkerService {
         } else {
             System.out.println("INVALID VAT NUMBER");
         }
-        MunicipalityWorker newMunWorker = new MunicipalityWorker(firstName, lastName, userName, password, phoneNumber, email, vatNumber, registryOffice);
+        MunicipalityWorker newMunWorker = new MunicipalityWorker(firstName, lastName, userName, password, phoneNumber, email,address, vatNumber, registryOffice);
 
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();

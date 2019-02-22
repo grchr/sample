@@ -1,5 +1,6 @@
 package gr.aueb.mscis.sample.service;
 
+import gr.aueb.mscis.sample.model.Address;
 import gr.aueb.mscis.sample.model.MunicipalityWorker;
 import gr.aueb.mscis.sample.model.User;
 import gr.aueb.mscis.sample.persistence.Initializer;
@@ -33,7 +34,7 @@ public class MunicipalityWorkerServiceTest {
 
         MunicipalityWorkerService municipalityWorkerService = new MunicipalityWorkerService();
         MunicipalityWorker newMunWorker = municipalityWorkerService.createMunicipalityWorker("Tim", "Duncan", "timD", "12345", "5334",
-                "spurs@texas.com", "12134", "Dallas Office");
+                "spurs@texas.com", "12134", "Dallas Office",new Address());
         // EntityManager.persist() updates the ID of the persisted object
         Assert.assertNotNull(newMunWorker.getId());
         em.close(); // close session

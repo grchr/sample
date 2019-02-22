@@ -28,6 +28,23 @@ public class Parent extends User {
 	/**
 	 * Instantiates a new Parent.
 	 *
+	 * @param name            the name
+	 * @param lastName        the last name
+	 * @param phoneNumber     the phone number
+	 * @param insuranceNumber the insurance number
+	 * @param email           the email
+	 * @param vatNumber       the vat number
+	 */
+	public Parent(String name, String lastName, String phoneNumber, String insuranceNumber, String email
+			, String vatNumber) {
+		super(name, lastName, phoneNumber, email, vatNumber);
+		this.insuranceNumber = insuranceNumber;
+	}
+
+	/**
+	/**
+	 * Instantiates a new Parent.
+	 *
 	 * @param fistName        the fist name
 	 * @param lastName        the last name
 	 * @param userName        the user name

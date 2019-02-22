@@ -1,13 +1,11 @@
 package gr.aueb.mscis.sample.service;
 
-import gr.aueb.mscis.sample.dao.ParentDao;
-import gr.aueb.mscis.sample.helper.UserDataValidator;
-import gr.aueb.mscis.sample.model.Child;
 import gr.aueb.mscis.sample.model.Parent;
 import gr.aueb.mscis.sample.persistence.JPAUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import java.util.List;
 
 /**
@@ -24,112 +22,94 @@ public class ParentService {
 		em = JPAUtil.getCurrentEntityManager();
 	}
 
-    /**
-     * Create parent parent.
-     *
-     * @param name            the name
-     * @param lastName        the last name
-     * @param phoneNumber     the phone number
-     * @param email           the email
-     * @param vatNumber       the vat number
-     * @param insuranceNumber the insurance number
-     * @param children        the children
-     * @return the parent
-     */
-    public Parent createParent(final String name, final String lastName, final String userName, final String password, final String phoneNumber , final String email
-            , final String vatNumber, final String insuranceNumber, List<Child> children) {
-        Parent newParent = new Parent(name, lastName, userName, password, phoneNumber, email, vatNumber, insuranceNumber);
-        if (children != null) {
-            newParent.setChildren(children);
-            for (Child child : children) {
-                child.setParent(newParent);
-            }
-        }
-
-        if(UserDataValidator.isValidEmailFormat(email)){
-            System.out.println("VALID EMAIL FORMAT");
-        } else {
-            System.out.println("INVALID EMAIL FORMAT");
-        }
-        if(UserDataValidator.isValidPhoneNumber(phoneNumber)) {
-            System.out.println("VALID PHONE NUMBER");
-        } else {
-            System.out.println("INVALID PHONE NUMBER");
-        }
-        if(UserDataValidator.isValidVATNumber(vatNumber)) {
-            System.out.println("VALID VAT NUMBER");
-        } else {
-            System.out.println("INVALID VAT NUMBER");
-        }
-        if (UserDataValidator.isValidInsuranceNumber(insuranceNumber)) {
-            System.out.println("VALID INSURANCE NUMBER");
-        } else {
-            System.out.println("INVALID INSURANCE NUMBER");
-        }
-
-        EntityTransaction tx = em.getTransaction();
-        tx.begin();
-        em.persist(newParent);
-        tx.commit();
+	/**
+	 * Create parent parent.
+	 *
+	 * @param newParent the new parent
+	 * @return the parent
+	 */
+	public Parent createParent(final Parent newParent) {
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		em.persist(newParent);
+		tx.commit();
 
 		return newParent;
 	}
 
-    public Parent updateParent(final String firstName, final String lastName, final String userName, final String password, final String phoneNumber , final String email
-            , final String vatNumber, final String insuranceNumber, List<Child> children, Parent parent) {
+	/**
+	 * Update parent.
+	 *
+	 * @param username the username
+	 * @param parent   the parent
+	 * @return the parent
+	 */
+	public Parent updateParentUsername(final String username, final Parent parent) {
+		parent.setUserName(username);
 
-        if (firstName != null) {
-            parent.setFistName(firstName);
-        }
-        if (lastName != null) {
-            parent.setLastName(lastName);
-        }
-        if (userName != null) {
-            parent.setUserName(userName);
-        }
-        if (password != null) {
-            parent.setPassword(password);
-        }
-        if (phoneNumber != null) {
-            parent.setPhoneNumber(phoneNumber);
-        }
-        if (email != null) {
-            parent.setEmail(email);
-        }
-        if (vatNumber != null) {
-            parent.setVatNumber(vatNumber);
-        }
-        if (insuranceNumber != null) {
-            parent.setInsuranceNumber(insuranceNumber);
-        }
-        if (children != null) {
-            parent.setChildren(children);
-        }
+		em = JPAUtil.getCurrentEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		em.merge(parent);
+		tx.commit();
 
-        em = JPAUtil.getCurrentEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        tx.begin();
-        em.merge(parent);
-        tx.commit();
+		return parent;
+	}
 
-        return parent;
-    }
+	/**
+	 * Find parent by last name list.
+	 *
+	 * @param lastName the last name
+	 * @return the list
+	 */
+	public List<Parent> findParentByLastName(final String lastName) {
+		em = JPAUtil.getCurrentEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
 
-    public Parent findParentByUsername(String userName) {
-        ParentDao parentDao = new ParentDao();
-        List<Parent> foundParents = parentDao.findByUserName(userName);
-        Parent foundAdmin = null;
-        // We assume that the username will be unique for each of the 3 types of users
-        if (foundParents.size() != 0) {
-            foundAdmin = foundParents.get(0);
-        }
-        return foundAdmin;
-    }
+		Query query = em.createQuery("from User user where user.lastName = :last and user.class like :type");
+		query.setParameter("last", lastName);
+		query.setParameter("type", "PARENT");
+		List<Parent> results = (List<Parent>) query.getResultList();
+		tx.commit();
+		return results;
+	}
 
-    public List<Parent> findAll() {
-        ParentDao parentDao = new ParentDao();
-        List<Parent> foundParents = parentDao.findAll();
-        return  foundParents;
-    }
+	/**
+	 * Find parent by vat number list.
+	 *
+	 * @param vatNumber the vat number
+	 * @return the list
+	 */
+	public List<Parent> findParentByVatNumber(String vatNumber) {
 
+		em = JPAUtil.getCurrentEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+
+		Query query = em.createQuery("from User user where user.vatNumber = :vat and user.class like :type");
+		query.setParameter("vat", vatNumber);
+		query.setParameter("type", "PARENT");
+		List<Parent> results = (List<Parent>) query.getResultList();
+		tx.commit();
+		return results;
+	}
+
+	/**
+	 * Find all list.
+	 *
+	 * @return the list
+	 */
+	public List<Parent> findAll() {
+		em = JPAUtil.getCurrentEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		String queryString = "from User user  where user.class like :type";
+		Query query = em.createQuery(queryString);
+		query.setParameter("type", "PARENT");
+		List<Parent> results = (List<Parent>) query.getResultList();
+		tx.commit();
+
+		return results;
+	}
 }
