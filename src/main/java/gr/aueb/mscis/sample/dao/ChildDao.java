@@ -24,8 +24,37 @@ public class ChildDao {
 		query.setParameter("id", parentId);
 		results = (List<Child>) query.getResultList();
 
+        tx.commit();
+        return results;
+    }
 
-		tx.commit();
-		return results;
-	}
+    public List<Child> findChildrenBySurname(String surname) {
+        List<Child> results = new ArrayList<>();
+        em = JPAUtil.getCurrentEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+
+        String queryString = "from " + Child.class.getName() + " where surname = :surname";
+        Query query = em.createQuery(queryString);
+        query.setParameter("surname", surname);
+        results = (List<Child>) query.getResultList();
+
+        tx.commit();
+        return results;
+    }
+
+    public List<Child> finadAll() {
+        List<Child> results = new ArrayList<>();
+        em = JPAUtil.getCurrentEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+
+        String queryString = "from " + Child.class.getName();
+        Query query = em.createQuery(queryString);
+        results = (List<Child>) query.getResultList();
+
+        tx.commit();
+        return results;
+    }
+
 }

@@ -21,19 +21,24 @@ public class AdministratorService {
 	public Administrator createAdministrator(String firstName, String lastName, String userName, String password, String phoneNumber,
 											 String email, String vatNumber, PrivilegeLevel privilegeLevel) {
 
-		em = JPAUtil.getCurrentEntityManager();
-		if (UserDataValidator.isValidEmailFormat(email)) {
-			System.out.println("VALID EMAIL FORMAT");
-		} else {
-			System.out.println("INVALID EMAIL FORMAT");
-		}
-		if (UserDataValidator.isValidPhoneNumber(phoneNumber)) {
-			System.out.println("VALID PHONE NUMBER");
-		} else {
-			System.out.println("INVALID PHONE NUMBER");
-		}
-		Administrator newAdmin = new Administrator(firstName, lastName, userName, password, phoneNumber,
-				email, vatNumber, privilegeLevel);
+        em = JPAUtil.getCurrentEntityManager();
+        if(UserDataValidator.isValidEmailFormat(email)){
+            System.out.println("VALID EMAIL FORMAT");
+        } else {
+            System.out.println("INVALID EMAIL FORMAT");
+        }
+        if(UserDataValidator.isValidPhoneNumber(phoneNumber)) {
+            System.out.println("VALID PHONE NUMBER");
+        } else {
+            System.out.println("INVALID PHONE NUMBER");
+        }
+        if(UserDataValidator.isValidVATNumber(vatNumber)) {
+            System.out.println("VALID VAT NUMBER");
+        } else {
+            System.out.println("INVALID VAT NUMBER");
+        }
+        Administrator newAdmin = new Administrator(firstName, lastName, userName, password, phoneNumber,
+                email, vatNumber, privilegeLevel);
 
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
@@ -43,13 +48,55 @@ public class AdministratorService {
 		return newAdmin;
 	}
 
-	public Administrator findAdminByUsername(String username) {
-		AdministratorDao administratorDao = new AdministratorDao();
-		List<Administrator> foundAdmins = administratorDao.findByUserName(username);
-		Administrator foundAdmin = null;
-		if (foundAdmins.size() != 0) {
-			foundAdmin = foundAdmins.get(0);
-		}
-		return foundAdmin;
-	}
+    public Administrator updateAdministrator(String firstName, String lastName, String userName, String password, String phoneNumber,
+                                             String email, String vatNumber, PrivilegeLevel privilegeLevel, Administrator administrator) {
+        if (firstName != null) {
+            administrator.setFistName(firstName);
+        }
+        if (lastName != null) {
+            administrator.setLastName(lastName);
+        }
+        if (userName != null) {
+            administrator.setUserName(userName);
+        }
+        if (password != null) {
+            administrator.setPassword(password);
+        }
+        if (phoneNumber != null) {
+            administrator.setPhoneNumber(phoneNumber);
+        }
+        if (email != null) {
+            administrator.setEmail(email);
+        }
+        if (vatNumber != null) {
+            administrator.setVatNumber(vatNumber);
+        }
+        if (privilegeLevel != null) {
+            administrator.setPrivilege(privilegeLevel);
+        }
+
+        em = JPAUtil.getCurrentEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+        em.merge(administrator);
+        tx.commit();
+
+        return administrator;
+    }
+
+    public Administrator findAdminByUsername(String username) {
+        AdministratorDao administratorDao = new AdministratorDao();
+        List<Administrator> foundAdmins = administratorDao.findByUserName(username);
+        Administrator foundAdmin = null;
+        if (foundAdmins.size() != 0) {
+            foundAdmin = foundAdmins.get(0);
+        }
+        return foundAdmin;
+    }
+
+    public List<Administrator> findAll() {
+        AdministratorDao administratorDao = new AdministratorDao();
+        List<Administrator> foundAdmins = administratorDao.findAll();
+        return foundAdmins;
+    }
 }

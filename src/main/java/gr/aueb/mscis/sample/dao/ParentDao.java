@@ -48,6 +48,23 @@ public class ParentDao extends UserDao {
 		results = (List<Parent>) query.getResultList();
 		tx.commit();
 
-		return results;
-	}
+        return results;
+    }
+
+    public List<Parent> findAll(){
+        List<Parent> results = new ArrayList<>();
+        em = JPAUtil.getCurrentEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+
+        String queryString = "from " + User.class.getName() + " where type like :type";
+        Query query = em.createQuery(queryString);
+        query.setParameter("type", "PARENT");
+        results = (List<Parent>) query.getResultList();
+
+        tx.commit();
+
+        return  results;
+    }
+
 }

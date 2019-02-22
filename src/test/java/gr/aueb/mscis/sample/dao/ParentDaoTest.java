@@ -22,7 +22,8 @@ public class ParentDaoTest {
     public void testParentDao() {
         em = JPAUtil.getCurrentEntityManager();
         ParentService parentService = new ParentService();
-        Parent newparent = parentService.createParent("Djibril", "Cisse", "6990", "adf@b", "4212", "523523", null);
+        Parent newparent = parentService.createParent("Djibril", "Cisse", "DC", "password",
+                "6990", "adf@b", "4212", "523523", null);
         ParentDao pdao = new ParentDao();
         List<Parent> parents = pdao.findByLastName("Cisse");
         System.out.println(parents.get(0).getFistName());

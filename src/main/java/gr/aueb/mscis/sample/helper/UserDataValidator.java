@@ -22,4 +22,23 @@ public class UserDataValidator {
 		return true;
 	}
 
+    public static boolean isValidInsuranceNumber(String insuranceNumber) {
+
+        if (!insuranceNumber.matches("[0-9]{9}")) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean isValidVATNumber(String vatNumber) {
+
+        if (!vatNumber.matches("[0-9]{9}")) {
+            return false;
+        }
+
+        return true;
+    }
+
+
 }

@@ -46,4 +46,10 @@ public class MunicipalityWorkerDao extends UserDao {
 		return results;
 	}
 
+    public List<MunicipalityWorker> findAll(){
+        List<MunicipalityWorker> results = new ArrayList<>();
+
+        return  results;
+    }
+
 }

@@ -42,18 +42,23 @@ public class MunicipalityWorkerService {
 //        if (lastName == null) {
 //
 //        }
-		em = JPAUtil.getCurrentEntityManager();
-		if (UserDataValidator.isValidEmailFormat(email)) {
-			System.out.println("VALID EMAIL FORMAT");
-		} else {
-			System.out.println("INVALID EMAIL FORMAT");
-		}
-		if (UserDataValidator.isValidPhoneNumber(phoneNumber)) {
-			System.out.println("VALID PHONE NUMBER");
-		} else {
-			System.out.println("INVALID PHONE NUMBER");
-		}
-		MunicipalityWorker newMunWorker = new MunicipalityWorker(firstName, lastName, userName, password, phoneNumber, email, vatNumber, registryOffice);
+        em = JPAUtil.getCurrentEntityManager();
+        if(UserDataValidator.isValidEmailFormat(email)){
+            System.out.println("VALID EMAIL FORMAT");
+        } else {
+            System.out.println("INVALID EMAIL FORMAT");
+        }
+        if(UserDataValidator.isValidPhoneNumber(phoneNumber)) {
+            System.out.println("VALID PHONE NUMBER");
+        } else {
+            System.out.println("INVALID PHONE NUMBER");
+        }
+        if(UserDataValidator.isValidVATNumber(vatNumber)) {
+            System.out.println("VALID VAT NUMBER");
+        } else {
+            System.out.println("INVALID VAT NUMBER");
+        }
+        MunicipalityWorker newMunWorker = new MunicipalityWorker(firstName, lastName, userName, password, phoneNumber, email, vatNumber, registryOffice);
 
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
