@@ -70,7 +70,8 @@ public class ParentServiceTest {
 		List<User> parent = em.createQuery("Select a From User a where  a.class like :userType", User.class)
 				.setParameter("userType", "PARENT").getResultList();
 
-		Parent createdParent = parentService.updateParentUsername("newusername", (Parent) parent.get(0));
+		Parent createdParent = parentService.updateParent(null, null,"newusername", null, null, null, null,
+				null, null, (Parent) parent.get(0));
 
 		assertEquals("newusername", createdParent.getUserName());
 		assertEquals("Parent", createdParent.getLastName());

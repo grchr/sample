@@ -1,5 +1,6 @@
 package gr.aueb.mscis.sample.service;
 
+import gr.aueb.mscis.sample.model.Child;
 import gr.aueb.mscis.sample.model.Parent;
 import gr.aueb.mscis.sample.persistence.JPAUtil;
 
@@ -44,8 +45,36 @@ public class ParentService {
 	 * @param parent   the parent
 	 * @return the parent
 	 */
-	public Parent updateParentUsername(final String username, final Parent parent) {
-		parent.setUserName(username);
+	public Parent updateParent(final String firstName, final String lastName, final String userName, final String password, final String phoneNumber , final String email
+			, final String vatNumber, final String insuranceNumber, List<Child> children, Parent parent) {
+
+		if (firstName != null) {
+			parent.setFistName(firstName);
+		}
+		if (lastName != null) {
+			parent.setLastName(lastName);
+		}
+		if (userName != null) {
+			parent.setUserName(userName);
+		}
+		if (password != null) {
+			parent.setPassword(password);
+		}
+		if (phoneNumber != null) {
+			parent.setPhoneNumber(phoneNumber);
+		}
+		if (email != null) {
+			parent.setEmail(email);
+		}
+		if (vatNumber != null) {
+			parent.setVatNumber(vatNumber);
+		}
+		if (insuranceNumber != null) {
+			parent.setInsuranceNumber(insuranceNumber);
+		}
+		if (children != null) {
+			parent.setChildren(children);
+		}
 
 		em = JPAUtil.getCurrentEntityManager();
 		EntityTransaction tx = em.getTransaction();

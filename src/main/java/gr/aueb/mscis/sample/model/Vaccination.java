@@ -26,11 +26,11 @@ public class Vaccination {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "child_id", referencedColumnName = "id")
 	private Child child;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="vaccine_id", referencedColumnName = "id")
 	private Vaccine vaccine;
 
