@@ -53,7 +53,7 @@ public class Initializer {
 	public void prepareChildData() {
 		eraseParentData();
 		Parent parent1 = new Parent("Test", "Parent", "sfs", "v", "@", "242");
-
+		parent1.setUserName("test");
 		List<Child> children = new ArrayList<>();
 		Child child1 = new Child("Test", "Child", new Date(1992, 12, 5));
 		child1.setParent(parent1);

@@ -2,6 +2,7 @@ package gr.aueb.mscis.sample.service;
 
 import gr.aueb.mscis.sample.model.Child;
 import gr.aueb.mscis.sample.model.Parent;
+import gr.aueb.mscis.sample.model.User;
 import gr.aueb.mscis.sample.persistence.Initializer;
 import gr.aueb.mscis.sample.persistence.JPAUtil;
 import org.junit.After;
@@ -49,13 +50,14 @@ public class ChildServiceTest {
 	@Test
 	public void findChildsByParentTest() {
 		ChildService childService = new ChildService();
-		Parent parent = em.find(Parent.class, 1);
+		ParentService parentService = new ParentService();
+		List<Parent> parent = parentService.findAll();
 
-		List<Child> childrens = childService.findChildsByParent(parent);
+		List<Child> children = childService.findChildsByParent(parent.get(0));
 
-		assertEquals(2, childrens.size());
-		assertNotNull(childrens.get(0));
-		assertNotNull(childrens.get(1));
+		assertEquals(2, children.size());
+		assertNotNull(children.get(0));
+		assertNotNull(children.get(1));
 	}
 
 	/**
@@ -80,17 +82,17 @@ public class ChildServiceTest {
 		child.setParent(parent);
 		Child child1 = childService.createChild(child);
 
-		assertEquals("Test",child1.getName());
-		assertEquals("Child",child1.getSurname());
-		assertEquals(new Date(1992, 12, 5),child1.getBirthday());
-		assertEquals(3,getChilds().size());
+		assertEquals("Test", child1.getName());
+		assertEquals("Child", child1.getSurname());
+		assertEquals(new Date(1992, 12, 5), child1.getBirthday());
+		assertEquals(3, getChilds().size());
 	}
 
 	/**
-	 * Finad all test.
+	 * Find all test.
 	 */
 	@Test
-	public void finadAllTest() {
+	public void findAllTest() {
 		ChildService childService = new ChildService();
 		List<Child> childrens = childService.finadAll();
 
