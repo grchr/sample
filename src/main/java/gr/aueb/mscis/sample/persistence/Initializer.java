@@ -112,6 +112,7 @@ public class Initializer {
 		EntityManager em = JPAUtil.getCurrentEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
+		em.createQuery("delete from Child where parent_id in (select id from User where type like :type)").setParameter("type", "PARENT").executeUpdate();
 		em.createQuery("delete from User user where user.class like :type").setParameter("type", "PARENT").executeUpdate();
 		tx.commit();
 	}

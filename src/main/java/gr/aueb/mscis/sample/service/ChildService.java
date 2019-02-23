@@ -42,7 +42,7 @@ public class ChildService {
 
 		Query query = em.createQuery("from Child where surname = :surname");
 		query.setParameter("surname", surname);
-		List<Child> results = query.getResultList();
+		List<Child> results = (List<Child>) query.getResultList();
 
 		tx.commit();
 		return results;

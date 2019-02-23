@@ -38,7 +38,7 @@ public abstract class User implements Serializable {
 	@Column(name = "last_name")
 	private String lastName;
 
-	@Column(name = "user_name",unique=true)
+	@Column(name = "user_name")
 	private String userName;
 
 	@Column(name = "password")
@@ -53,7 +53,7 @@ public abstract class User implements Serializable {
 	@Embedded
 	private Address address;
 
-	@Column(name = "VAT_number",unique=true)
+	@Column(name = "VAT_number")
 	private String vatNumber;
 
 	/**
