@@ -38,9 +38,6 @@ public class Vaccination {
 	@Column(name = "notify_date")
 	private Date notifyDate;
 
-	@Column(name = "vaccinatedTimes")
-	private int vaccinatedTimes;
-
 	@Column(name = "status")
 	private VaccinationStatus status;
 
@@ -56,14 +53,12 @@ public class Vaccination {
 	 * @param child           the child
 	 * @param vaccine         the vaccine
 	 * @param notifyDate      the notify date
-	 * @param vaccinatedTimes the vaccinated times
 	 * @param status          the status
 	 */
-	public Vaccination(final Child child, final Vaccine vaccine, final Date notifyDate, final int vaccinatedTimes, final VaccinationStatus status) {
+	public Vaccination(final Child child, final Vaccine vaccine, final Date notifyDate, final VaccinationStatus status) {
 		this.child = child;
 		this.vaccine = vaccine;
 		this.notifyDate = notifyDate;
-		this.vaccinatedTimes = vaccinatedTimes;
 		this.status = status;
 	}
 
@@ -140,24 +135,6 @@ public class Vaccination {
 	}
 
 	/**
-	 * Gets vaccinated times.
-	 *
-	 * @return the vaccinated times
-	 */
-	public int getVaccinatedTimes() {
-		return vaccinatedTimes;
-	}
-
-	/**
-	 * Sets vaccinated times.
-	 *
-	 * @param vaccinatedTimes the vaccinated times
-	 */
-	public void setVaccinatedTimes(final int vaccinatedTimes) {
-		this.vaccinatedTimes = vaccinatedTimes;
-	}
-
-	/**
 	 * Gets status.
 	 *
 	 * @return the status
@@ -183,7 +160,6 @@ public class Vaccination {
 				+ ",\"child\":" + child
 				+ ",\"vaccine\":" + vaccine
 				+ ",\"notifyDate\":" + notifyDate
-				+ ",\"vaccinatedTimes\":" + vaccinatedTimes + "\""
 				+ ",\"status\":" + status + "\""
 				+ "}}";
 	}
