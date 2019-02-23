@@ -1,5 +1,7 @@
 package gr.aueb.mscis.sample.model;
 
+import gr.aueb.mscis.sample.enums.VaccinationStatus;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.sql.Date;
 
@@ -18,28 +19,30 @@ import java.sql.Date;
  * @author taggelis
  */
 @Entity
-@Table(name="vaccination")
+@Table(name = "vaccination")
 public class Vaccination {
 
 	@Id
-	@Column(name="id")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	@OneToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "child_id", referencedColumnName = "id")
 	private Child child;
 
-	@ManyToOne
-	@JoinColumn(name="vaccine_id", referencedColumnName = "id")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "vaccine_id", referencedColumnName = "id")
 	private Vaccine vaccine;
 
-	@Column(name="notify_date")
+	@Column(name = "notify_date")
 	private Date notifyDate;
 
-	@Column(name="vaccinatedTimes")
+	@Column(name = "vaccinatedTimes")
 	private int vaccinatedTimes;
 
+	@Column(name = "status")
+	private VaccinationStatus status;
 
 	/**
 	 * Instantiates a new Vaccination.
@@ -54,12 +57,14 @@ public class Vaccination {
 	 * @param vaccine         the vaccine
 	 * @param notifyDate      the notify date
 	 * @param vaccinatedTimes the vaccinated times
+	 * @param status          the status
 	 */
-	public Vaccination(final Child child, final Vaccine vaccine, final Date notifyDate, final int vaccinatedTimes) {
+	public Vaccination(final Child child, final Vaccine vaccine, final Date notifyDate, final int vaccinatedTimes, final VaccinationStatus status) {
 		this.child = child;
 		this.vaccine = vaccine;
 		this.notifyDate = notifyDate;
 		this.vaccinatedTimes = vaccinatedTimes;
+		this.status = status;
 	}
 
 	/**
@@ -152,6 +157,24 @@ public class Vaccination {
 		this.vaccinatedTimes = vaccinatedTimes;
 	}
 
+	/**
+	 * Gets status.
+	 *
+	 * @return the status
+	 */
+	public VaccinationStatus getStatus() {
+		return status;
+	}
+
+	/**
+	 * Sets status.
+	 *
+	 * @param status the status
+	 */
+	public void setStatus(final VaccinationStatus status) {
+		this.status = status;
+	}
+
 
 	@Override
 	public String toString() {
@@ -161,6 +184,7 @@ public class Vaccination {
 				+ ",\"vaccine\":" + vaccine
 				+ ",\"notifyDate\":" + notifyDate
 				+ ",\"vaccinatedTimes\":" + vaccinatedTimes + "\""
+				+ ",\"status\":" + status + "\""
 				+ "}}";
 	}
 }
