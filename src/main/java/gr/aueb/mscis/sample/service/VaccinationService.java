@@ -24,4 +24,7 @@ public class VaccinationService {
 		return results == 1;
 	}
 
+	//TODO: implement create vaccinations with reference to specific child, for all vaccines
+	//TODO: implement update vaccinations for new statuses
+
 }
