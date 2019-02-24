@@ -51,8 +51,8 @@ public class MunicipalityWorkerServiceTest {
 	public void createMunicipalityWorkerTest() {
 
 		MunicipalityWorkerService municipalityWorkerService = new MunicipalityWorkerService();
-		MunicipalityWorker newMunWorker = municipalityWorkerService.createMunicipalityWorker("Tim", "Duncan", "timD", "12345", "5334",
-				"spurs@texas.com", "12134", "Dallas Office", new Address());
+		MunicipalityWorker newMunWorker = municipalityWorkerService.createMunicipalityWorker("Tim", "Duncan", "timD", "12345", "6944816378",
+				"spurs@texas.com", "123456789", "Dallas Office", new Address());
 		// EntityManager.persist() updates the ID of the persisted object
 		Assert.assertNotNull(newMunWorker.getId());
 		em.close(); // close session
