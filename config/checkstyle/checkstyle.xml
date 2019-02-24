@@ -128,8 +128,8 @@
 			<property name="tabWidth" value="4"/>
 		</module>
         <module name="MethodLength"/>
-        <module name="ParameterNumber"/>
-
+       <!-- <module name="ParameterNumber"/>
+            -->
 
         <!-- Checks for whitespace                               -->
         <!-- See http://checkstyle.sf.net/config_whitespace.html -->
@@ -175,7 +175,9 @@
 		-->
         <module name="IllegalInstantiation"/>
         <module name="InnerAssignment"/>
-        <module name="MagicNumber"/>
+       <!--
+       <module name="MagicNumber"/>
+        -->
         <module name="MissingSwitchDefault"/>
         <module name="SimplifyBooleanExpression"/>
         <module name="SimplifyBooleanReturn"/>

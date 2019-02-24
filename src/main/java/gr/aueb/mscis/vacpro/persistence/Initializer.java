@@ -2,13 +2,17 @@ package gr.aueb.mscis.vacpro.persistence;
 
 
 import gr.aueb.mscis.vacpro.enums.PrivilegeLevel;
-import gr.aueb.mscis.vacpro.model.*;
+import gr.aueb.mscis.vacpro.model.Administrator;
+import gr.aueb.mscis.vacpro.model.Child;
+import gr.aueb.mscis.vacpro.model.MunicipalityWorker;
+import gr.aueb.mscis.vacpro.model.Parent;
+import gr.aueb.mscis.vacpro.model.Vaccine;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -21,7 +25,7 @@ public class Initializer {
 	 * Prepare municipality worker data.
 	 */
 	public void prepareMunicipalityWorkerData() {
-		eraseUserData(MunicipalityWorker.class);
+		eraseMunicipalityWorkerData();
 
 		MunicipalityWorker munW1 = new MunicipalityWorker("T", "Dot", "Athens");
 		munW1.setEmail("email");
@@ -94,10 +98,13 @@ public class Initializer {
 
 	}
 
-	public void prepareVaccineData(){
-		eraseVaccineData(Vaccine.class);
+	/**
+	 * Prepare vaccine data.
+	 */
+	public void prepareVaccineData() {
+		eraseVaccineData();
 
-		Vaccine vaccine1 = new Vaccine( "hepatitis",  300, "typeA",  1);
+		Vaccine vaccine1 = new Vaccine("hepatitis", 300, "typeA", 1);
 		EntityManager em = JPAUtil.getCurrentEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
@@ -129,8 +136,10 @@ public class Initializer {
 		EntityManager em = JPAUtil.getCurrentEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		em.createQuery("delete from Child where parent_id in (select id from User where type like :type)").setParameter("type", "PARENT").executeUpdate();
-		em.createQuery("delete from User user where user.class like :type").setParameter("type", "PARENT").executeUpdate();
+		em.createQuery("delete from Child where parent_id in (select id from User where type like :type)")
+				.setParameter("type", "PARENT").executeUpdate();
+		em.createQuery("delete from User user where user.class like :type").setParameter("type", "PARENT")
+				.executeUpdate();
 		tx.commit();
 	}
 
@@ -139,27 +148,18 @@ public class Initializer {
 	 * Remove all data from database.
 	 * The functionality must be executed within the bounds of a transaction
 	 */
-	private void eraseUserData(Class clazz) {
+	private void eraseMunicipalityWorkerData() {
 
 		EntityManager em = JPAUtil.getCurrentEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 
-		Query query = null;
-
-		if (clazz.isInstance(User.class)) {
-			query = em.createNativeQuery("delete from User");
-		} else if (clazz.isInstance(MunicipalityWorker.class)) {
-			query = em.createNativeQuery("delete from User where type like :type").setParameter("type", "MUN_W");
-		}
-		if (query != null) {
-			query.executeUpdate();
-		}
-
+		Query query = em.createNativeQuery("delete from User where type like :type").setParameter("type", "MUN_W");
+		query.executeUpdate();
 		tx.commit();
 	}
 
-	private void eraseVaccineData(Class clazz) {
+	private void eraseVaccineData() {
 		EntityManager em = JPAUtil.getCurrentEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();

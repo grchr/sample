@@ -2,7 +2,11 @@ package gr.aueb.mscis.vacpro.model;
 
 import gr.aueb.mscis.vacpro.enums.PrivilegeLevel;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 /**
  * The type Administrator.
@@ -15,6 +19,9 @@ public class Administrator extends User {
 	@Column(name = "privilege")
 	private PrivilegeLevel privilege;
 
+	/**
+	 * Instantiates a new Administrator.
+	 */
 	public Administrator() {
 		super();
 	}
@@ -26,7 +33,7 @@ public class Administrator extends User {
 	 * @param lastName  the last name
 	 * @param privilege the privilege
 	 */
-	public Administrator(String fistName, String lastName, PrivilegeLevel privilege) {
+	public Administrator(final String fistName, final String lastName, final PrivilegeLevel privilege) {
 		super(fistName, lastName);
 		this.privilege = privilege;
 	}
@@ -41,10 +48,12 @@ public class Administrator extends User {
 	 * @param phoneNumber the phone number
 	 * @param email       the email
 	 * @param vatNumber   the vat number
+	 * @param address     the address
 	 * @param privilege   the privilege
 	 */
-	public Administrator(String fistName, String lastName, String userName, String password, String phoneNumber, String email,
-						 String vatNumber, Address address, PrivilegeLevel privilege) {
+	public Administrator(final String fistName, final String lastName, final String userName, final String password,
+						 final String phoneNumber, final String email, final String vatNumber, final Address address,
+						 final PrivilegeLevel privilege) {
 		super(fistName, lastName, userName, password, phoneNumber, email, address, vatNumber);
 		this.privilege = privilege;
 	}
@@ -63,12 +72,13 @@ public class Administrator extends User {
 	 *
 	 * @param privilege the privilege
 	 */
-	public void setPrivilege(PrivilegeLevel privilege) {
+	public void setPrivilege(final PrivilegeLevel privilege) {
 		this.privilege = privilege;
 	}
 
 	@Override
 	public String toString() {
-		return "id: " + this.getId() + " name: " + this.getFistName() + " " + this.getLastName() + " privilege level: " + this.getPrivilege();
+		return "id: " + this.getId() + " name: " + this.getFistName() + " " + this.getLastName()
+				+ " privilege level: " + this.getPrivilege();
 	}
 }

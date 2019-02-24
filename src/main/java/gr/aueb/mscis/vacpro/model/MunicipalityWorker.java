@@ -47,7 +47,8 @@ public class MunicipalityWorker extends User {
 	 * @param registryOffice the registry office
 	 */
 	public MunicipalityWorker(final String fistName, final String lastName, final String userName, final String password,
-							  final String phoneNumber, final String email, final Address address, final String vatNumber, final String registryOffice) {
+							  final String phoneNumber, final String email, final Address address, final String vatNumber,
+							  final String registryOffice) {
 		super(fistName, lastName, userName, password, phoneNumber, email, address, vatNumber);
 		this.registryOffice = registryOffice;
 	}

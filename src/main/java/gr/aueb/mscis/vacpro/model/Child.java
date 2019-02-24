@@ -1,15 +1,22 @@
 package gr.aueb.mscis.vacpro.model;
 
 
-import org.joda.time.DateTime;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
 /**
  * The type Child.
+ *
  */
 @Entity
 @Table(name = "Child")
@@ -158,14 +165,18 @@ public class Child implements Serializable {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+	public boolean equals(final Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()){
+			return false;
+		}
 		Child child = (Child) o;
-		return getId() == child.getId() &&
-				Objects.equals(getName(), child.getName()) &&
-				Objects.equals(getSurname(), child.getSurname()) &&
-				Objects.equals(getParent(), child.getParent());
+		return getId() == child.getId()
+				&& Objects.equals(getName(), child.getName())
+				&& Objects.equals(getSurname(), child.getSurname())
+				&& Objects.equals(getParent(), child.getParent());
 	}
 
 	@Override

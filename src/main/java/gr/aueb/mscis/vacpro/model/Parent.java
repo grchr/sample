@@ -1,7 +1,12 @@
 package gr.aueb.mscis.vacpro.model;
 
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,14 +40,14 @@ public class Parent extends User {
 	 * @param email           the email
 	 * @param vatNumber       the vat number
 	 */
-	public Parent(String name, String lastName, String phoneNumber, String insuranceNumber, String email
-			, String vatNumber) {
+	public Parent(final String name, final String lastName, final String phoneNumber, final String insuranceNumber,
+				  final String email, final String vatNumber) {
 		super(name, lastName, phoneNumber, email, vatNumber);
 		this.insuranceNumber = insuranceNumber;
 	}
 
 	/**
-	/**
+	 * /**
 	 * Instantiates a new Parent.
 	 *
 	 * @param fistName        the fist name
@@ -57,7 +62,8 @@ public class Parent extends User {
 	 * @param children        the children
 	 */
 	public Parent(final String fistName, final String lastName, final String userName, final String password,
-				  final String phoneNumber, final String email, final Address address, final String vatNumber, final String insuranceNumber, final List<Child> children) {
+				  final String phoneNumber, final String email, final Address address, final String vatNumber,
+				  final String insuranceNumber, final List<Child> children) {
 		super(fistName, lastName, userName, password, phoneNumber, email, address, vatNumber);
 		this.insuranceNumber = insuranceNumber;
 		this.children = children;
@@ -77,7 +83,7 @@ public class Parent extends User {
 	 *
 	 * @param insuranceNumber the insurance number
 	 */
-	public void setInsuranceNumber(String insuranceNumber) {
+	public void setInsuranceNumber(final String insuranceNumber) {
 		this.insuranceNumber = insuranceNumber;
 	}
 
@@ -94,11 +100,12 @@ public class Parent extends User {
 	}
 
 	/**
+	 * `
 	 * Sets children.
 	 *
 	 * @param children the children
 	 */
-	public void setChildren(List<Child> children) {
+	public void setChildren(final List<Child> children) {
 		this.children = children;
 	}
 }

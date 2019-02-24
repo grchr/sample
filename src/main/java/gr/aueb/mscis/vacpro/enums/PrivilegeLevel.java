@@ -1,5 +1,19 @@
 package gr.aueb.mscis.vacpro.enums;
 
+/**
+ * The enum Privilege level.
+ */
 public enum PrivilegeLevel {
-	FULL, REPORT, NOTIFICATION
+	/**
+	 * Full privilege level.
+	 */
+	FULL,
+	/**
+	 * Report privilege level.
+	 */
+	REPORT,
+	/**
+	 * Notification privilege level.
+	 */
+	NOTIFICATION
 }

@@ -41,12 +41,22 @@ public class ParentService {
 	/**
 	 * Update parent.
 	 *
-	 * @param username the username
-	 * @param parent   the parent
+	 * @param firstName       the first name
+	 * @param lastName        the last name
+	 * @param userName        the user name
+	 * @param password        the password
+	 * @param phoneNumber     the phone number
+	 * @param email           the email
+	 * @param vatNumber       the vat number
+	 * @param insuranceNumber the insurance number
+	 * @param children        the children
+	 * @param parent          the parent
 	 * @return the parent
 	 */
-	public Parent updateParent(final String firstName, final String lastName, final String userName, final String password, final String phoneNumber , final String email
-			, final String vatNumber, final String insuranceNumber, List<Child> children, Parent parent) {
+	public Parent updateParent(final String firstName, final String lastName, final String userName,
+							   final String password, final String phoneNumber, final String email,
+							   final String vatNumber, final String insuranceNumber,final List<Child> children,
+							   final Parent parent) {
 
 		if (firstName != null) {
 			parent.setFistName(firstName);
@@ -110,7 +120,7 @@ public class ParentService {
 	 * @param vatNumber the vat number
 	 * @return the list
 	 */
-	public List<Parent> findParentByVatNumber(String vatNumber) {
+	public List<Parent> findParentByVatNumber(final String vatNumber) {
 
 		em = JPAUtil.getCurrentEntityManager();
 		EntityTransaction tx = em.getTransaction();

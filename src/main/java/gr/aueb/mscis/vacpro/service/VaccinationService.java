@@ -12,17 +12,28 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The type Vaccination service.
+ *
  * @author taggelis
  */
 public class VaccinationService {
 
 	private EntityManager em;
 
+	/**
+	 * Instantiates a new Vaccination service.
+	 */
 	public VaccinationService() {
 		em = JPAUtil.getCurrentEntityManager();
 	}
 
-	public Vaccination createVaccination(Vaccination vaccination) {
+	/**
+	 * Create vaccination vaccination.
+	 *
+	 * @param vaccination the vaccination
+	 * @return the vaccination
+	 */
+	public Vaccination createVaccination(final Vaccination vaccination) {
 
 		em = JPAUtil.getCurrentEntityManager();
 		EntityTransaction tx = em.getTransaction();
@@ -33,7 +44,13 @@ public class VaccinationService {
 		return vaccination;
 	}
 
-	public Vaccination updateVaccination(Vaccination vaccination) {
+	/**
+	 * Update vaccination vaccination.
+	 *
+	 * @param vaccination the vaccination
+	 * @return the vaccination
+	 */
+	public Vaccination updateVaccination(final Vaccination vaccination) {
 
 		em = JPAUtil.getCurrentEntityManager();
 		EntityTransaction tx = em.getTransaction();
@@ -44,6 +61,11 @@ public class VaccinationService {
 		return vaccination;
 	}
 
+	/**
+	 * Find all list.
+	 *
+	 * @return the list
+	 */
 	public List<Vaccination> findAll() {
 		em = JPAUtil.getCurrentEntityManager();
 		EntityTransaction tx = em.getTransaction();
@@ -55,7 +77,13 @@ public class VaccinationService {
 		return results;
 	}
 
-	public List<Vaccination> findVaccinationsThatNeedNotification(Date today) {
+	/**
+	 * Find vaccinations that need notification list.
+	 *
+	 * @param today the today
+	 * @return the list
+	 */
+	public List<Vaccination> findVaccinationsThatNeedNotification(final Date today) {
 		List<Vaccination> results = new ArrayList<>();
 
 		em = JPAUtil.getCurrentEntityManager();
@@ -68,7 +96,7 @@ public class VaccinationService {
 
 		tx.commit();
 
-		return  results;
+		return results;
 	}
 
 }

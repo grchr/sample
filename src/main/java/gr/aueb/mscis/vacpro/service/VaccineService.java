@@ -9,11 +9,20 @@ import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Vaccine service.
+ */
 public class VaccineService {
 
     private EntityManager em;
 
-    public Vaccine createVaccine(Vaccine vaccine) {
+    /**
+     * Create vaccine vaccine.
+     *
+     * @param vaccine the vaccine
+     * @return the vaccine
+     */
+    public Vaccine createVaccine(final Vaccine vaccine) {
 
         em = JPAUtil.getCurrentEntityManager();
 
@@ -27,6 +36,11 @@ public class VaccineService {
         return vaccine;
     }
 
+    /**
+     * Find all list.
+     *
+     * @return the list
+     */
     public List<Vaccine> findAll(){
         List<Vaccine> results = new ArrayList<>();
 

@@ -31,7 +31,7 @@ public class ChildService {
 	 * @param parent the parent
 	 * @return the list
 	 */
-	public List<Child> findChildsByParent(Parent parent) {
+	public List<Child> findChildsByParent(final Parent parent) {
 
 		em = JPAUtil.getCurrentEntityManager();
 		EntityTransaction tx = em.getTransaction();
@@ -52,7 +52,7 @@ public class ChildService {
 	 * @param surname the surname
 	 * @return the list
 	 */
-	public List<Child> findChildrenBySurname(String surname) {
+	public List<Child> findChildrenBySurname(final String surname) {
 
 		em = JPAUtil.getCurrentEntityManager();
 		EntityTransaction tx = em.getTransaction();

@@ -83,7 +83,7 @@ public abstract class User implements Serializable {
 	 * @param email       the email
 	 * @param vatNumber   the vat number
 	 */
-	protected User( String fistName, String lastName, String phoneNumber, String email, String vatNumber) {
+	protected User(final String fistName,final String lastName,final String phoneNumber,final String email,final String vatNumber) {
 		this.fistName = fistName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
@@ -185,7 +185,7 @@ public abstract class User implements Serializable {
 	 *
 	 * @param userName the user name
 	 */
-	public void setUserName(String userName) {
+	public void setUserName(final String userName) {
 		this.userName = userName;
 	}
 
@@ -203,7 +203,7 @@ public abstract class User implements Serializable {
 	 *
 	 * @param password the password
 	 */
-	public void setPassword(String password) {
+	public void setPassword(final String password) {
 		this.password = password;
 	}
 
@@ -280,14 +280,18 @@ public abstract class User implements Serializable {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+	public boolean equals(final Object o) {
+		if (this == o){
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 		User user = (User) o;
-		return getId() == user.getId() &&
-				Objects.equals(getFistName(), user.getFistName()) &&
-				Objects.equals(getLastName(), user.getLastName()) &&
-				Objects.equals(getUserName(), user.getUserName());
+		return getId() == user.getId()
+				&& Objects.equals(getFistName(), user.getFistName())
+				&& Objects.equals(getLastName(), user.getLastName())
+				&& Objects.equals(getUserName(), user.getUserName());
 	}
 
 	@Override

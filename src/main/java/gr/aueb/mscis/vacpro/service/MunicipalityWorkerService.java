@@ -39,8 +39,9 @@ public class MunicipalityWorkerService {
 	 * @param address        the address
 	 * @return the municipality worker
 	 */
-	public MunicipalityWorker createMunicipalityWorker(String firstName, String lastName, String userName, String password, String phoneNumber,
-													   String email, String vatNumber, String registryOffice, final Address address) {
+	public MunicipalityWorker createMunicipalityWorker(final String firstName, final String lastName, final String userName,
+													   final String password, final String phoneNumber, final String email,
+													   final String vatNumber, final String registryOffice, final Address address) {
 
 		em = JPAUtil.getCurrentEntityManager();
 		if (UserDataValidator.isValidEmailFormat(email)) {
@@ -52,7 +53,8 @@ public class MunicipalityWorkerService {
 		if (UserDataValidator.isValidVATNumber(vatNumber)) {
 			System.out.println("VALID VAT NUMBER");
 		}
-		MunicipalityWorker newMunWorker = new MunicipalityWorker(firstName, lastName, userName, password, phoneNumber, email, address, vatNumber, registryOffice);
+		MunicipalityWorker newMunWorker = new MunicipalityWorker(firstName, lastName, userName, password,
+																phoneNumber, email, address, vatNumber, registryOffice);
 
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
@@ -76,8 +78,10 @@ public class MunicipalityWorkerService {
 	 * @param municipalityWorker the municipality worker
 	 * @return the municipality worker
 	 */
-	public MunicipalityWorker updateMunicipalityWorker(String firstName, String lastName, String userName, String password, String phoneNumber,
-													   String email, String vatNumber, String registryOffice, MunicipalityWorker municipalityWorker) {
+	public MunicipalityWorker updateMunicipalityWorker(final String firstName, final String lastName, final String userName,
+													   final String password, final String phoneNumber, final String email,
+													   final String vatNumber, final String registryOffice,
+													   final MunicipalityWorker municipalityWorker) {
 
 		if (firstName != null) {
 			municipalityWorker.setFistName(firstName);
