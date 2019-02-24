@@ -1,7 +1,9 @@
 package gr.aueb.mscis.sample.persistence;
 
 import gr.aueb.mscis.sample.enums.PrivilegeLevel;
+import gr.aueb.mscis.sample.enums.VaccinationStatus;
 import gr.aueb.mscis.sample.model.*;
+import org.joda.time.DateTime;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -55,10 +57,10 @@ public class Initializer {
 		Parent parent1 = new Parent("Test", "Parent", "sfs", "v", "@", "242");
 		parent1.setUserName("test");
 		List<Child> children = new ArrayList<>();
-		Child child1 = new Child("Test", "Child", new Date(1992, 12, 5));
+		Child child1 = new Child("Test", "Child", new Date(2017, 3, 4));
 		child1.setParent(parent1);
 		children.add(child1);
-		Child child2 = new Child("Test2", "Child", new Date(1992, 12, 5));
+		Child child2 = new Child("Test2", "Child", new Date(2017, 1, 16));
 		child2.setParent(parent1);
 		children.add(child2);
 
@@ -89,10 +91,22 @@ public class Initializer {
 
 	}
 
+	public void prepareVaccineData(){
+		eraseVaccineData(Vaccine.class);
+
+		Vaccine vaccine1 = new Vaccine( "hepatitis",  300, "typeA",  1);
+		EntityManager em = JPAUtil.getCurrentEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+
+		em.persist(vaccine1);
+		tx.commit();
+	}
+
 	/**
 	 * Erase admin data.
 	 */
-	public void eraseAdminData() {
+	private void eraseAdminData() {
 		EntityManager em = JPAUtil.getCurrentEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
@@ -107,7 +121,7 @@ public class Initializer {
 	/**
 	 * Erase parent data.
 	 */
-	public void eraseParentData() {
+	private void eraseParentData() {
 
 		EntityManager em = JPAUtil.getCurrentEntityManager();
 		EntityTransaction tx = em.getTransaction();
@@ -138,6 +152,17 @@ public class Initializer {
 		if (query != null) {
 			query.executeUpdate();
 		}
+
+		tx.commit();
+	}
+
+	private void eraseVaccineData(Class clazz) {
+		EntityManager em = JPAUtil.getCurrentEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+
+		Query query = em.createNativeQuery("delete from vaccine");
+		query.executeUpdate();
 
 		tx.commit();
 	}

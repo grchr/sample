@@ -1,6 +1,7 @@
 package gr.aueb.mscis.sample.model;
 
 import gr.aueb.mscis.sample.enums.VaccinationStatus;
+import org.joda.time.DateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * The type Vaccination.

@@ -9,16 +9,28 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import java.util.List;
 
+/**
+ * The type Child service.
+ */
 public class ChildService {
 
 
 	private EntityManager em;
 
+	/**
+	 * Instantiates a new Child service.
+	 */
 	public ChildService() {
 		em = JPAUtil.getCurrentEntityManager();
 	}
 
 
+	/**
+	 * Find childs by parent list.
+	 *
+	 * @param parent the parent
+	 * @return the list
+	 */
 	public List<Child> findChildsByParent(Parent parent) {
 
 		em = JPAUtil.getCurrentEntityManager();
@@ -34,6 +46,12 @@ public class ChildService {
 		return results;
 	}
 
+	/**
+	 * Find children by surname list.
+	 *
+	 * @param surname the surname
+	 * @return the list
+	 */
 	public List<Child> findChildrenBySurname(String surname) {
 
 		em = JPAUtil.getCurrentEntityManager();
@@ -48,6 +66,12 @@ public class ChildService {
 		return results;
 	}
 
+	/**
+	 * Create child child.
+	 *
+	 * @param child the child
+	 * @return the child
+	 */
 	public Child createChild(final Child child){
 
 		em = JPAUtil.getCurrentEntityManager();
@@ -59,6 +83,11 @@ public class ChildService {
 		return child;
 	}
 
+	/**
+	 * Finad all list.
+	 *
+	 * @return the list
+	 */
 	public List<Child> finadAll() {
 		em = JPAUtil.getCurrentEntityManager();
 		EntityTransaction tx = em.getTransaction();

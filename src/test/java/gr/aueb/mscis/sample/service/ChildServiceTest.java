@@ -5,6 +5,7 @@ import gr.aueb.mscis.sample.model.Parent;
 import gr.aueb.mscis.sample.model.User;
 import gr.aueb.mscis.sample.persistence.Initializer;
 import gr.aueb.mscis.sample.persistence.JPAUtil;
+import org.joda.time.DateTime;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -78,7 +79,7 @@ public class ChildServiceTest {
 	public void createChildTest() {
 		ChildService childService = new ChildService();
 		Parent parent = em.find(Parent.class, 1);
-		Child child = new Child("Test", "Child", new Date(1992, 12, 5));
+		Child child = new Child("Test", "Child", new Date(2017, 1, 15));
 		child.setParent(parent);
 		Child child1 = childService.createChild(child);
 

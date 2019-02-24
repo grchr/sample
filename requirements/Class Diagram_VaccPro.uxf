@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>11</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>792</x>
+      <y>0</y>
+      <w>374</w>
+      <h>572</h>
+    </coordinates>
+    <panel_attributes>User
+--
+-id: Integer
+-firstname: String
+-lastName: String
+-userName: String
+-password: String
+-phoneNumber: String
+-email: String
+-address: Address
+-vatNumber: String
+--
++getId(): Integer
++setId(id: Integer) {readOnly}
++getFirstName(): String
++setFirstName(firstName: String) {readOnly}
++getLastName(): String
++setLastName(lastName: String) {readOnly}
++getUserName(): String
++setUserName(userName: String)
++getPassword(): String
++setPassword(password: String)
++getPhoneNumber(): String
++setPhoneNumber(phoneNumber: String) {readOnly}
++getEmail(): String
++setEmail(email: String) {readOnly}
++getVatNumber(): String
++setVatNumber(vatNumber: String) {readOnly}
++getAddress(): Address
++setAddress(address: Address) {readOnly}
++equals(o: Object): Boolean
++hashCode(): Integer
++toString(): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>803</x>
+      <y>638</y>
+      <w>341</w>
+      <h>143</h>
+    </coordinates>
+    <panel_attributes>Parent
+--
+-insuranceNumber: String
+-children: List&lt;Child&gt;
+--
++getInsuranceNumber(): String
++setInsuranceNumber(insuranceNumber: String)
++getChildren(): List&lt;Child&gt;
++setChildren(children: List&lt;Child&gt;)
+ </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1177</x>
+      <y>649</y>
+      <w>275</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>Administrator
+--
+-privilege: PrivilegeLevel
+--
++getPrivilege(): PrivilegeLevel
++setPrivilege(privilege: PrivilegeLevel)
++toString(): String
+ </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>451</y>
+      <w>297</w>
+      <h>341</h>
+    </coordinates>
+    <panel_attributes>Child
+--
+-id: Integer
+-surname: String
+-birthday: Date
+-parent: Parent
+--
++getId(): Integer
++setId(id: Integer) {readOnly}
++getName(): String
++setName(name: String) {readOnly}
++getSurname(): String
++setSurname(surname: String) {readOnly}
++getBirthday(): Date
++setBirthday(birthday: Date) {readOnly}
++getParent(): Parent
++setParent(parent: Parent) {readOnly}
++equals(o: Object): Boolean
++hashCode(): Integer
++toString(): String
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>319</x>
+      <y>649</y>
+      <w>363</w>
+      <h>121</h>
+    </coordinates>
+    <panel_attributes>MunicipalityWorker
+--
+-registryOffice: String
+--
++getRegistryOffice(): String
++setRegistryOffice(registryOffice: String) {readOnly}
++toString(): String
+ </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>330</x>
+      <y>143</y>
+      <w>297</w>
+      <h>341</h>
+    </coordinates>
+    <panel_attributes>Address
+--
+-street: String
+-number: String
+-city: String
+-zipcode: Integer
+-country: String
+--
++getStreet(): String
++setStreet(street: String) {readOnly}
++getNumber(): String
++setNumber(number: String) {readOnly}
++getCity(): String
++setCity(city: String) {readOnly}
++getZipcode(): Integer
++setZipcode(zipcode: Integer) {readOnly}
++getCountry(): String
++setCountry(country: String) {readOnly}
++toString(): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>264</x>
+      <y>924</y>
+      <w>407</w>
+      <h>319</h>
+    </coordinates>
+    <panel_attributes>Vaccine
+--
+-id: Integer
+-disease: String
+-vaccinationAge: Integer
+-vaccinationType: String
+-numberOfDose: Integer
+--
++getId(): Integer
++setId(id: Integer) {readOnly}
++getDisease(): String
++setDisease(disease: String) {readOnly}
++getVaccinationAge(): Integer
++setVaccinationAge(vaccinationAge: Integer) {readOnly}
++getVaccinationType(): String
++setVaccinationType(vaccinationType: String) {readOnly}
++getNumberOfDose(): Integer
++setNumberOfDose(numberOfDose: Integer) {readOnly}
++toString(): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>880</x>
+      <y>913</y>
+      <w>341</w>
+      <h>319</h>
+    </coordinates>
+    <panel_attributes>Vaccination
+--
+-id: Integer
+-child: Child
+-vaccine: Vaccine
+-notifyDate: Date
+-status: VaccinationStatus
+--
++getId(): Integer
++setId(id: Integer) {readOnly}
++getChild(): Child
++setChild(child: Child) {readOnly}
++getVaccine(): Vaccine
++setVaccine(vaccine: Vaccine) {readOnly}
++getNotifyDate(): Date
++setNotifyDate(notifyDate: Date) {readOnly}
++getStatus(): VaccinationStatus
++setStatus(status: VaccinationStatus) {readOnly}
++toString(): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>517</x>
+      <y>561</y>
+      <w>363</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>310.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>979</x>
+      <y>561</y>
+      <w>33</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1023</x>
+      <y>561</y>
+      <w>231</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;190.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>616</x>
+      <y>330</y>
+      <w>198</w>
+      <h>33</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>160.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>187</x>
+      <y>770</y>
+      <w>704</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..2
+m2=1..*
+&lt; έχει</panel_attributes>
+    <additional_attributes>600.0;10.0;600.0;70.0;10.0;70.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>616</x>
+      <y>319</y>
+      <w>132</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>1</panel_attributes>
+    <additional_attributes>10.0;20.0;100.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>924</x>
+      <y>770</y>
+      <w>165</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..1
+m2=0..1
+διαχειρίζεται &gt;</panel_attributes>
+    <additional_attributes>110.0;10.0;110.0;60.0;10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>99</x>
+      <y>781</y>
+      <w>803</w>
+      <h>242</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..n
+m2=1..1
+&lt; αφορά</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0;640.0;90.0;640.0;190.0;710.0;190.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>660</x>
+      <y>1056</y>
+      <w>242</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+&lt; αφορά</panel_attributes>
+    <additional_attributes>10.0;20.0;200.0;20.0</additional_attributes>
+  </element>
+</diagram>

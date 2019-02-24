@@ -1,6 +1,8 @@
 package gr.aueb.mscis.sample.model;
 
 
+import org.joda.time.DateTime;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
@@ -40,9 +42,9 @@ public class Child implements Serializable {
 	/**
 	 * Instantiates a new Child.
 	 *
-	 * @param name    the name
-	 * @param surname the surname
-	 * @param birthday     the age
+	 * @param name     the name
+	 * @param surname  the surname
+	 * @param birthday the age
 	 */
 	public Child(final String name, final String surname, final Date birthday) {
 		this.name = name;
@@ -53,10 +55,10 @@ public class Child implements Serializable {
 	/**
 	 * Instantiates a new Child.
 	 *
-	 * @param name    the name
-	 * @param surname the surname
-	 * @param birthday     the age
-	 * @param parent  the parent
+	 * @param name     the name
+	 * @param surname  the surname
+	 * @param birthday the age
+	 * @param parent   the parent
 	 */
 	public Child(final String name, final String surname, final Date birthday, final Parent parent) {
 		this.name = name;
@@ -131,7 +133,7 @@ public class Child implements Serializable {
 	/**
 	 * Sets age.
 	 *
-	 * @param age the age
+	 * @param birthday the birthday
 	 */
 	public void setBirthday(final Date birthday) {
 		this.birthday = birthday;
