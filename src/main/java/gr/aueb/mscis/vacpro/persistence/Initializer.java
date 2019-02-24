@@ -7,7 +7,7 @@ import gr.aueb.mscis.vacpro.model.*;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -164,7 +164,9 @@ public class Initializer {
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 
-		Query query = em.createNativeQuery("delete from vaccine");
+		Query queryDeleteVaccinations = em.createQuery("delete from Vaccination where vaccine_id in (select id from Vaccine)");
+		queryDeleteVaccinations.executeUpdate();
+		Query query = em.createNativeQuery("delete from Vaccine");
 		query.executeUpdate();
 
 		tx.commit();

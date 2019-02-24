@@ -7,6 +7,8 @@ import gr.aueb.mscis.vacpro.persistence.JPAUtil;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,24 +22,23 @@ public class VaccinationService {
 		em = JPAUtil.getCurrentEntityManager();
 	}
 
-	public boolean updateChildVaccinationTimes(final int childID, final int vaccineId, final int vaccinatedTimes) {
-		int results = em.createQuery("Update Vaccination set vaccinatedTimes=:times where child.id=:childId and vaccine.id=:vaccineId")
-				.setParameter("times", vaccinatedTimes)
-				.setParameter("childId", childID)
-				.setParameter("vaccineId", vaccineId).executeUpdate();
-
-		return results == 1;
-	}
-
-	//TODO: implement create vaccinations with reference to specific child, for all vaccines
-	//TODO: implement update vaccinations for new statuses
-	//TODO: find vaccinations for current day
 	public Vaccination createVaccination(Vaccination vaccination) {
 
 		em = JPAUtil.getCurrentEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		em.persist(vaccination);
+		tx.commit();
+
+		return vaccination;
+	}
+
+	public Vaccination updateVaccination(Vaccination vaccination) {
+
+		em = JPAUtil.getCurrentEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		em.merge(vaccination);
 		tx.commit();
 
 		return vaccination;
@@ -52,6 +53,22 @@ public class VaccinationService {
 
 		tx.commit();
 		return results;
+	}
+
+	public List<Vaccination> findVaccinationsThatNeedNotification(Date today) {
+		List<Vaccination> results = new ArrayList<>();
+
+		em = JPAUtil.getCurrentEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+
+		Query query = em.createQuery("from Vaccination where notify_date > :date").setParameter("date", today);
+		query.setParameter("date", today);
+		results = query.getResultList();
+
+		tx.commit();
+
+		return  results;
 	}
 
 }
