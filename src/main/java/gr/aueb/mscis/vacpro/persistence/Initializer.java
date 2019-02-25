@@ -2,11 +2,18 @@ package gr.aueb.mscis.vacpro.persistence;
 
 
 import gr.aueb.mscis.vacpro.enums.PrivilegeLevel;
+import gr.aueb.mscis.vacpro.enums.VaccinationStatus;
+import gr.aueb.mscis.vacpro.helper.DateConversion;
 import gr.aueb.mscis.vacpro.model.Administrator;
 import gr.aueb.mscis.vacpro.model.Child;
 import gr.aueb.mscis.vacpro.model.MunicipalityWorker;
 import gr.aueb.mscis.vacpro.model.Parent;
+import gr.aueb.mscis.vacpro.model.Vaccination;
 import gr.aueb.mscis.vacpro.model.Vaccine;
+import gr.aueb.mscis.vacpro.service.ChildService;
+import gr.aueb.mscis.vacpro.service.ParentService;
+import gr.aueb.mscis.vacpro.service.VaccinationService;
+import gr.aueb.mscis.vacpro.service.VaccineService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -113,6 +120,41 @@ public class Initializer {
 		tx.commit();
 	}
 
+
+	/**
+	 * Prepare vaccination data.
+	 */
+	public void prepareVaccinationData(){
+		eraseVaccinationData();
+
+		Parent parent1 = new Parent("Nick", "Calathes", "6999", "4141", "trakis@pao.bc", "241221");
+		List<Child> children = new ArrayList<>();
+		Child child1 = new Child("nando", "de colo", new Date(118, 1, 2));
+		Child child2 = new Child("sergio", "llull", new Date(118, 12, 5));
+		child1.setParent(parent1);
+		child2.setParent(parent1);
+		children.add(child1);
+		children.add(child2);
+		parent1.setChildren(children);
+		ParentService parentService = new ParentService();
+		parentService.createParent(parent1);
+		ChildService childService = new ChildService();
+		Child storedChild = childService.findChildrenBySurname("de colo").get(0);
+		System.out.println(storedChild);
+		VaccineService vaccineService = new VaccineService();
+		vaccineService.createVaccine(new Vaccine("hepatitis", 300, "typeA", 1));
+		vaccineService.createVaccine(new Vaccine("hepatitis", 400, "typeA", 2));
+		List<Vaccine> vaccines = vaccineService.findAll();
+		System.out.println(vaccines.size());
+		VaccinationService vaccinationService = new VaccinationService();
+		for (Child child : children) {
+			for (Vaccine vac : vaccines) {
+				Vaccination vaccination = new Vaccination(child, vac, DateConversion.calculateNotificationDate(
+							child1.getBirthday(), vac.getVaccinationAge()), VaccinationStatus.REGISTERED);
+				vaccinationService.createVaccination(vaccination);
+			}
+		}
+	}
 	/**
 	 * Erase admin data.
 	 */
@@ -170,6 +212,19 @@ public class Initializer {
 		query.executeUpdate();
 
 		tx.commit();
+	}
+
+	private void eraseVaccinationData() {
+		EntityManager em = JPAUtil.getCurrentEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+
+		Query queryDeleteVaccinations = em.createQuery("delete from Vaccination");
+		queryDeleteVaccinations.executeUpdate();
+		Query query = em.createNativeQuery("delete from Vaccine");
+		query.executeUpdate();
+		tx.commit();
+		eraseParentData();
 	}
 
 }

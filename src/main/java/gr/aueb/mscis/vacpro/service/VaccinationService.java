@@ -2,6 +2,7 @@ package gr.aueb.mscis.vacpro.service;
 
 
 import gr.aueb.mscis.vacpro.model.Vaccination;
+import gr.aueb.mscis.vacpro.model.Vaccine;
 import gr.aueb.mscis.vacpro.persistence.JPAUtil;
 
 import javax.persistence.EntityManager;
@@ -9,7 +10,9 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * The type Vaccination service.
@@ -97,6 +100,38 @@ public class VaccinationService {
 		tx.commit();
 
 		return results;
+	}
+
+	/**
+	 * Create monthly vaccination report map.
+	 *
+	 * @param from the from
+	 * @param to   the to
+	 * @return the map
+	 */
+	public Map<Vaccine, Integer> createMonthlyVaccinationReport(final Date from, final Date to) {
+
+		em = JPAUtil.getCurrentEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+
+		Query query = em.createQuery("from Vaccination where notifyDate > :date and notifyDate< :endofmonth")
+				.setParameter("date",from)
+				.setParameter("endofmonth", to);
+
+		List<Vaccination> results = query.getResultList();
+
+		Map<Vaccine, Integer> numberOfVaccinations = new HashMap<>();
+		for (Vaccination vac : results) {
+			Integer dsa = numberOfVaccinations.get(vac.getVaccine());
+			if (dsa == null) {
+				dsa = 0;
+			}
+			numberOfVaccinations.put(vac.getVaccine(), dsa + 1);
+		}
+		tx.commit();
+
+		return numberOfVaccinations;
 	}
 
 }
