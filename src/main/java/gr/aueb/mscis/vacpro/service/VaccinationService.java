@@ -93,7 +93,7 @@ public class VaccinationService {
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 
-		Query query = em.createQuery("from Vaccination where notify_date > :date").setParameter("date", today);
+		Query query = em.createQuery("from Vaccination where notify_date = :date").setParameter("date", today);
 		query.setParameter("date", today);
 		results = query.getResultList();
 
@@ -115,7 +115,7 @@ public class VaccinationService {
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 
-		Query query = em.createQuery("from Vaccination where notifyDate > :date and notifyDate< :endofmonth")
+		Query query = em.createQuery("from Vaccination where notifyDate >= :date and notifyDate <= :endofmonth")
 				.setParameter("date",from)
 				.setParameter("endofmonth", to);
 

@@ -76,7 +76,7 @@ public class VaccinationServiceTest {
 		Date today = new Date(119, 1, 24);
 		System.out.println("Check to send notification for day : " + today);
 		List<Vaccination> vaccinations = vaccinationService.findVaccinationsThatNeedNotification(today);
-		Assert.assertEquals(2, vaccinations.size());
+		Assert.assertEquals(1, vaccinations.size());
 
 	}
 

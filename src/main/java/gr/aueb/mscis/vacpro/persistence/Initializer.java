@@ -130,7 +130,7 @@ public class Initializer {
 		Parent parent1 = new Parent("Nick", "Calathes", "6999", "4141", "trakis@pao.bc", "241221");
 		List<Child> children = new ArrayList<>();
 		Child child1 = new Child("nando", "de colo", new Date(118, 1, 2));
-		Child child2 = new Child("sergio", "llull", new Date(118, 12, 5));
+		Child child2 = new Child("sergio", "llull", new Date(119, 1, 21));
 		child1.setParent(parent1);
 		child2.setParent(parent1);
 		children.add(child1);
@@ -142,15 +142,14 @@ public class Initializer {
 		Child storedChild = childService.findChildrenBySurname("de colo").get(0);
 		System.out.println(storedChild);
 		VaccineService vaccineService = new VaccineService();
-		vaccineService.createVaccine(new Vaccine("hepatitis", 300, "typeA", 1));
+		vaccineService.createVaccine(new Vaccine("hepatitis", 3, "typeA", 1));
 		vaccineService.createVaccine(new Vaccine("hepatitis", 400, "typeA", 2));
 		List<Vaccine> vaccines = vaccineService.findAll();
 		System.out.println(vaccines.size());
 		VaccinationService vaccinationService = new VaccinationService();
 		for (Child child : children) {
 			for (Vaccine vac : vaccines) {
-				Vaccination vaccination = new Vaccination(child, vac, DateConversion.calculateNotificationDate(
-							child1.getBirthday(), vac.getVaccinationAge()), VaccinationStatus.REGISTERED);
+				Vaccination vaccination = new Vaccination(child, vac, DateConversion.calculateNotificationDate(child.getBirthday(), vac.getVaccinationAge()), VaccinationStatus.REGISTERED);
 				vaccinationService.createVaccination(vaccination);
 			}
 		}
