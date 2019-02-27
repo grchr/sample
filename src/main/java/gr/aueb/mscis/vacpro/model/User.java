@@ -1,17 +1,7 @@
 package gr.aueb.mscis.vacpro.model;
 
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -25,11 +15,12 @@ import java.util.Objects;
 		name = "type",
 		discriminatorType = DiscriminatorType.STRING
 )
+@SequenceGenerator(name="user_seq", initialValue = 1, allocationSize = 1)
 public abstract class User implements Serializable {
 
 	@Id
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
 	private int id;
 
 	@Column(name = "first_name")

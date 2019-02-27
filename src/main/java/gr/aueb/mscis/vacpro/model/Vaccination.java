@@ -3,15 +3,7 @@ package gr.aueb.mscis.vacpro.model;
 
 import gr.aueb.mscis.vacpro.enums.VaccinationStatus;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -21,11 +13,12 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "vaccination")
+@SequenceGenerator(name="vaccination_seq", initialValue = 1, allocationSize = 1)
 public class Vaccination {
 
 	@Id
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vaccination_seq")
 	private int id;
 
 	@ManyToOne(fetch = FetchType.EAGER)

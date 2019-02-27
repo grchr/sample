@@ -1,15 +1,7 @@
 package gr.aueb.mscis.vacpro.model;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -20,11 +12,12 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "Child")
+@SequenceGenerator(name = "child_seq", initialValue = 1, allocationSize = 1)
 public class Child implements Serializable {
 
 	@Id
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "child_seq")
 	private int id;
 
 	@Column(name = "name")
