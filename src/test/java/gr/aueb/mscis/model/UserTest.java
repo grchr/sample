@@ -23,6 +23,7 @@ public class UserTest {
         Address address = new Address();
         address.setCity("Dallas");
         address.setCountry("USA");
+        address.setStreet("Pain Street");
         address.setZipcode(45691);
         parent.setAddress(address);
 
@@ -33,6 +34,14 @@ public class UserTest {
         Assert.assertEquals("chucNorrisExistedBeforeTheBingBang", parent.getPassword());
         Assert.assertEquals("chuckieCheese", parent.getUserName());
         Assert.assertEquals("6969123", parent.getPhoneNumber());
-        Assert.assertEquals(address, parent.getAddress());
+
+        User parent2 = new Parent();
+        ((Parent) parent2).setInsuranceNumber("562136516");
+        parent2.setEmail("ranger@texas.com");
+        parent2.setFistName("Chuck");
+        parent2.setLastName("Norris");
+        parent2.setUserName("chuckieCheese");
+
+        Assert.assertEquals(parent, parent2);
     }
 }
