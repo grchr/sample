@@ -56,7 +56,7 @@ public class AdministratorServiceTest {
 		Administrator administrator = administratorService.createAdministrator("Admin", "Adminopoulos", "megaAdmin", "1234",
 				"341414", "ABGKABDD@sszb.vc", "123456", new Address(), PrivilegeLevel.FULL);
 
-		assertEquals("Admin", administrator.getFistName());
+		assertEquals("Admin", administrator.getFirstName());
 		assertEquals("Adminopoulos", administrator.getLastName());
 		assertEquals("megaAdmin", administrator.getUserName());
 		assertEquals("1234", administrator.getPassword());
@@ -81,7 +81,7 @@ public class AdministratorServiceTest {
 		Administrator administrator = administratorService.updateAdministratorPassword("newPass", (Administrator) admin1.get(0));
 
 		assertEquals("newPass", administrator.getPassword());
-		assertEquals("Bruce", administrator.getFistName());
+		assertEquals("Bruce", administrator.getFirstName());
 		assertEquals("Wayne", administrator.getLastName());
 		assertEquals(PrivilegeLevel.FULL, administrator.getPrivilege());
 		assertEquals(1, getAdmins().size());
@@ -96,7 +96,7 @@ public class AdministratorServiceTest {
 		AdministratorService administratorService = new AdministratorService();
 
 		Administrator administrator = administratorService.findAdminByUsername("username");
-		assertEquals("Bruce", administrator.getFistName());
+		assertEquals("Bruce", administrator.getFirstName());
 		assertEquals("Wayne", administrator.getLastName());
 		assertEquals("pass", administrator.getPassword());
 		assertEquals(PrivilegeLevel.FULL, administrator.getPrivilege());
@@ -118,7 +118,7 @@ public class AdministratorServiceTest {
 
 		Administrator adm = administratorService.updateAdministratorPrivilege(PrivilegeLevel.NOTIFICATION, admin1);
 
-		assertEquals("Bruce", adm.getFistName());
+		assertEquals("Bruce", adm.getFirstName());
 		assertEquals("Wayne", adm.getLastName());
 		assertEquals("pass", adm.getPassword());
 		assertEquals(PrivilegeLevel.NOTIFICATION, adm.getPrivilege());
@@ -136,7 +136,7 @@ public class AdministratorServiceTest {
 		List<Administrator> admin = administratorService.findAll();
 
 		assertEquals(1, admin.size());
-		assertEquals("Bruce", admin.get(0).getFistName());
+		assertEquals("Bruce", admin.get(0).getFirstName());
 		assertEquals("Wayne", admin.get(0).getLastName());
 	}
 

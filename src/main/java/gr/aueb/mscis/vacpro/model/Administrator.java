@@ -29,19 +29,19 @@ public class Administrator extends User {
 	/**
 	 * Instantiates a new Administrator.
 	 *
-	 * @param fistName  the fist name
+	 * @param firstName  the first name
 	 * @param lastName  the last name
 	 * @param privilege the privilege
 	 */
-	public Administrator(final String fistName, final String lastName, final PrivilegeLevel privilege) {
-		super(fistName, lastName);
+	public Administrator(final String firstName, final String lastName, final PrivilegeLevel privilege) {
+		super(firstName, lastName);
 		this.privilege = privilege;
 	}
 
 	/**
 	 * Instantiates a new Administrator.
 	 *
-	 * @param fistName    the fist name
+	 * @param firstName    the first name
 	 * @param lastName    the last name
 	 * @param userName    the user name
 	 * @param password    the password
@@ -51,10 +51,10 @@ public class Administrator extends User {
 	 * @param address     the address
 	 * @param privilege   the privilege
 	 */
-	public Administrator(final String fistName, final String lastName, final String userName, final String password,
+	public Administrator(final String firstName, final String lastName, final String userName, final String password,
 						 final String phoneNumber, final String email, final String vatNumber, final Address address,
 						 final PrivilegeLevel privilege) {
-		super(fistName, lastName, userName, password, phoneNumber, email, address, vatNumber);
+		super(firstName, lastName, userName, password, phoneNumber, email, address, vatNumber);
 		this.privilege = privilege;
 	}
 
@@ -78,7 +78,7 @@ public class Administrator extends User {
 
 	@Override
 	public String toString() {
-		return "id: " + this.getId() + " name: " + this.getFistName() + " " + this.getLastName()
+		return "id: " + this.getId() + " name: " + this.getFirstName() + " " + this.getLastName()
 				+ " privilege level: " + this.getPrivilege();
 	}
 }

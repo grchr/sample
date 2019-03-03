@@ -59,7 +59,7 @@ public class ParentService {
 							   final Parent parent) {
 
 		if (firstName != null) {
-			parent.setFistName(firstName);
+			parent.setFirstName(firstName);
 		}
 		if (lastName != null) {
 			parent.setLastName(lastName);

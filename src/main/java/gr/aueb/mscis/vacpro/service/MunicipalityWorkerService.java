@@ -84,7 +84,7 @@ public class MunicipalityWorkerService {
 													   final MunicipalityWorker municipalityWorker) {
 
 		if (firstName != null) {
-			municipalityWorker.setFistName(firstName);
+			municipalityWorker.setFirstName(firstName);
 		}
 		if (lastName != null) {
 			municipalityWorker.setLastName(lastName);

@@ -62,7 +62,7 @@ public class MunicipalityWorkerServiceTest {
 
 		MunicipalityWorker savedMunWorker = em.find(MunicipalityWorker.class, newMunWorker.getId());
 		Assert.assertNotNull(savedMunWorker);
-		assertEquals("Tim", savedMunWorker.getFistName());
+		assertEquals("Tim", savedMunWorker.getFirstName());
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class MunicipalityWorkerServiceTest {
 				(MunicipalityWorker) mun.get(0));
 
 		assertEquals("newReg", worker.getRegistryOffice());
-		assertEquals("newFirstname", worker.getFistName());
+		assertEquals("newFirstname", worker.getFirstName());
 		assertEquals("newLastname", worker.getLastName());
 		assertEquals("newPhone", worker.getPhoneNumber());
 		assertEquals("newEmail", worker.getEmail());

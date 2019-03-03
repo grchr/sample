@@ -36,7 +36,7 @@ public class MunicipalityWorker extends User {
 	/**
 	 * Instantiates a new Municipality worker.
 	 *
-	 * @param fistName       the fist name
+	 * @param firstName       the first name
 	 * @param lastName       the last name
 	 * @param userName       the user name
 	 * @param password       the password
@@ -46,10 +46,10 @@ public class MunicipalityWorker extends User {
 	 * @param vatNumber      the vat number
 	 * @param registryOffice the registry office
 	 */
-	public MunicipalityWorker(final String fistName, final String lastName, final String userName, final String password,
+	public MunicipalityWorker(final String firstName, final String lastName, final String userName, final String password,
 							  final String phoneNumber, final String email, final Address address, final String vatNumber,
 							  final String registryOffice) {
-		super(fistName, lastName, userName, password, phoneNumber, email, address, vatNumber);
+		super(firstName, lastName, userName, password, phoneNumber, email, address, vatNumber);
 		this.registryOffice = registryOffice;
 	}
 
@@ -73,6 +73,6 @@ public class MunicipalityWorker extends User {
 
 	@Override
 	public String toString() {
-		return "id: " + this.getId() + " name: " + this.getFistName() + " " + this.getLastName() + " office: " + this.getRegistryOffice();
+		return "id: " + this.getId() + " name: " + this.getFirstName() + " " + this.getLastName() + " office: " + this.getRegistryOffice();
 	}
 }

@@ -17,7 +17,7 @@ public class VaccinationServiceStub extends VaccinationService {
 	@Override
 	public List<Vaccination> findVaccinationsThatNeedNotification(Date date) {
 		Parent parent = new Parent();
-		parent.setFistName("theParent");
+		parent.setFirstName("theParent");
 		parent.setLastName("Papadopoylos");
 		parent.setEmail("theparent@gmail.com");
 

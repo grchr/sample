@@ -50,7 +50,7 @@ public class Parent extends User {
 	 * /**
 	 * Instantiates a new Parent.
 	 *
-	 * @param fistName        the fist name
+	 * @param firstName        the first name
 	 * @param lastName        the last name
 	 * @param userName        the user name
 	 * @param password        the password
@@ -61,10 +61,10 @@ public class Parent extends User {
 	 * @param insuranceNumber the insurance number
 	 * @param children        the children
 	 */
-	public Parent(final String fistName, final String lastName, final String userName, final String password,
+	public Parent(final String firstName, final String lastName, final String userName, final String password,
 				  final String phoneNumber, final String email, final Address address, final String vatNumber,
 				  final String insuranceNumber, final List<Child> children) {
-		super(fistName, lastName, userName, password, phoneNumber, email, address, vatNumber);
+		super(firstName, lastName, userName, password, phoneNumber, email, address, vatNumber);
 		this.insuranceNumber = insuranceNumber;
 		this.children = children;
 	}

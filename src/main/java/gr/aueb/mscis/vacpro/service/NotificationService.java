@@ -66,7 +66,7 @@ public class NotificationService {
 
 	private String createMessage(final Parent parent, final List<Child> childList) {
 		StringBuilder message = new StringBuilder("Καλησπέρα κ.,");
-		message.append(parent.getFistName());
+		message.append(parent.getFirstName());
 		message.append(". Είναι ώρα να πάτε για εμβόλιο τον (τους):");
 		for (Child child : childList) {
 			message.append(" ").append(child.getName());

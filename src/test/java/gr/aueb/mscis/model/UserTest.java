@@ -14,7 +14,7 @@ public class UserTest {
         User parent = new Parent();
         ((Parent) parent).setInsuranceNumber("562136516");
         parent.setEmail("ranger@texas.com");
-        parent.setFistName("Chuck");
+        parent.setFirstName("Chuck");
         parent.setLastName("Norris");
         parent.setPassword("chucNorrisExistedBeforeTheBingBang");
         parent.setUserName("chuckieCheese");
@@ -29,7 +29,7 @@ public class UserTest {
 
         Assert.assertEquals("562136516", ((Parent) parent).getInsuranceNumber());
         Assert.assertEquals("ranger@texas.com", parent.getEmail());
-        Assert.assertEquals("Chuck", parent.getFistName());
+        Assert.assertEquals("Chuck", parent.getFirstName());
         Assert.assertEquals("Norris", parent.getLastName());
         Assert.assertEquals("chucNorrisExistedBeforeTheBingBang", parent.getPassword());
         Assert.assertEquals("chuckieCheese", parent.getUserName());
@@ -38,7 +38,7 @@ public class UserTest {
         User parent2 = new Parent();
         ((Parent) parent2).setInsuranceNumber("562136516");
         parent2.setEmail("ranger@texas.com");
-        parent2.setFistName("Chuck");
+        parent2.setFirstName("Chuck");
         parent2.setLastName("Norris");
         parent2.setUserName("chuckieCheese");
 

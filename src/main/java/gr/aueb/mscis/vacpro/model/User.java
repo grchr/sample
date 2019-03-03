@@ -24,7 +24,7 @@ public abstract class User implements Serializable {
 	private int id;
 
 	@Column(name = "first_name")
-	private String fistName;
+	private String firstName;
 
 	@Column(name = "last_name")
 	private String lastName;
@@ -57,25 +57,25 @@ public abstract class User implements Serializable {
 	/**
 	 * Instantiates a new User.
 	 *
-	 * @param fistName the fist name
+	 * @param firstName the first name
 	 * @param lastName the last name
 	 */
-	protected User(final String fistName, final String lastName) {
-		this.fistName = fistName;
+	protected User(final String firstName, final String lastName) {
+		this.firstName = firstName;
 		this.lastName = lastName;
 	}
 
 	/**
 	 * Instantiates a new User.
 	 *
-	 * @param fistName    the fist name
+	 * @param firstName    the first name
 	 * @param lastName    the last name
 	 * @param phoneNumber the phone number
 	 * @param email       the email
 	 * @param vatNumber   the vat number
 	 */
-	protected User(final String fistName,final String lastName,final String phoneNumber,final String email,final String vatNumber) {
-		this.fistName = fistName;
+	protected User(final String firstName, final String lastName, final String phoneNumber, final String email, final String vatNumber) {
+		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
@@ -86,7 +86,7 @@ public abstract class User implements Serializable {
 	/**
 	 * Instantiates a new User.
 	 *
-	 * @param fistName    the fist name
+	 * @param firstName    the first name
 	 * @param lastName    the last name
 	 * @param userName    the user name
 	 * @param password    the password
@@ -95,9 +95,9 @@ public abstract class User implements Serializable {
 	 * @param address     the address
 	 * @param vatNumber   the vat number
 	 */
-	public User(final String fistName, final String lastName, final String userName, final String password, final String phoneNumber,
+	public User(final String firstName, final String lastName, final String userName, final String password, final String phoneNumber,
 				final String email, final Address address, final String vatNumber) {
-		this.fistName = fistName;
+		this.firstName = firstName;
 		this.lastName = lastName;
 		this.userName = userName;
 		this.password = password;
@@ -127,21 +127,21 @@ public abstract class User implements Serializable {
 	}
 
 	/**
-	 * Gets fist name.
+	 * Gets first name.
 	 *
-	 * @return the fist name
+	 * @return the first name
 	 */
-	public String getFistName() {
-		return fistName;
+	public String getFirstName() {
+		return firstName;
 	}
 
 	/**
-	 * Sets fist name.
+	 * Sets first name.
 	 *
-	 * @param fistName the fist name
+	 * @param firstName the first name
 	 */
-	public void setFistName(final String fistName) {
-		this.fistName = fistName;
+	public void setFirstName(final String firstName) {
+		this.firstName = firstName;
 	}
 
 	/**
@@ -280,7 +280,7 @@ public abstract class User implements Serializable {
 		}
 		User user = (User) o;
 		return getId() == user.getId()
-				&& Objects.equals(getFistName(), user.getFistName())
+				&& Objects.equals(getFirstName(), user.getFirstName())
 				&& Objects.equals(getLastName(), user.getLastName())
 				&& Objects.equals(getUserName(), user.getUserName());
 	}
@@ -288,14 +288,14 @@ public abstract class User implements Serializable {
 	@Override
 	public int hashCode() {
 
-		return Objects.hash(getId(), getFistName(), getLastName(), getUserName());
+		return Objects.hash(getId(), getFirstName(), getLastName(), getUserName());
 	}
 
 	@Override
 	public String toString() {
 		return "{\"User\":{"
 				+ "\"id\":\"" + id + "\""
-				+ ",\"fistName\":" + fistName + "\""
+				+ ",\"firstName\":" + firstName + "\""
 				+ ",\"lastName\":" + lastName + "\""
 				+ ",\"userName\":" + userName + "\""
 				+ ",\"password\":" + password + "\""

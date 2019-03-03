@@ -51,7 +51,7 @@ public class ParentServiceTest {
 		parent1.setUserName("theUsername");
 		Parent createdParent = parentService.createParent(parent1);
 
-		assertEquals("Kostas", createdParent.getFistName());
+		assertEquals("Kostas", createdParent.getFirstName());
 		assertEquals("Fortounis", createdParent.getLastName());
 		assertEquals("6999", createdParent.getPhoneNumber());
 		assertEquals("v", createdParent.getInsuranceNumber());
@@ -75,7 +75,7 @@ public class ParentServiceTest {
 
 		assertEquals("newusername", createdParent.getUserName());
 		assertEquals("newParent", createdParent.getLastName());
-		assertEquals("newFirstname", createdParent.getFistName());
+		assertEquals("newFirstname", createdParent.getFirstName());
 		assertEquals("newphone", createdParent.getPhoneNumber());
 		assertEquals("newin", createdParent.getInsuranceNumber());
 		assertEquals("newemail", createdParent.getEmail());
@@ -122,7 +122,7 @@ public class ParentServiceTest {
 		List<Parent> admin = parentService.findAll();
 
 		assertEquals(1, admin.size());
-		assertEquals("Test", admin.get(0).getFistName());
+		assertEquals("Test", admin.get(0).getFirstName());
 		assertEquals("Parent", admin.get(0).getLastName());
 	}
 
