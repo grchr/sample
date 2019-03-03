@@ -121,6 +121,13 @@ public class VaccinationService {
 
 		List<Vaccination> results = query.getResultList();
 
+		Map<Vaccine, Integer> numberOfVaccinations = getNumberOfVaccinations(results);
+		tx.commit();
+
+		return numberOfVaccinations;
+	}
+
+	private Map<Vaccine, Integer> getNumberOfVaccinations(List<Vaccination> results) {
 		Map<Vaccine, Integer> numberOfVaccinations = new HashMap<>();
 		for (Vaccination vac : results) {
 			Integer dsa = numberOfVaccinations.get(vac.getVaccine());
@@ -129,8 +136,6 @@ public class VaccinationService {
 			}
 			numberOfVaccinations.put(vac.getVaccine(), dsa + 1);
 		}
-		tx.commit();
-
 		return numberOfVaccinations;
 	}
 
