@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>585</x>
-      <y>0</y>
+      <x>576</x>
+      <y>54</y>
       <w>189</w>
       <h>126</h>
     </coordinates>
@@ -16,8 +16,7 @@
 Τηλέφωνο
 e-mail
 ΑΦΜ
-Username
-Password
+
 
 
  </panel_attributes>
@@ -26,8 +25,8 @@ Password
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>306</x>
-      <y>216</y>
+      <x>297</x>
+      <y>270</y>
       <w>189</w>
       <h>63</h>
     </coordinates>
@@ -39,8 +38,8 @@ Password
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>864</x>
-      <y>216</y>
+      <x>855</x>
+      <y>270</y>
       <w>189</w>
       <h>63</h>
     </coordinates>
@@ -52,22 +51,49 @@ Password
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>594</x>
-      <y>216</y>
+      <x>864</x>
+      <y>117</y>
+      <w>189</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>Στοιχεια Πρόσβασης
+--
+username
+password</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>585</x>
+      <y>270</y>
       <w>189</w>
       <h>81</h>
     </coordinates>
     <panel_attributes>Κηδεμόνας
 --
 ΑΜΚΑ
-Τέκνο</panel_attributes>
+Τέκνο
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>675</x>
-      <y>117</y>
+      <x>756</x>
+      <y>135</y>
+      <w>126</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;120.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>666</x>
+      <y>171</y>
       <w>27</w>
       <h>117</h>
     </coordinates>
@@ -77,8 +103,8 @@ Password
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>693</x>
-      <y>117</y>
+      <x>684</x>
+      <y>171</y>
       <w>279</w>
       <h>117</h>
     </coordinates>
@@ -88,8 +114,8 @@ Password
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>396</x>
-      <y>117</y>
+      <x>387</x>
+      <y>171</y>
       <w>288</w>
       <h>117</h>
     </coordinates>
@@ -97,10 +123,24 @@ Password
     <additional_attributes>300.0;10.0;10.0;110.0</additional_attributes>
   </element>
   <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>180</x>
+      <y>279</y>
+      <w>135</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=1..1
+&lt; καταγράφει </panel_attributes>
+    <additional_attributes>10.0;20.0;130.0;20.0</additional_attributes>
+  </element>
+  <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>9</x>
-      <y>216</y>
+      <x>0</x>
+      <y>270</y>
       <w>189</w>
       <h>81</h>
     </coordinates>
@@ -113,8 +153,8 @@ Password
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>486</x>
-      <y>234</y>
+      <x>477</x>
+      <y>288</y>
       <w>126</w>
       <h>45</h>
     </coordinates>
@@ -127,8 +167,8 @@ m2=1..1
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>675</x>
-      <y>288</y>
+      <x>666</x>
+      <y>342</y>
       <w>135</w>
       <h>117</h>
     </coordinates>
@@ -141,22 +181,22 @@ m2=0..1
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>135</x>
-      <y>288</y>
-      <w>540</w>
+      <x>54</x>
+      <y>342</y>
+      <w>612</w>
       <h>99</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1..2
 m2=1..*
 &lt; έχει</panel_attributes>
-    <additional_attributes>560.0;10.0;560.0;90.0;10.0;90.0;10.0;10.0</additional_attributes>
+    <additional_attributes>640.0;10.0;640.0;90.0;10.0;90.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>360</x>
-      <y>459</y>
+      <x>351</x>
+      <y>513</y>
       <w>351</w>
       <h>126</h>
     </coordinates>
@@ -173,8 +213,80 @@ m2=1..*
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>36</x>
-      <y>459</y>
+      <x>855</x>
+      <y>513</y>
+      <w>189</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>Ειδοποίηση
+--
+Αποδέκτης
+ΜέσοΑποστολής
+ΤύποςΕιδοποίησης</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1179</x>
+      <y>270</y>
+      <w>189</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>Αναφορά
+--
+ΑριθμόςΕμβολίων
+ΤύποςΕμβολίων
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1035</x>
+      <y>279</y>
+      <w>162</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..1
+m2=0..n
+στέλνει &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;160.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>936</x>
+      <y>324</y>
+      <w>81</w>
+      <h>207</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..1
+m2=0..n
+στέλνει &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;210.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>693</x>
+      <y>531</y>
+      <w>180</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=0..1
+&lt; αφορά</panel_attributes>
+    <additional_attributes>10.0;20.0;180.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>27</x>
+      <y>513</y>
       <w>189</w>
       <h>108</h>
     </coordinates>
@@ -189,8 +301,8 @@ m2=1..*
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>216</x>
-      <y>468</y>
+      <x>207</x>
+      <y>522</y>
       <w>162</w>
       <h>45</h>
     </coordinates>
@@ -203,8 +315,8 @@ m2=1
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>252</x>
-      <y>9</y>
+      <x>243</x>
+      <y>63</y>
       <w>189</w>
       <h>108</h>
     </coordinates>
@@ -223,8 +335,8 @@ m2=1
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>432</x>
-      <y>63</y>
+      <x>423</x>
+      <y>117</y>
       <w>171</w>
       <h>36</h>
     </coordinates>
@@ -235,15 +347,65 @@ m2=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>36</x>
+      <x>1098</x>
       <y>288</y>
-      <w>531</w>
-      <h>189</h>
+      <w>27</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>lt=.
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1071</x>
+      <y>396</y>
+      <w>90</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>Ημερομηνία</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>936</x>
+      <y>387</y>
+      <w>153</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=.
+</panel_attributes>
+    <additional_attributes>10.0;20.0;150.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>414</x>
+      <y>729</y>
+      <w>189</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>Ειδοποίηση Υπουργείου
+--
+ΑΜΚΑ Τέκνου
+ΤύποςΕμβολιασμού
+ΗμερομηνίαΕμβολιασμού</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>504</x>
+      <y>630</y>
+      <w>108</w>
+      <h>117</h>
     </coordinates>
     <panel_attributes>lt=-
-m1=1..n
-m2=1..1
-&lt; αφορά</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;140.0;550.0;140.0;550.0;190.0</additional_attributes>
+m1=1
+m2=1
+&lt; ενημερώνει</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
   </element>
 </diagram>

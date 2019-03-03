@@ -4,29 +4,18 @@
   <element>
     <id>UMLFrame</id>
     <coordinates>
-      <x>70</x>
+      <x>0</x>
       <y>50</y>
-      <w>790</w>
-      <h>600</h>
+      <w>1160</w>
+      <h>430</h>
     </coordinates>
     <panel_attributes>daily</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>UMLActor</id>
-    <coordinates>
-      <x>90</x>
-      <y>150</y>
-      <w>100</w>
-      <h>110</h>
-    </coordinates>
-    <panel_attributes>Administrator</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>320</x>
+      <x>250</x>
       <y>90</y>
       <w>140</w>
       <h>30</h>
@@ -37,33 +26,21 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>380</x>
+      <x>310</x>
       <y>110</y>
       <w>30</w>
-      <h>500</h>
+      <h>370</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;480.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>130</x>
-      <y>130</y>
-      <w>280</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-
-calculateDailyNotifications()</panel_attributes>
-    <additional_attributes>260.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;350.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>370</x>
+      <x>300</x>
       <y>160</y>
       <w>40</w>
-      <h>380</h>
+      <h>230</h>
     </coordinates>
     <panel_attributes>
 </panel_attributes>
@@ -72,7 +49,7 @@ calculateDailyNotifications()</panel_attributes>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>660</x>
+      <x>590</x>
       <y>90</y>
       <w>150</w>
       <h>30</h>
@@ -83,45 +60,45 @@ calculateDailyNotifications()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>730</x>
+      <x>660</x>
       <y>110</y>
       <w>30</w>
-      <h>510</h>
+      <h>350</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;490.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;330.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>400</x>
-      <y>370</y>
-      <w>210</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-
-sendNotifications()</panel_attributes>
-    <additional_attributes>10.0;50.0;80.0;50.0;80.0;10.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>400</x>
-      <y>180</y>
-      <w>360</w>
+      <x>330</x>
+      <y>360</y>
+      <w>720</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-
-findDailyVaccinations()</panel_attributes>
-    <additional_attributes>340.0;20.0;10.0;20.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;-
+sendNotifications()</panel_attributes>
+    <additional_attributes>700.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>330</x>
+      <y>180</y>
+      <w>340</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+findVaccinationsThatNeedNotification()</panel_attributes>
+    <additional_attributes>320.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>720</x>
-      <y>210</y>
+      <x>650</x>
+      <y>190</y>
       <w>40</w>
-      <h>60</h>
+      <h>30</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -129,49 +106,102 @@ findDailyVaccinations()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>400</x>
-      <y>240</y>
-      <w>340</w>
+      <x>50</x>
+      <y>140</y>
+      <w>270</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-
-returnResults()</panel_attributes>
-    <additional_attributes>10.0;20.0;320.0;20.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;-
+sendDailyVaccinationNotification()</panel_attributes>
+    <additional_attributes>250.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
-    <id>UMLFrame</id>
+    <id>UMLGeneric</id>
     <coordinates>
-      <x>270</x>
-      <y>340</y>
-      <w>520</w>
-      <h>210</h>
+      <x>840</x>
+      <y>90</y>
+      <w>100</w>
+      <h>30</h>
     </coordinates>
-    <panel_attributes>alternative</panel_attributes>
+    <panel_attributes>_:Vaccination_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>260</x>
-      <y>430</y>
-      <w>550</w>
-      <h>50</h>
+      <x>880</x>
+      <y>110</y>
+      <w>30</w>
+      <h>350</h>
     </coordinates>
-    <panel_attributes>lt=.
-
-           [no notifications today]</panel_attributes>
-    <additional_attributes>530.0;20.0;10.0;20.0</additional_attributes>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;330.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>400</x>
-      <y>470</y>
-      <w>310</w>
-      <h>60</h>
+      <x>330</x>
+      <y>260</y>
+      <w>560</w>
+      <h>40</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;-
-displayNoNotificationsMessage()</panel_attributes>
-    <additional_attributes>10.0;40.0;90.0;40.0;90.0;10.0;10.0;10.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;-
+update()</panel_attributes>
+    <additional_attributes>540.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>870</x>
+      <y>270</y>
+      <w>40</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>990</x>
+      <y>90</y>
+      <w>130</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>_:EmailProvider_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1030</x>
+      <y>370</y>
+      <w>40</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1040</x>
+      <y>110</y>
+      <w>30</w>
+      <h>360</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;340.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>230</x>
+      <y>240</y>
+      <w>740</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>loop</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>
