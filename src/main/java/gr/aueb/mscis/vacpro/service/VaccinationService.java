@@ -127,7 +127,7 @@ public class VaccinationService {
 		return numberOfVaccinations;
 	}
 
-	private Map<Vaccine, Integer> getNumberOfVaccinations(List<Vaccination> results) {
+	private Map<Vaccine, Integer> getNumberOfVaccinations(final List<Vaccination> results) {
 		Map<Vaccine, Integer> numberOfVaccinations = new HashMap<>();
 		for (Vaccination vac : results) {
 			Integer dsa = numberOfVaccinations.get(vac.getVaccine());

@@ -149,7 +149,8 @@ public class Initializer {
 		VaccinationService vaccinationService = new VaccinationService();
 		for (Child child : children) {
 			for (Vaccine vac : vaccines) {
-				Vaccination vaccination = new Vaccination(child, vac, DateConversion.calculateNotificationDate(child.getBirthday(), vac.getVaccinationAge()), VaccinationStatus.REGISTERED);
+				Vaccination vaccination = new Vaccination(child, vac, DateConversion.calculateNotificationDate(child.getBirthday(),
+						vac.getVaccinationAge()), VaccinationStatus.REGISTERED);
 				vaccinationService.createVaccination(vaccination);
 			}
 		}

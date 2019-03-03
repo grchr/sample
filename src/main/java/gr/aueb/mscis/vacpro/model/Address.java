@@ -137,15 +137,19 @@ public class Address implements Serializable {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+	public boolean equals(final Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 		Address address = (Address) o;
-		return getZipcode() == address.getZipcode() &&
-				Objects.equals(getStreet(), address.getStreet()) &&
-				Objects.equals(getNumber(), address.getNumber()) &&
-				Objects.equals(getCity(), address.getCity()) &&
-				Objects.equals(getCountry(), address.getCountry());
+		return getZipcode() == address.getZipcode()
+				&& Objects.equals(getStreet(), address.getStreet())
+				&& Objects.equals(getNumber(), address.getNumber())
+				&& Objects.equals(getCity(), address.getCity())
+				&& Objects.equals(getCountry(), address.getCountry());
 	}
 
 	@Override
