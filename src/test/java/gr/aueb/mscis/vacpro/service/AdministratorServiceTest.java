@@ -110,11 +110,8 @@ public class AdministratorServiceTest {
 	@Test
 	public void updateAdministratorPrivilegeTest() {
 		AdministratorService administratorService = new AdministratorService();
-
-		Administrator admin1 = new Administrator("Bruce", "Wayne", PrivilegeLevel.FULL);
-		admin1.setUserName("username");
-		admin1.setPassword("pass");
-		admin1.setId(1);
+		
+		Administrator admin1 = administratorService.findAdminByUsername("username");
 
 		Administrator adm = administratorService.updateAdministratorPrivilege(PrivilegeLevel.NOTIFICATION, admin1);
 
@@ -122,6 +119,8 @@ public class AdministratorServiceTest {
 		assertEquals("Wayne", adm.getLastName());
 		assertEquals("pass", adm.getPassword());
 		assertEquals(PrivilegeLevel.NOTIFICATION, adm.getPrivilege());
+		//System.out.println(getAdmins().get(0));
+		//System.out.println(getAdmins().get(1));
 		assertEquals(1, getAdmins().size());
 
 	}
