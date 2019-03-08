@@ -32,7 +32,7 @@ public abstract class User implements Serializable {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
-	private int id;
+	private Integer id;
 
 	@Column(name = "first_name")
 	private String firstName;
@@ -124,7 +124,7 @@ public abstract class User implements Serializable {
 	 *
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -133,7 +133,7 @@ public abstract class User implements Serializable {
 	 *
 	 * @param id the id
 	 */
-	public void setId(final int id) {
+	public void setId(final Integer id) {
 		this.id = id;
 	}
 

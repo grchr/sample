@@ -23,7 +23,7 @@ public class Address implements Serializable {
 	private String city;
 
 	@Column(name = "zipcode")
-	private int zipcode;
+	private Integer zipcode;
 
 	@Column(name = "country")
 	private String country = "Ελλάδα";

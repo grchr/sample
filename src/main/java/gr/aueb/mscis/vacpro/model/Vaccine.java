@@ -21,19 +21,19 @@ public class Vaccine {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vaccine_seq")
-	private int id;
+	private Integer id;
 
 	@Column(name = "disease")
 	private String disease;
 
 	@Column(name = "vaccination_Age")
-	private int vaccinationAge;
+	private Integer vaccinationAge;
 
 	@Column(name = "vaccination_Type")
 	private String vaccinationType;
 
 	@Column(name = "number_of_dose")
-	private int numberOfDose;
+	private Integer numberOfDose;
 
 	/**
 	 * Instantiates a new Vaccine.
@@ -70,7 +70,7 @@ public class Vaccine {
 	 *
 	 * @param id the id
 	 */
-	public void setId(final int id) {
+	public void setId(final Integer id) {
 		this.id = id;
 	}
 

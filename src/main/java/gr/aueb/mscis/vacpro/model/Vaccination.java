@@ -28,7 +28,7 @@ public class Vaccination {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vaccination_seq")
-	private int id;
+	private Integer id;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "child_id", referencedColumnName = "id")
@@ -79,7 +79,7 @@ public class Vaccination {
 	 *
 	 * @param id the id
 	 */
-	public void setId(final int id) {
+	public void setId(final Integer id) {
 		this.id = id;
 	}
 

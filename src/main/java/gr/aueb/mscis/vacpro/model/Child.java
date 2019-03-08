@@ -27,7 +27,7 @@ public class Child implements Serializable {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "child_seq")
-	private int id;
+	private Integer id;
 
 	@Column(name = "name")
 	private String name;
@@ -90,7 +90,7 @@ public class Child implements Serializable {
 	 *
 	 * @param id the id
 	 */
-	public void setId(final int id) {
+	public void setId(final Integer id) {
 		this.id = id;
 	}
 
