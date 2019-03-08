@@ -7,6 +7,9 @@ import gr.aueb.mscis.vacpro.persistence.JPAUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The type Municipality worker service.
@@ -114,5 +117,20 @@ public class MunicipalityWorkerService {
 		tx.commit();
 
 		return municipalityWorker;
+	}
+
+	public MunicipalityWorker findByUserName(String username) {
+		List<MunicipalityWorker> results = new ArrayList<>();
+		em = JPAUtil.getCurrentEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+
+		String queryString = "from User user where user.userName= :user_name and user.class like :usertype";
+		Query query = em.createQuery(queryString);
+		query.setParameter("user_name", username);
+		query.setParameter("usertype", "MUN_W");
+		results = (List<MunicipalityWorker>) query.getResultList();
+		tx.commit();
+		return results.get(0);
 	}
 }
