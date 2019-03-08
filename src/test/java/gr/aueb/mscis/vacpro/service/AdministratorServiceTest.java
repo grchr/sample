@@ -110,7 +110,7 @@ public class AdministratorServiceTest {
 	@Test
 	public void updateAdministratorPrivilegeTest() {
 		AdministratorService administratorService = new AdministratorService();
-		
+
 		Administrator admin1 = administratorService.findAdminByUsername("username");
 
 		Administrator adm = administratorService.updateAdministratorPrivilege(PrivilegeLevel.NOTIFICATION, admin1);
