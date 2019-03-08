@@ -114,6 +114,19 @@ public class ParentService {
 		return results;
 	}
 
+	public Parent findParentByUsername(final String userName) {
+		em = JPAUtil.getCurrentEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+
+		Query query = em.createQuery("from User user where user.userName = :userName and user.class like :type");
+		query.setParameter("userName", userName);
+		query.setParameter("type", "PARENT");
+		List<Parent> results = (List<Parent>) query.getResultList();
+		tx.commit();
+		return results.get(0);
+	}
+
 	/**
 	 * Find parent by vat number list.
 	 *
