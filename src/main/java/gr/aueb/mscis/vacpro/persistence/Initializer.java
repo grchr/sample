@@ -56,6 +56,7 @@ public class Initializer {
 
 		Parent parent1 = new Parent("Test", "Parent", "sfs", "v", "@", "242");
 		parent1.setUserName("username");
+		parent1.setPassword("pswd");
 		EntityManager em = JPAUtil.getCurrentEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
