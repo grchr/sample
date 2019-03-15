@@ -49,7 +49,7 @@ public class ResourceConverters {
         municipalityWorkerInfo.setAddress(municipalityWorker.getAddress());
         municipalityWorkerInfo.setEmail(municipalityWorker.getEmail());
         municipalityWorkerInfo.setPhoneNumber(municipalityWorker.getPhoneNumber());
-        municipalityWorker.setRegistryOffice(municipalityWorker.getRegistryOffice());
+        municipalityWorkerInfo.setRegistryOffice(municipalityWorker.getRegistryOffice());
 
         return municipalityWorkerInfo;
     }
