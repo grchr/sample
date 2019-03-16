@@ -27,7 +27,9 @@ public class ParentServiceTest {
 	 */
 	@After
 	public void tearDown() {
-		em.close();
+		if (em.isOpen()) {
+			em.close();
+		}
 	}
 
 	/**

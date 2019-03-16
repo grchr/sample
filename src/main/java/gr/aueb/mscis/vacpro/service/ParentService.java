@@ -82,7 +82,7 @@ public class ParentService {
 		if (insuranceNumber != null) {
 			parent.setInsuranceNumber(insuranceNumber);
 		}
-		if (children != null) {
+		if (children != null && !children.isEmpty()) {
 			parent.setChildren(children);
 		}
 

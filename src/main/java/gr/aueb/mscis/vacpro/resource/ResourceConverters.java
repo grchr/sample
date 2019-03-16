@@ -84,7 +84,6 @@ public class ResourceConverters {
 
 		return parent;
 	}
-
 	/**
 	 * Convert to mun worker dto municipality worker info.
 	 *

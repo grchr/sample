@@ -1,11 +1,14 @@
 package gr.aueb.mscis.vacpro.resource;
 
 import gr.aueb.mscis.vacpro.model.Parent;
+import gr.aueb.mscis.vacpro.persistence.JPAUtil;
 import gr.aueb.mscis.vacpro.service.ParentService;
 
+import javax.persistence.EntityManager;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -70,11 +73,7 @@ public class UserResource {
 					System.out.println("Parent successfully signed in.");
 					parentInfo = ResourceConverters.convertParentChildToDTO(user);
 					users.add(parentInfo);
-				} else {
-					System.out.println("Invalid username or password.");
 				}
-			} else {
-				System.out.println("Invalid username or password.");
 			}
 		}
 
@@ -104,5 +103,23 @@ public class UserResource {
 		UriBuilder ub = uriInfo.getAbsolutePathBuilder();
 		URI newParentUri = ub.path(Integer.toString(newParent.getId())).build();
 		return Response.created(newParentUri).build();
+	}
+
+	@PUT
+	@Path("/parent/update/{parentId:[0-9]*}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response updateParent(@PathParam("parentId") final int parentId, final ParentInfo requestParent) {
+		EntityManager em = JPAUtil.getCurrentEntityManager();
+		Parent existingParent = em.find(Parent.class, parentId);
+		if (existingParent == null) {
+			return Response.status(Response.Status.NOT_FOUND).build();
+		}
+
+		Parent parentInfo = ResourceConverters.convertParentChildFromDTO(requestParent);
+		ParentService parentService = new ParentService();
+		parentService.updateParent(parentInfo.getFirstName(), parentInfo.getLastName(), parentInfo.getUserName(),
+				parentInfo.getPassword(), parentInfo.getPhoneNumber(), parentInfo.getEmail(), parentInfo.getVatNumber(),
+				parentInfo.getInsuranceNumber(), parentInfo.getChildren(), existingParent);
+		return Response.ok().build();
 	}
 }
