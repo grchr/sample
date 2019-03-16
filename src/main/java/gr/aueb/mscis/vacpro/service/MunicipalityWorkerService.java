@@ -3,6 +3,7 @@ package gr.aueb.mscis.vacpro.service;
 import gr.aueb.mscis.vacpro.helper.UserDataValidator;
 import gr.aueb.mscis.vacpro.model.Address;
 import gr.aueb.mscis.vacpro.model.MunicipalityWorker;
+import gr.aueb.mscis.vacpro.model.Parent;
 import gr.aueb.mscis.vacpro.persistence.JPAUtil;
 
 import javax.persistence.EntityManager;
@@ -132,5 +133,23 @@ public class MunicipalityWorkerService {
 		results = (List<MunicipalityWorker>) query.getResultList();
 		tx.commit();
 		return results.get(0);
+	}
+
+	/**
+	 * Find all list.
+	 *
+	 * @return the list
+	 */
+	public List<MunicipalityWorker> findAll() {
+		em = JPAUtil.getCurrentEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		String queryString = "from User user  where user.class like :type";
+		Query query = em.createQuery(queryString);
+		query.setParameter("type", "MUN_W");
+		List<MunicipalityWorker> results = (List<MunicipalityWorker>) query.getResultList();
+		tx.commit();
+
+		return results;
 	}
 }

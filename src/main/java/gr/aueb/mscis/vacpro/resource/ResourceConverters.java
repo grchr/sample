@@ -84,6 +84,7 @@ public class ResourceConverters {
 
 		return parent;
 	}
+
 	/**
 	 * Convert to mun worker dto municipality worker info.
 	 *
@@ -104,5 +105,28 @@ public class ResourceConverters {
 		municipalityWorkerInfo.setRegistryOffice(municipalityWorker.getRegistryOffice());
 
 		return municipalityWorkerInfo;
+	}
+
+
+	/**
+	 * Convert from mun worker to dto municipality worker.
+	 *
+	 * @param municipalityWorkerInfo the municipality worker info
+	 * @return the municipality worker
+	 */
+	public static MunicipalityWorker convertFromMunWorkerToDTO(MunicipalityWorkerInfo municipalityWorkerInfo) {
+		MunicipalityWorker municipalityWorker = new MunicipalityWorker();
+
+		municipalityWorker.setId(municipalityWorkerInfo.getId());
+		municipalityWorker.setFirstName(municipalityWorkerInfo.getFirstName());
+		municipalityWorker.setLastName(municipalityWorkerInfo.getLastName());
+		municipalityWorker.setUserName(municipalityWorkerInfo.getUserName());
+		municipalityWorker.setPassword(municipalityWorkerInfo.getPassword());
+		municipalityWorker.setAddress(municipalityWorkerInfo.getAddress());
+		municipalityWorker.setEmail(municipalityWorkerInfo.getEmail());
+		municipalityWorker.setPhoneNumber(municipalityWorkerInfo.getPhoneNumber());
+		municipalityWorker.setRegistryOffice(municipalityWorkerInfo.getRegistryOffice());
+
+		return municipalityWorker;
 	}
 }

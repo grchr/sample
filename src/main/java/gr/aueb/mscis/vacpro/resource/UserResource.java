@@ -1,7 +1,9 @@
 package gr.aueb.mscis.vacpro.resource;
 
+import gr.aueb.mscis.vacpro.model.MunicipalityWorker;
 import gr.aueb.mscis.vacpro.model.Parent;
 import gr.aueb.mscis.vacpro.persistence.JPAUtil;
+import gr.aueb.mscis.vacpro.service.MunicipalityWorkerService;
 import gr.aueb.mscis.vacpro.service.ParentService;
 
 import javax.persistence.EntityManager;
@@ -33,6 +35,7 @@ public class UserResource {
 	@Context
 	UriInfo uriInfo;
 
+
 	/**
 	 * List all parents list.
 	 *
@@ -52,31 +55,27 @@ public class UserResource {
 	}
 
 	/**
-	 * Sign in list.
+	 * Parent Sign in list.
 	 *
-	 * @param userType the user type
 	 * @param username the username
 	 * @param password the password
 	 * @return the list
 	 */
 	@GET
-	@Path("/{type}/{username}/{password}")
+	@Path("/parent/{username}/{password}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<ParentInfo> signIn(@PathParam("type") String userType, @PathParam("username") String username, @PathParam("password") String password) {
+	public List<ParentInfo> parentSignIn(@PathParam("username") String username, @PathParam("password") String password) {
 		List<ParentInfo> users = new ArrayList<>();
 		ParentInfo parentInfo = null;
-		if (userType.equalsIgnoreCase("PARENT")) {
-			ParentService parentService = new ParentService();
-			Parent user = parentService.findParentByUsername(username);
-			if (user != null) {
-				if (user.getPassword().equals(password)) {
-					System.out.println("Parent successfully signed in.");
-					parentInfo = ResourceConverters.convertParentChildToDTO(user);
-					users.add(parentInfo);
-				}
+		ParentService parentService = new ParentService();
+		Parent user = parentService.findParentByUsername(username);
+		if (user != null) {
+			if (user.getPassword().equals(password)) {
+				System.out.println("Parent successfully signed in.");
+				parentInfo = ResourceConverters.convertParentChildToDTO(user);
+				users.add(parentInfo);
 			}
 		}
-
 		return users;
 	}
 
@@ -105,6 +104,13 @@ public class UserResource {
 		return Response.created(newParentUri).build();
 	}
 
+	/**
+	 * Update parent response.
+	 *
+	 * @param parentId      the parent id
+	 * @param requestParent the request parent
+	 * @return the response
+	 */
 	@PUT
 	@Path("/parent/update/{parentId:[0-9]*}")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -122,4 +128,102 @@ public class UserResource {
 				parentInfo.getInsuranceNumber(), parentInfo.getChildren(), existingParent);
 		return Response.ok().build();
 	}
+
+	/**
+	 * List all workers list.
+	 *
+	 * @return the list
+	 */
+	@GET
+	@Path("municipality")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<MunicipalityWorkerInfo> listAllWorkers() {
+		MunicipalityWorkerService service = new MunicipalityWorkerService();
+		List<MunicipalityWorker> results = service.findAll();
+		List<MunicipalityWorkerInfo> municipalityWorkerInfos = new ArrayList<>();
+		for (MunicipalityWorker mw : results) {
+			municipalityWorkerInfos.add(ResourceConverters.convertToMunWorkerDTO(mw));
+		}
+		return municipalityWorkerInfos;
+	}
+
+
+	/**
+	 * Workers Sign in list.
+	 *
+	 * @param username the username
+	 * @param password the password
+	 * @return the list
+	 */
+	@GET
+	@Path("/municipality/{username}/{password}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<MunicipalityWorkerInfo> workerSignIn(@PathParam("username") String username, @PathParam("password") String password) {
+		List<MunicipalityWorkerInfo> users = new ArrayList<>();
+		MunicipalityWorkerInfo worker = null;
+		MunicipalityWorkerService service = new MunicipalityWorkerService();
+		MunicipalityWorker user = service.findByUserName(username);
+		if (user != null) {
+			if (user.getPassword().equals(password)) {
+				System.out.println("Parent successfully signed in.");
+				worker = ResourceConverters.convertToMunWorkerDTO(user);
+				users.add(worker);
+			}
+		}
+		return users;
+	}
+
+	/**
+	 * Create parent response.
+	 *
+	 * @param worker the worker
+	 * @return the response
+	 */
+	@POST
+	@Path("municipality/create")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response createWorker(final MunicipalityWorkerInfo worker) {
+
+		MunicipalityWorkerService service = new MunicipalityWorkerService();
+		MunicipalityWorker workers = service.findByUserName(worker.getUserName());
+		if (workers != null) {
+			return Response.status(Response.Status.CONFLICT).build();
+		}
+		MunicipalityWorker newWorker = ResourceConverters.convertFromMunWorkerToDTO(worker);
+		System.out.println(newWorker);
+		newWorker = service.createMunicipalityWorker(newWorker.getFirstName(), newWorker.getLastName(), newWorker.getUserName()
+				, newWorker.getPassword(), newWorker.getPhoneNumber(), newWorker.getEmail(), newWorker.getVatNumber()
+				, newWorker.getRegistryOffice(), newWorker.getAddress());
+
+		UriBuilder ub = uriInfo.getAbsolutePathBuilder();
+		URI newWorkerUri = ub.path(Integer.toString(newWorker.getId())).build();
+		return Response.created(newWorkerUri).build();
+	}
+
+	/**
+	 * Update worker response.
+	 *
+	 * @param municipalityId the municipality id
+	 * @param request        the request
+	 * @return the response
+	 */
+	@PUT
+	@Path("/municipality/update/{municipalityId:[0-9]*}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response updateWorker(@PathParam("municipalityId") final int municipalityId, final MunicipalityWorkerInfo request) {
+		EntityManager em = JPAUtil.getCurrentEntityManager();
+		MunicipalityWorker existingWorker = em.find(MunicipalityWorker.class, municipalityId);
+		if (existingWorker == null) {
+			return Response.status(Response.Status.NOT_FOUND).build();
+		}
+
+		MunicipalityWorker worker = ResourceConverters.convertFromMunWorkerToDTO(request);
+		MunicipalityWorkerService workerService = new MunicipalityWorkerService();
+		workerService.updateMunicipalityWorker(worker.getFirstName(), worker.getLastName(), worker.getUserName(),
+				worker.getPassword(), worker.getPhoneNumber(), worker.getEmail(), worker.getVatNumber(),
+				worker.getRegistryOffice(), existingWorker);
+		return Response.ok().build();
+	}
+
+
 }
