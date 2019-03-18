@@ -71,7 +71,6 @@ public class UserResource {
 		Parent user = parentService.findParentByUsername(username);
 		if (user != null) {
 			if (user.getPassword().equals(password)) {
-				System.out.println("Parent successfully signed in.");
 				parentInfo = ResourceConverters.convertParentChildToDTO(user);
 				users.add(parentInfo);
 			}
@@ -162,11 +161,10 @@ public class UserResource {
 		List<MunicipalityWorkerInfo> users = new ArrayList<>();
 		MunicipalityWorkerInfo worker = null;
 		MunicipalityWorkerService service = new MunicipalityWorkerService();
-		MunicipalityWorker user = service.findByUserName(username);
-		if (user != null) {
-			if (user.getPassword().equals(password)) {
-				System.out.println("Parent successfully signed in.");
-				worker = ResourceConverters.convertToMunWorkerDTO(user);
+		List<MunicipalityWorker> userWorkers = service.findByUserName(username);
+		if (userWorkers != null && !userWorkers.isEmpty()) {
+			if (userWorkers.get(0).getPassword().equals(password)) {
+				worker = ResourceConverters.convertToMunWorkerDTO(userWorkers.get(0));
 				users.add(worker);
 			}
 		}
@@ -185,8 +183,8 @@ public class UserResource {
 	public Response createWorker(final MunicipalityWorkerInfo worker) {
 
 		MunicipalityWorkerService service = new MunicipalityWorkerService();
-		MunicipalityWorker workers = service.findByUserName(worker.getUserName());
-		if (workers != null) {
+		List<MunicipalityWorker> workers = service.findByUserName(worker.getUserName());
+		if (workers != null && !workers.isEmpty()) {
 			return Response.status(Response.Status.CONFLICT).build();
 		}
 		MunicipalityWorker newWorker = ResourceConverters.convertFromMunWorkerToDTO(worker);

@@ -1,8 +1,10 @@
 package gr.aueb.mscis.vacpro.resource;
 
+import gr.aueb.mscis.vacpro.model.MunicipalityWorker;
 import gr.aueb.mscis.vacpro.model.Parent;
 import gr.aueb.mscis.vacpro.persistence.Initializer;
 import gr.aueb.mscis.vacpro.persistence.JPAUtil;
+import gr.aueb.mscis.vacpro.service.MunicipalityWorkerService;
 import gr.aueb.mscis.vacpro.service.ParentService;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
@@ -52,6 +54,7 @@ public class UsersResourceTest extends JerseyTest {
 		em = JPAUtil.getCurrentEntityManager();
 		Initializer dataHelper = new Initializer();
 		dataHelper.prepareParentData();
+		dataHelper.prepareMunicipalityWorkerData();
 	}
 
 	@Test
@@ -133,6 +136,87 @@ public class UsersResourceTest extends JerseyTest {
 
 		Response response = target("users/parent/update/90000000").request().put(
 				Entity.entity(parentInfo, MediaType.APPLICATION_JSON));
+		assertEquals(Response.Status.NOT_FOUND.getStatusCode(), response.getStatus());
+	}
+
+	@Test
+	public void testFindAllWorkersResource(){
+		Invocation.Builder builder = target("users/municipality").request();
+		List<MunicipalityWorkerInfo> workers = builder.get(new GenericType<List<MunicipalityWorkerInfo>>() {
+		});
+
+		assertEquals(1, workers.size());
+		assertEquals(200, builder.get().getStatus());
+	}
+
+	@Test
+	public void testSignInSuccessfullyWorkerResource() {
+		Invocation.Builder builder = target("users/municipality/username/password").request();
+		System.out.println(builder.get().getEntity().toString());
+		List<MunicipalityWorkerInfo> worker = builder.get(new GenericType<List<MunicipalityWorkerInfo>>() {
+		});
+		assertEquals(1, worker.size());
+		System.out.println(worker.get(0).getFirstName() + " " + worker.get(0).getLastName() + " username: " + worker.get(0).getUserName());
+
+		assertEquals(200, builder.get().getStatus());
+	}
+
+	@Test
+	public void testSignUpWorker(){
+		MunicipalityWorkerInfo workerInfo = new MunicipalityWorkerInfo();
+		workerInfo.setVatNumber("aNewOneVat");
+		workerInfo.setUserName("spanoylisOMpampasSas");
+		workerInfo.setPassword("gianakopoulos");
+
+		Response response = target("users/municipality/create").request().post(Entity.entity(workerInfo, MediaType.APPLICATION_JSON));
+
+		assertEquals(Response.Status.CREATED.getStatusCode(), response.getStatus());
+		MunicipalityWorkerService service = new MunicipalityWorkerService();
+		assertEquals("aNewOneVat", service.findByUserName("spanoylisOMpampasSas").get(0).getVatNumber());
+		System.out.println("---Test completed---");
+	}
+
+	@Test
+	public void testSignUpFailedWorker() {
+		MunicipalityWorkerInfo workerInfo = new MunicipalityWorkerInfo();
+		workerInfo.setVatNumber("242");
+		workerInfo.setUserName("username");
+		workerInfo.setPassword("password");
+
+		Response response = target("users/municipality/create").request().post(Entity.entity(workerInfo, MediaType.APPLICATION_JSON));
+
+		assertEquals(Response.Status.CONFLICT.getStatusCode(), response.getStatus());
+		System.out.println("---Test completed---");
+	}
+
+	@Test
+	public void testUpdateWorker() {
+		MunicipalityWorkerInfo workerInfo = new MunicipalityWorkerInfo();
+		workerInfo.setVatNumber("theOneVat");
+		workerInfo.setUserName("theOnewUsername");
+		workerInfo.setPassword("theOnePass");
+		MunicipalityWorkerService service = new MunicipalityWorkerService();
+
+		MunicipalityWorker parent = service.findByUserName("username").get(0);
+
+		Response response = target("users/municipality/update/" + parent.getId()).request().put(
+				Entity.entity(workerInfo, MediaType.APPLICATION_JSON));
+
+		em.close();
+		MunicipalityWorkerService service2 = new MunicipalityWorkerService();
+		assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+		MunicipalityWorker updatedParent = service2.findByUserName("theOnewUsername").get(0);
+		assertEquals(parent.getId(), updatedParent.getId());
+		assertEquals("theOneVat", updatedParent.getVatNumber());
+		assertEquals("theOnePass", updatedParent.getPassword());
+	}
+
+	@Test
+	public void testUpdateWorkerFailed() {
+		MunicipalityWorkerInfo workerInfo = new MunicipalityWorkerInfo();
+
+		Response response = target("users/parent/update/90000000").request().put(
+				Entity.entity(workerInfo, MediaType.APPLICATION_JSON));
 		assertEquals(Response.Status.NOT_FOUND.getStatusCode(), response.getStatus());
 	}
 

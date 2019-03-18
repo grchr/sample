@@ -48,15 +48,15 @@ public class MunicipalityWorkerService {
 													   final String vatNumber, final String registryOffice, final Address address) {
 
 		em = JPAUtil.getCurrentEntityManager();
-		if (UserDataValidator.isValidEmailFormat(email)) {
-			System.out.println("VALID EMAIL FORMAT");
-		}
-		if (UserDataValidator.isValidPhoneNumber(phoneNumber)) {
-			System.out.println("VALID PHONE NUMBER");
-		}
-		if (UserDataValidator.isValidVATNumber(vatNumber)) {
-			System.out.println("VALID VAT NUMBER");
-		}
+//		if (UserDataValidator.isValidEmailFormat(email)) {
+//			System.out.println("VALID EMAIL FORMAT");
+//		}
+//		if (UserDataValidator.isValidPhoneNumber(phoneNumber)) {
+//			System.out.println("VALID PHONE NUMBER");
+//		}
+//		if (UserDataValidator.isValidVATNumber(vatNumber)) {
+//			System.out.println("VALID VAT NUMBER");
+//		}
 		MunicipalityWorker newMunWorker = new MunicipalityWorker(firstName, lastName, userName, password,
 																phoneNumber, email, address, vatNumber, registryOffice);
 
@@ -120,7 +120,7 @@ public class MunicipalityWorkerService {
 		return municipalityWorker;
 	}
 
-	public MunicipalityWorker findByUserName(String username) {
+	public List<MunicipalityWorker> findByUserName(String username) {
 		List<MunicipalityWorker> results = new ArrayList<>();
 		em = JPAUtil.getCurrentEntityManager();
 		EntityTransaction tx = em.getTransaction();
@@ -132,7 +132,7 @@ public class MunicipalityWorkerService {
 		query.setParameter("usertype", "MUN_W");
 		results = (List<MunicipalityWorker>) query.getResultList();
 		tx.commit();
-		return results.get(0);
+		return results;
 	}
 
 	/**

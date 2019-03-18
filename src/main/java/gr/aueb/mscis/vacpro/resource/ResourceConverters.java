@@ -125,6 +125,7 @@ public class ResourceConverters {
 		municipalityWorker.setAddress(municipalityWorkerInfo.getAddress());
 		municipalityWorker.setEmail(municipalityWorkerInfo.getEmail());
 		municipalityWorker.setPhoneNumber(municipalityWorkerInfo.getPhoneNumber());
+		municipalityWorker.setVatNumber(municipalityWorkerInfo.getVatNumber());
 		municipalityWorker.setRegistryOffice(municipalityWorkerInfo.getRegistryOffice());
 
 		return municipalityWorker;
