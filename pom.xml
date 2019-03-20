@@ -27,6 +27,14 @@
 			<version>5.2.2.Final</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.7</version>
+		</dependency>
+
+
 		<!-- Η2 -->
 		<dependency>
 			<groupId>com.h2database</groupId>
