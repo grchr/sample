@@ -1,6 +1,5 @@
-package gr.aueb.mscis.model;
+package gr.aueb.mscis.vacpro.model;
 
-import gr.aueb.mscis.vacpro.model.EmailMessage;
 import org.junit.Assert;
 import org.junit.Test;
 

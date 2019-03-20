@@ -1,8 +1,5 @@
-package gr.aueb.mscis.model;
+package gr.aueb.mscis.vacpro.model;
 
-import gr.aueb.mscis.vacpro.model.Address;
-import gr.aueb.mscis.vacpro.model.Parent;
-import gr.aueb.mscis.vacpro.model.User;
 import org.junit.Assert;
 import org.junit.Test;
 
