@@ -48,15 +48,15 @@ public class MunicipalityWorkerService {
 													   final String vatNumber, final String registryOffice, final Address address) {
 
 		em = JPAUtil.getCurrentEntityManager();
-//		if (UserDataValidator.isValidEmailFormat(email)) {
-//			System.out.println("VALID EMAIL FORMAT");
-//		}
-//		if (UserDataValidator.isValidPhoneNumber(phoneNumber)) {
-//			System.out.println("VALID PHONE NUMBER");
-//		}
-//		if (UserDataValidator.isValidVATNumber(vatNumber)) {
-//			System.out.println("VALID VAT NUMBER");
-//		}
+		if (UserDataValidator.isValidEmailFormat(email)) {
+			System.out.println("VALID EMAIL FORMAT");
+		}
+		if (UserDataValidator.isValidPhoneNumber(phoneNumber)) {
+			System.out.println("VALID PHONE NUMBER");
+		}
+		if (UserDataValidator.isValidVATNumber(vatNumber)) {
+			System.out.println("VALID VAT NUMBER");
+		}
 		MunicipalityWorker newMunWorker = new MunicipalityWorker(firstName, lastName, userName, password,
 																phoneNumber, email, address, vatNumber, registryOffice);
 

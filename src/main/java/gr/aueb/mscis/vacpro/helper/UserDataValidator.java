@@ -19,8 +19,11 @@ public final class UserDataValidator {
 	 */
 	public static boolean isValidEmailFormat(final String email) {
 
-		return email.matches(EMAIL_REGEX);
+		if (email != null) {
+			return email.matches(EMAIL_REGEX);
+		}
 
+		return false;
 	}
 
 	/**
@@ -31,7 +34,11 @@ public final class UserDataValidator {
 	 */
 	public static boolean isValidPhoneNumber(final String phoneNumber) {
 
-		return phoneNumber.matches("[0-9]{10}");
+		if (phoneNumber != null) {
+			return phoneNumber.matches("[0-9]{10}");
+		}
+
+		return false;
 	}
 
 
@@ -43,7 +50,11 @@ public final class UserDataValidator {
 	 */
 	public static boolean isValidVATNumber(final String vatNumber) {
 
-		return vatNumber.matches("[0-9]{9}");
+		if (vatNumber != null) {
+			return vatNumber.matches("[0-9]{9}");
+		}
+
+		return false;
 	}
 
 
