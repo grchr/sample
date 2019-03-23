@@ -33,7 +33,7 @@ public class UserResource {
 	 * The Uri info.
 	 */
 	@Context
-	UriInfo uriInfo;
+	private UriInfo uriInfo;
 
 
 	/**
@@ -64,7 +64,7 @@ public class UserResource {
 	@GET
 	@Path("/parent/{username}/{password}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<ParentInfo> parentSignIn(@PathParam("username") String username, @PathParam("password") String password) {
+	public List<ParentInfo> parentSignIn(@PathParam("username") final String username, @PathParam("password") final String password) {
 		List<ParentInfo> users = new ArrayList<>();
 		ParentInfo parentInfo = null;
 		ParentService parentService = new ParentService();
@@ -157,7 +157,7 @@ public class UserResource {
 	@GET
 	@Path("/municipality/{username}/{password}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<MunicipalityWorkerInfo> workerSignIn(@PathParam("username") String username, @PathParam("password") String password) {
+	public List<MunicipalityWorkerInfo> workerSignIn(@PathParam("username") final String username, @PathParam("password") final String password) {
 		List<MunicipalityWorkerInfo> users = new ArrayList<>();
 		MunicipalityWorkerInfo worker = null;
 		MunicipalityWorkerService service = new MunicipalityWorkerService();

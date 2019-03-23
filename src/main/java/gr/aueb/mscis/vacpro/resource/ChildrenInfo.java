@@ -2,6 +2,9 @@ package gr.aueb.mscis.vacpro.resource;
 
 import java.util.Date;
 
+/**
+ * The type Children info.
+ */
 public class ChildrenInfo {
 
     private Integer id;
@@ -14,9 +17,21 @@ public class ChildrenInfo {
 
     private ParentInfo parent;
 
+    /**
+     * Instantiates a new Children info.
+     */
     public ChildrenInfo(){}
 
-    public ChildrenInfo(Integer id, String name, String surname, Date birthday, ParentInfo parent) {
+    /**
+     * Instantiates a new Children info.
+     *
+     * @param id       the id
+     * @param name     the name
+     * @param surname  the surname
+     * @param birthday the birthday
+     * @param parent   the parent
+     */
+    public ChildrenInfo(final Integer id, final  String name, final String surname, final Date birthday, final ParentInfo parent) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -24,43 +39,93 @@ public class ChildrenInfo {
         this.parent = parent;
     }
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
+    public void setId(final Integer id) {
         this.id = id;
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
+    public void setName(final String name) {
         this.name = name;
     }
 
+    /**
+     * Gets surname.
+     *
+     * @return the surname
+     */
     public String getSurname() {
         return surname;
     }
 
-    public void setSurname(String surname) {
+    /**
+     * Sets surname.
+     *
+     * @param surname the surname
+     */
+    public void setSurname(final String surname) {
         this.surname = surname;
     }
 
+    /**
+     * Gets birthday.
+     *
+     * @return the birthday
+     */
     public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    /**
+     * Sets birthday.
+     *
+     * @param birthday the birthday
+     */
+    public void setBirthday(final Date birthday) {
         this.birthday = birthday;
     }
 
+    /**
+     * Gets parent.
+     *
+     * @return the parent
+     */
     public ParentInfo getParent() {
         return parent;
     }
 
-    public void setParent(ParentInfo parent) {
+    /**
+     * Sets parent.
+     *
+     * @param parent the parent
+     */
+    public void setParent(final ParentInfo parent) {
         this.parent = parent;
     }
 }

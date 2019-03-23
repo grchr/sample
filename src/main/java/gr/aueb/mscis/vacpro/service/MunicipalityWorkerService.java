@@ -3,7 +3,6 @@ package gr.aueb.mscis.vacpro.service;
 import gr.aueb.mscis.vacpro.helper.UserDataValidator;
 import gr.aueb.mscis.vacpro.model.Address;
 import gr.aueb.mscis.vacpro.model.MunicipalityWorker;
-import gr.aueb.mscis.vacpro.model.Parent;
 import gr.aueb.mscis.vacpro.persistence.JPAUtil;
 
 import javax.persistence.EntityManager;
@@ -120,7 +119,13 @@ public class MunicipalityWorkerService {
 		return municipalityWorker;
 	}
 
-	public List<MunicipalityWorker> findByUserName(String username) {
+	/**
+	 * Find by user name list.
+	 *
+	 * @param username the username
+	 * @return the list
+	 */
+	public List<MunicipalityWorker> findByUserName(final String username) {
 		List<MunicipalityWorker> results = new ArrayList<>();
 		em = JPAUtil.getCurrentEntityManager();
 		EntityTransaction tx = em.getTransaction();

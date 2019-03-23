@@ -114,6 +114,12 @@ public class ParentService {
 		return results;
 	}
 
+	/**
+	 * Find parent by username parent.
+	 *
+	 * @param userName the user name
+	 * @return the parent
+	 */
 	public Parent findParentByUsername(final String userName) {
 		em = JPAUtil.getCurrentEntityManager();
 		EntityTransaction tx = em.getTransaction();

@@ -39,7 +39,7 @@ public class VaccinationResource {
 	 * The Uri info.
 	 */
 	@Context
-	UriInfo uriInfo;
+	private UriInfo uriInfo;
 
 	/**
 	 * Create vaccination response.
@@ -74,7 +74,8 @@ public class VaccinationResource {
 		}
 		EntityManager em = JPAUtil.getCurrentEntityManager();
 		Child child = em.find(Child.class, childId);
-		Vaccination vaccination = vaccinationService.createVaccination(new Vaccination(child, theVaccine, request.getVaccinationDate(), request.getStatus()));
+		Vaccination vaccination = vaccinationService.createVaccination(new Vaccination(child, theVaccine,
+				request.getVaccinationDate(), request.getStatus()));
 
 		UriBuilder ub = uriInfo.getAbsolutePathBuilder();
 		URI newWorkerUri = ub.path(Integer.toString(vaccination.getId())).build();
@@ -130,7 +131,7 @@ public class VaccinationResource {
 		VaccinationService vaccinationService = new VaccinationService();
 		NotificationService notificationService = new NotificationService(new GmailProvider(), vaccinationService);
 		int notified = notificationService.sendDailyVaccinationNotification();
-		return Response.ok().entity(notified).build();
+		return Response.ok().build();
 	}
 
 	/**
@@ -146,6 +147,6 @@ public class VaccinationResource {
 
 		Map<Vaccine, Integer> map = vaccinationService.createMonthlyVaccinationReport(new Date(), DateUtils.addMonths(new Date(), 1));
 
-		return Response.ok().entity(map).build();
+		return Response.ok().build();
 	}
 }

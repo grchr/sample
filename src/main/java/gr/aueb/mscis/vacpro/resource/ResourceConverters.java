@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * The type Resource converters.
  */
-public class ResourceConverters {
+public final class ResourceConverters {
 
 	/**
 	 * Convert parent child to dto parent info.
@@ -18,7 +18,7 @@ public class ResourceConverters {
 	 * @param parent the parent
 	 * @return the parent info
 	 */
-	public static ParentInfo convertParentChildToDTO(Parent parent) {
+	public static ParentInfo convertParentChildToDTO(final Parent parent) {
 		ParentInfo parentInfo = new ParentInfo();
 
 		parentInfo.setId(parent.getId());
@@ -45,6 +45,10 @@ public class ResourceConverters {
 		parentInfo.setVatNumber(parent.getVatNumber());
 
 		return parentInfo;
+	}
+
+	private ResourceConverters(){
+
 	}
 
 	/**
@@ -91,7 +95,7 @@ public class ResourceConverters {
 	 * @param municipalityWorker the municipality worker
 	 * @return the municipality worker info
 	 */
-	public static MunicipalityWorkerInfo convertToMunWorkerDTO(MunicipalityWorker municipalityWorker) {
+	public static MunicipalityWorkerInfo convertToMunWorkerDTO(final MunicipalityWorker municipalityWorker) {
 		MunicipalityWorkerInfo municipalityWorkerInfo = new MunicipalityWorkerInfo();
 
 		municipalityWorkerInfo.setId(municipalityWorker.getId());
@@ -114,7 +118,7 @@ public class ResourceConverters {
 	 * @param municipalityWorkerInfo the municipality worker info
 	 * @return the municipality worker
 	 */
-	public static MunicipalityWorker convertFromMunWorkerToDTO(MunicipalityWorkerInfo municipalityWorkerInfo) {
+	public static MunicipalityWorker convertFromMunWorkerToDTO(final MunicipalityWorkerInfo municipalityWorkerInfo) {
 		MunicipalityWorker municipalityWorker = new MunicipalityWorker();
 
 		municipalityWorker.setId(municipalityWorkerInfo.getId());
