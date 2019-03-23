@@ -5,3 +5,6 @@ vaccines.trace.db
 sample.iml
 .idea/*
 target/
+.classpath
+.project
+.settings/
